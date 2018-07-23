@@ -1,6 +1,5 @@
-import { combineReducers } from 'redux'
-import services from './services'
+import { combineReducers } from 'redux';
 
 export default combineReducers({
-  services
+  
 })
