@@ -1,24 +1,16 @@
 import { combineReducers } from 'redux'
 import selections from './selections'
-import locations from './locations'
-import employees from './employees'
-import services from './services'
+import allLocations from './locations'
+import allEmployees from './employees'
+import allServices from './services'
 import customer from './customer'
-import getServices from './getServices'
-import getLocations from './getLocations'
-import getEmployees from './getEmployees'
 import getTimes from './getTimes'
 
 export default combineReducers({
+  allLocations,
+  allEmployees,
+  allServices,
+  customer,
   selections,
-  getServices,
-  getLocations,
-  getEmployees,
-  getTimes,
-  locations,
-  employees,
-  services,
-  customer
-
-
+  getTimes
 })

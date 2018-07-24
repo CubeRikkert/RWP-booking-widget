@@ -1,10 +1,10 @@
+import { GET_EMPLOYEES} from '../actions/get'
 
-const initialState = ['jack','john']
-
-
-export default function(state = initialState, action) {
+export default function(state = null, action) {
   switch (action.type) {
-      default:
-        return state
+    case GET_EMPLOYEES:
+      return action.payload
+    default:
+      return state
   }
 }

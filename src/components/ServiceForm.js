@@ -1,15 +1,11 @@
 import { connect } from 'react-redux'
 import compose from 'recompose/compose';
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import {selectServices} from '../actions/selections';
 import { getServices} from '../actions/get';
+import Select from 'react-select';
 
 
 const styles = theme => ({
@@ -35,41 +31,42 @@ class ServiceForm extends React.Component {
   }
 
   handleChange = event => {
-    this.props.selectServices(event.target.value)
+    this.props.selectServices(event.value)
   };
 
   render() {
 
     const { classes, services, service } = this.props;
- 
+    if (!services) return null
+    const serviceOptions = services.map(ser=>({"value":ser.name,"label":ser.name}))
     return (
-      
-      <form className={classes.root} autoComplete="off">
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="service-form">Pick a service!</InputLabel>
-          <Select
-            value={service}
-            onChange={this.handleChange}
-            input={<Input name="service" id="service" />}
-          >
-            {services.map(ser=>
-              (<MenuItem key={ser} value={ser}>{ser.name}</MenuItem>)
-            )}
-          </Select>
-        </FormControl>
-      </form>
+      <div className={classes.root}>
+        <div className={classes.formControl}>
+          <Fragment>
+            <Select
+              placeholder = "Pick a service..."
+              isDisabled={false}
+              isLoading={false}
+              isClearable={true}
+              isSearchable={true}
+              name="service"
+              options={serviceOptions}
+              onChange={this.handleChange}
+              value={
+                service !== '' ? {value:service,label: service} : ''
+              }
+            />
+          </Fragment>
+        </div>
+      </div>
     );
   }
 }
 
 const mapStateToProps = function (state) {
   return {
-
-    services: state.services,
-    // service: state.selections.selection.service,
-    getServices : state.getServices,
-
-
+    services: state.allServices,
+    service: state.selections.service
   }
 }
 

@@ -1,15 +1,11 @@
 import { connect } from 'react-redux'
 import compose from 'recompose/compose';
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import {selectLocation} from '../actions/selections'
 import { getLocations} from '../actions/get';
+import Select from 'react-select';
 
 const styles = theme => ({
   root: {
@@ -32,40 +28,43 @@ class LocationForm extends React.Component {
   }
 
   handleChange = event => {
-    this.props.selectLocation(event.target.value)
+    this.props.selectLocation(event.value)
   };
 
   render() {
 
     const { classes, locations, location } = this.props;
+    if (!locations) return null
+    const locationOptions = locations.map(loc=>({"value":loc.name,"label":loc.name}))
 
     return (
-      <form className={classes.root} autoComplete="off">
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="location-form">Pick a location!</InputLabel>
-          <Select
-            value={location}
-            onChange={this.handleChange}
-            input={<Input name="location" id="location" />}
-          >
-            {locations.map(loc=>
-              (<MenuItem key={loc} value={loc}>{loc}</MenuItem>)
-            )}
-          </Select>
-        </FormControl>
-      </form>
+      <div className={classes.root}>
+        <div className={classes.formControl}>
+          <Fragment>
+            <Select
+              placeholder = "Pick a location..."
+              isDisabled={false}
+              isLoading={false}
+              isClearable={true}
+              isSearchable={true}
+              name="employee"
+              options={locationOptions}
+              onChange={this.handleChange}
+              value={
+                location !== '' ? {value:location,label: location} : ''
+              }
+            />
+          </Fragment>
+        </div>
+      </div>
     );
   }
 }
 
 const mapStateToProps = function (state) {
   return {
-
-    locations: state.locations,
-    // location: state.selections.selection.location,
-    getLocations : state.Locations
-    
-
+    locations: state.allLocations,
+    location: state.selections.location
   }
 }
 

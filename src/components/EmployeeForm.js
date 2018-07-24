@@ -1,15 +1,11 @@
 import { connect } from 'react-redux'
 import compose from 'recompose/compose';
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import {selectEmployees} from '../actions/selections'
 import {getEmployees} from '../actions/get'
+import Select from 'react-select';
 
 const styles = theme => ({
   root: {
@@ -32,39 +28,43 @@ class EmployeeForm extends React.Component {
   }
 
   handleChange = event => {
-    this.props.selectEmployees(event.target.value)
+    this.props.selectEmployees(event.value)
   };
 
   render() {
 
     const { classes, employees, employee } = this.props;
-
+    if (!employees) return null
+    const employeeOptions = employees.map(emp=>({"value":emp.name,"label":emp.name}))
+    
     return (
-      <form className={classes.root} autoComplete="off">
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="employee-form">Pick an employee!</InputLabel>
-          <Select
-            value={employee}
-            onChange={this.handleChange}
-            input={<Input name="employee" id="employee" />}
-          >
-            {employees.map(emp=>
-              (<MenuItem key={emp} value={emp}>{emp}</MenuItem>)
-            )}
-          </Select>
-        </FormControl>
-      </form>
+      <div className={classes.root}>
+        <div className={classes.formControl}>
+          <Fragment>
+            <Select
+              placeholder = "Pick an employee..."
+              isDisabled={false}
+              isLoading={false}
+              isClearable={true}
+              isSearchable={true}
+              name="employee"
+              options={employeeOptions}
+              onChange={this.handleChange}
+              value={
+                employee !== '' ? {value:employee,label: employee} : ''
+              }
+            />
+          </Fragment>
+        </div>
+      </div>
     );
   }
 }
 
 const mapStateToProps = function (state) {
   return {
-
-    // employees: state.selections.employees,
-    employees: state.employees,
-    getEmployees: state.getEmployees
-
+    employees: state.allEmployees,
+    employee: state.selections.employee
   }
 }
 

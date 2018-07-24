@@ -16,9 +16,9 @@ export default class BookingWidget extends PureComponent {
   render() {
     return (
       <div>
+        <ServiceForm />
         <LocationForm />
         <EmployeeForm />
-        <ServiceForm />
         {/* <DateForm /> */}
         <CustomerForm />
         <ResetForm />

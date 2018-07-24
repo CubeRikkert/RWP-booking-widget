@@ -1,9 +1,10 @@
-const initialState = ['waxing','cutting hair','change hair color']
+import { GET_SERVICES} from '../actions/get'
 
-
-export default function(state = initialState, action) {
+export default function(state = null, action) {
   switch (action.type) {
-      default:
-        return state
+    case GET_SERVICES:
+      return action.payload
+    default:
+      return state
   }
 }

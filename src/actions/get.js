@@ -6,13 +6,12 @@ export const GET_LOCATIONS = 'GET_LOCATIONS'
 export const GET_EMPLOYEES = 'GET_EMPLOYEES'
 export const GET_TIMES = 'GET_TIMES'
 
-export const getServices = () => (dispatch , getState) =>
+export const getServices = () => (dispatch) =>
  {
-  const state = getState()
   request 
   .get (`${baseUrl}/services.json`)
   .then (response => {
-    console.log(response.body.services)
+    // console.log(response.body.services)
     dispatch ({
       type: GET_SERVICES,
       payload: response.body.services
@@ -21,13 +20,12 @@ export const getServices = () => (dispatch , getState) =>
 }
 
 
-export const getLocations = () => (dispatch , getState) =>
+export const getLocations = () => (dispatch) =>
  {
-  const state = getState()
   request 
   .get (`${baseUrl}/bookings/locations.json`)
   .then (response => {
-    console.log(response.body)
+    // console.log(response.body)
     dispatch ({
       type: GET_LOCATIONS,
       payload: response.body.locations
@@ -35,13 +33,12 @@ export const getLocations = () => (dispatch , getState) =>
   })
 }
 
-export const getEmployees = () => (dispatch , getState) =>
+export const getEmployees = () => (dispatch) =>
  {
-  const state = getState()
   request 
   .get (`${baseUrl}/bookings/resources.json`)
   .then (response => {
-    console.log(response.body)
+    // console.log(response.body)
     dispatch ({
       type: GET_EMPLOYEES,
       payload: response.body["resources/employees"]    })
@@ -49,13 +46,12 @@ export const getEmployees = () => (dispatch , getState) =>
 }
 
 
-export const getTimes = (serviceId, date) => (dispatch , getState) =>
+export const getTimes = (serviceId, date) => (dispatch) =>
  {
-  const state = getState(serviceId, date)
   request 
   .get (`https://codaisseur-booking-widget.salonized.com/bookings/timeslots?service_ids=${serviceId}&date=${date}`)
   .then (response => {
-    console.log(response.body)
+    // console.log(response.body)
     dispatch ({
       type: GET_TIMES,
       payload: response.body    })
