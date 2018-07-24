@@ -8,6 +8,7 @@ import EmployeeForm from './EmployeeForm';
 import ServiceForm from './ServiceForm';
 // import DateForm from './DateForm';
 import CustomerForm from './CustomerForm'
+import ResetForm from './ResetForm';
 // import Summery from './Summary'
 
 export default class BookingWidget extends PureComponent {
@@ -20,6 +21,7 @@ export default class BookingWidget extends PureComponent {
         <ServiceForm />
         {/* <DateForm /> */}
         <CustomerForm />
+        <ResetForm />
         {/* <Summary /> */}
       </div>
     )
