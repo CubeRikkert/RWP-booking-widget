@@ -6,8 +6,10 @@ import React, { PureComponent } from 'react';
 import LocationForm from './LocationForm'
 import EmployeeForm from './EmployeeForm';
 import ServiceForm from './ServiceForm';
-import DateForm from './DateForm';
+// import DateForm from './DateForm';
 import CustomerForm from './CustomerForm'
+import ResetForm from './ResetForm';
+// import Summery from './Summary'
 
 export default class BookingWidget extends PureComponent {
 
@@ -17,8 +19,10 @@ export default class BookingWidget extends PureComponent {
         <LocationForm />
         <EmployeeForm />
         <ServiceForm />
-        <DateForm />
+        {/* <DateForm /> */}
         <CustomerForm />
+        <ResetForm />
+        {/* <Summary /> */}
       </div>
     )
   }

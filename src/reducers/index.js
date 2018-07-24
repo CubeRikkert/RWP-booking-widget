@@ -1,5 +1,9 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 import selections from './selections'
+import locations from './locations'
+import employees from './employees'
+import services from './services'
+import customer from './customer'
 import getServices from './getServices'
 import getLocations from './getLocations'
 import getEmployees from './getEmployees'
@@ -10,5 +14,11 @@ export default combineReducers({
   getServices,
   getLocations,
   getEmployees,
-  getTimes
+  getTimes,
+  locations,
+  employees,
+  services,
+  customer
+
+
 })

@@ -32,7 +32,6 @@ class LocationForm extends React.Component {
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
     this.props.selectLocation(event.target.value)
   };
 
@@ -61,10 +60,12 @@ class LocationForm extends React.Component {
 
 const mapStateToProps = function (state) {
   return {
+
     locations: state.selections.locations,
     location: state.selections.selection.location,
     getLocations : state.Locations
     
+
   }
 }
 

@@ -32,7 +32,6 @@ class EmployeeForm extends React.Component {
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
     this.props.selectEmployees(event.target.value)
   };
 
@@ -61,9 +60,11 @@ class EmployeeForm extends React.Component {
 
 const mapStateToProps = function (state) {
   return {
+
     employees: state.selections.employees,
     employee: state.selections.selection.employee,
     getEmployees: state.getEmployees
+
   }
 }
 

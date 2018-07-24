@@ -35,7 +35,6 @@ class ServiceForm extends React.Component {
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
     this.props.selectServices(event.target.value)
   };
 
@@ -65,9 +64,11 @@ class ServiceForm extends React.Component {
 
 const mapStateToProps = function (state) {
   return {
+
     services: state.selections.services,
     service: state.selections.selection.service,
     getServices : state.getServices,
+
 
   }
 }
