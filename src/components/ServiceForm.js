@@ -56,8 +56,8 @@ class ServiceForm extends React.Component {
 
 const mapStateToProps = function (state) {
   return {
-    services: state.selections.services,
-    service: state.selections.selection.service
+    services: state.services,
+    service: state.selections.service
   }
 }
 
