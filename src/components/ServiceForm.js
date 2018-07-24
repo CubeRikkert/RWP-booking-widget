@@ -27,7 +27,6 @@ const styles = theme => ({
 class ServiceForm extends React.Component {
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
     this.props.selectServices(event.target.value)
   };
 
