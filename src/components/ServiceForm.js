@@ -10,7 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {selectServices} from '../actions/selections';
 import { getServices} from '../actions/get';
-import { getLocations} from '../actions/get';
+
 
 const styles = theme => ({
   root: {

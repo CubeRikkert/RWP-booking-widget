@@ -51,7 +51,7 @@ export const getEmployees = () => (dispatch , getState) =>
 
 export const getTimes = (serviceId, date) => (dispatch , getState) =>
  {
-  const state = getState()
+  const state = getState(serviceId, date)
   request 
   .get (`https://codaisseur-booking-widget.salonized.com/bookings/timeslots?service_ids=${serviceId}&date=${date}`)
   .then (response => {
