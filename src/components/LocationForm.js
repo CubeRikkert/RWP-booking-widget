@@ -61,8 +61,8 @@ class LocationForm extends React.Component {
 const mapStateToProps = function (state) {
   return {
 
-    locations: state.selections.locations,
-    location: state.selections.selection.location,
+    locations: state.locations,
+    // location: state.selections.selection.location,
     getLocations : state.Locations
     
 

@@ -61,8 +61,8 @@ class EmployeeForm extends React.Component {
 const mapStateToProps = function (state) {
   return {
 
-    employees: state.selections.employees,
-    employee: state.selections.selection.employee,
+    // employees: state.selections.employees,
+    employees: state.employees,
     getEmployees: state.getEmployees
 
   }
