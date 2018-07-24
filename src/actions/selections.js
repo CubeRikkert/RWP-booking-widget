@@ -1,7 +1,9 @@
+
 export const SELECT_LOCATION = 'SELECT_LOCATION'
 export const SELECT_SERVICES = 'SELECT_SERVICES'
 export const SELECT_EMPLOYEES = 'SELECT_EMPLOYEES'
 export const SELECT_DATE = 'SELECT_DATE'
+
 
 export function selectLocation(location) {
   return {
@@ -16,6 +18,7 @@ export function selectServices(services) {
     payload: services
   }
 }
+
 
 export function selectEmployees(employees) {
   return {

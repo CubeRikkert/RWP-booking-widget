@@ -1,4 +1,4 @@
-import {SELECT_LOCATION,SELECT_SERVICES,SELECT_EMPLOYEES,SELECT_DATE} from '../actions/selections'
+import {SELECT_LOCATION, GET_SERVICES, SELECT_SERVICES,SELECT_EMPLOYEES,SELECT_DATE} from '../actions/selections'
 
 const initialState = {
   locations: ['cool hairdresser','very cool waxing','nice salon'],
@@ -28,10 +28,12 @@ export default function(state = initialState, action) {
         return {...state, selection: {...state.selection, location: action.payload}}
       case SELECT_SERVICES:
         return {...state, selection: {...state.selection, service: action.payload}}
-      case SELECT_EMPLOYEES:
+        case SELECT_EMPLOYEES:
         return {...state, selection: {...state.selection, employee: action.payload}}
       case SELECT_DATE:
         return {...state, selection: {...state.selection, date: action.payload}}
+  
+
       default:
         return state
   }

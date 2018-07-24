@@ -8,7 +8,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import {selectServices} from '../actions/selections'
+import {selectServices} from '../actions/selections';
+import { getServices} from '../actions/get';
+import { getLocations} from '../actions/get';
 
 const styles = theme => ({
   root: {
@@ -26,6 +28,12 @@ const styles = theme => ({
 
 class ServiceForm extends React.Component {
 
+
+  componentWillMount() {
+    this.props.getServices()
+  
+  }
+
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
     this.props.selectServices(event.target.value)
@@ -34,8 +42,9 @@ class ServiceForm extends React.Component {
   render() {
 
     const { classes, services, service } = this.props;
-
+ 
     return (
+      
       <form className={classes.root} autoComplete="off">
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="service-form">Pick a service!</InputLabel>
@@ -45,7 +54,7 @@ class ServiceForm extends React.Component {
             input={<Input name="service" id="service" />}
           >
             {services.map(ser=>
-              (<MenuItem key={ser} value={ser}>{ser}</MenuItem>)
+              (<MenuItem key={ser} value={ser}>{ser.name}</MenuItem>)
             )}
           </Select>
         </FormControl>
@@ -57,7 +66,9 @@ class ServiceForm extends React.Component {
 const mapStateToProps = function (state) {
   return {
     services: state.selections.services,
-    service: state.selections.selection.service
+    service: state.selections.selection.service,
+    getServices : state.getServices,
+
   }
 }
 
@@ -65,4 +76,4 @@ ServiceForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, {selectServices}))(ServiceForm);
+export default compose(withStyles(styles), connect(mapStateToProps, {selectServices, getServices}))(ServiceForm);

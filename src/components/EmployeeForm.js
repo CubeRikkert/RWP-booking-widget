@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {selectEmployees} from '../actions/selections'
+import {getEmployees} from '../actions/get'
 
 const styles = theme => ({
   root: {
@@ -25,6 +26,10 @@ const styles = theme => ({
 });
 
 class EmployeeForm extends React.Component {
+
+  componentWillMount() {
+    this.props.getEmployees()
+  }
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -57,7 +62,8 @@ class EmployeeForm extends React.Component {
 const mapStateToProps = function (state) {
   return {
     employees: state.selections.employees,
-    employee: state.selections.selection.employee
+    employee: state.selections.selection.employee,
+    getEmployees: state.getEmployees
   }
 }
 
@@ -65,4 +71,4 @@ EmployeeForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, {selectEmployees}))(EmployeeForm);
+export default compose(withStyles(styles), connect(mapStateToProps, {selectEmployees, getEmployees}))(EmployeeForm);

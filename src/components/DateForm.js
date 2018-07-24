@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import {selectDate} from '../actions/selections'
+import {getTimes} from '../actions/get'
 
 const styles = theme => ({
   container: {
@@ -19,6 +20,10 @@ const styles = theme => ({
 });
 
 class DateForm extends React.Component {
+
+  componentWillMount() {
+    this.props.getTimes()
+  }
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -49,7 +54,8 @@ class DateForm extends React.Component {
 
 const mapStateToProps = function (state) {
   return {
-    date: state.selections.selection.date
+    date: state.selections.selection.date,
+    getTimes : state.getTimes
   }
 }
 
@@ -57,4 +63,4 @@ DateForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, {selectDate}))(DateForm);
+export default compose(withStyles(styles), connect(mapStateToProps, {selectDate, getTimes}))(DateForm);
