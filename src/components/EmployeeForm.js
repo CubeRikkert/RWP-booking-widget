@@ -27,7 +27,6 @@ const styles = theme => ({
 class EmployeeForm extends React.Component {
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
     this.props.selectEmployees(event.target.value)
   };
 
