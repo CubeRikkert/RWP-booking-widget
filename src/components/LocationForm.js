@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {selectLocation} from '../actions/selections'
+import { getLocations} from '../actions/get';
 
 const styles = theme => ({
   root: {
@@ -25,6 +26,10 @@ const styles = theme => ({
 });
 
 class LocationForm extends React.Component {
+
+  componentWillMount() {
+    this.props.getLocations()
+  }
 
   handleChange = event => {
     this.props.selectLocation(event.target.value)
@@ -55,8 +60,12 @@ class LocationForm extends React.Component {
 
 const mapStateToProps = function (state) {
   return {
-    locations: state.locations,
-    location: state.selections.location
+
+    locations: state.selections.locations,
+    location: state.selections.selection.location,
+    getLocations : state.Locations
+    
+
   }
 }
 
@@ -64,4 +73,4 @@ LocationForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, {selectLocation}))(LocationForm);
+export default compose(withStyles(styles), connect(mapStateToProps, {selectLocation, getLocations}))(LocationForm);

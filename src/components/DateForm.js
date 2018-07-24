@@ -1,60 +1,67 @@
-// import { connect } from 'react-redux'
-// import compose from 'recompose/compose';
-// import React from 'react';
-// import PropTypes from 'prop-types';
-// import { withStyles } from '@material-ui/core/styles';
-// import TextField from '@material-ui/core/TextField';
-// import {selectDate} from '../actions/selections'
 
-// const styles = theme => ({
-//   container: {
-//     display: 'flex',
-//     flexWrap: 'wrap',
-//   },
-//   textField: {
-//     marginLeft: theme.spacing.unit,
-//     marginRight: theme.spacing.unit,
-//     minWidth: 350,
-//   },
-// });
+import { connect } from 'react-redux'
+import compose from 'recompose/compose';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import {selectDate} from '../actions/selections'
+import {getTimes} from '../actions/get'
 
-// class DateForm extends React.Component {
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    minWidth: 350,
+  },
+});
 
-//   handleChange = event => {
-//     this.setState({ [event.target.name]: event.target.value });
-//     this.props.selectDate(event.target.value)
-//   };
+class DateForm extends React.Component {
 
-//   render() {
+  componentWillMount() {
+    this.props.getTimes()
+  }
 
-//     const { classes } = this.props;
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+    this.props.selectDate(event.target.value)
+  };
 
-//     return (
-//       <form className={classes.container} noValidate>
-//       <TextField
-//         id="datetime-local"
-//         label="Pick an appointment date!"
-//         type="datetime-local" 
-//         className={classes.textField}
-//         InputLabelProps={{
-//           shrink: true,
-//         }}
-//         onChange={this.handleChange}
-//         placeholder=''
-//       />
-//     </form>
-//     );
-//   }
-// }
+  render() {
 
-// const mapStateToProps = function (state) {
-//   return {
-//     date: state.selections.selection.date
-//   }
-// }
+    const { classes } = this.props;
 
-// DateForm.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
+    return (
+      <form className={classes.container} noValidate>
+      <TextField
+        id="datetime-local"
+        label="Pick an appointment date!"
+        type="datetime-local" 
+        className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        onChange={this.handleChange}
+        placeholder=''
+      />
+    </form>
+    );
+  }
+}
 
-// export default compose(withStyles(styles), connect(mapStateToProps, {selectDate}))(DateForm);
+const mapStateToProps = function (state) {
+  return {
+    date: state.selections.selection.date,
+    getTimes : state.getTimes
+  }
+}
+
+DateForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default compose(withStyles(styles), connect(mapStateToProps, {selectDate, getTimes}))(DateForm);

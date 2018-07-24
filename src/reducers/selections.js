@@ -1,4 +1,6 @@
+
 import {SELECT_LOCATION,SELECT_SERVICES,SELECT_EMPLOYEES,SELECT_DATE, RESET_FORM} from '../actions/selections'
+
 
 const initialState = {
     location: '',
@@ -13,6 +15,8 @@ export default function(state = initialState, action) {
       case SELECT_LOCATION:
         return {...state, location: action.payload}
       case SELECT_SERVICES:
+
+
         return {...state, service: action.payload}
       case SELECT_EMPLOYEES:
         return {...state, employee: action.payload}
@@ -20,6 +24,7 @@ export default function(state = initialState, action) {
         return {...state, date: action.payload}
       case RESET_FORM:
         return initialState
+
       default:
         return state
   }
