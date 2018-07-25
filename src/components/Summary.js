@@ -17,17 +17,20 @@ import './Summary.css'
 class Summary extends React.Component {
 
     checkServiceSelection = () => {
-        if (!this.props.selections.service.id) return 'select a service'
+  
+        if ( !this.props.selections.service || !this.props.selections.service.id ) return 'select a service'
         return (`Service: ${this.props.selections.service.name}, \nPrice: €${(this.props.selections.service.price/100).toFixed(2)}, Duration ${this.props.selections.service.duration} minutes`)
     }
 
     checkLocationSelection = () => {
-        if (!this.props.selections.location.id) return 'select a location'
+
+        if ( !this.props.selections.location || !this.props.selections.location.id) return 'select a location'
         else return this.props.selections.location.name
     }
 
     checkEmployeeSelection = () => {
-        if (!this.props.selections.employee.id) return 'select an employee'
+      
+        if (!this.props.selections.employee || !this.props.selections.employee.id ) return 'select an employee'
         else return this.props.selections.employee.name 
     }
 
