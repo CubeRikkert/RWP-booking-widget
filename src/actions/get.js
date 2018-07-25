@@ -5,6 +5,7 @@ export const GET_SERVICES = 'GET_SERVICES'
 export const GET_LOCATIONS = 'GET_LOCATIONS'
 export const GET_EMPLOYEES = 'GET_EMPLOYEES'
 export const GET_TIMES = 'GET_TIMES'
+export const GET_DATES = 'GET_DATES'
 
 export const getServices = () => (dispatch) =>
  {
@@ -58,4 +59,14 @@ export const getTimes = (serviceId, date) => (dispatch) =>
   })
 }
 
-
+export const getDates = (serviceId, date) => (dispatch) =>
+ {
+  request 
+  .get (`https://codaisseur-booking-widget.salonized.com/bookings/available_days?service_ids=${serviceId}&date=${date}`)
+  .then (response => {
+    // console.log(response.body)
+    dispatch ({
+      type: GET_DATES,
+      payload: response.body    })
+  })
+}
