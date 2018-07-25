@@ -33,12 +33,10 @@ class EmployeeForm extends React.Component {
   };
 
   filterEmployees = () => {
-    if (this.props.selections.service || this.props.selections.location) {
-      if (this.props.selections.service.id && this.props.selections.location.id) return this.props.employees.filter(emp=>emp.service_ids.includes(this.props.selections.service.id)).filter(emp=>emp.location_id===this.props.selections.location.id)
-      if (!this.props.selections.service.id && !this.props.selections.location.id) return this.props.employees
-      if (this.props.selections.service.id && !this.props.selections.location.id) return this.props.employees.filter(emp=>emp.service_ids.includes(this.props.selections.service.id))
-      if (!this.props.selections.service.id && this.props.selections.location.id) return this.props.employees.filter(emp=>emp.location_id===this.props.selections.location.id)
-    } else return this.props.employees
+      if (!this.props.selections.service && !this.props.selections.location) return this.props.employees
+      if (this.props.selections.service && !this.props.selections.location) return this.props.employees.filter(emp=>emp.service_ids.includes(this.props.selections.service.id))
+      if (!this.props.selections.service && this.props.selections.location) return this.props.employees.filter(emp=>emp.location_id===this.props.selections.location.id)
+      if (this.props.selections.service && this.props.selections.location) return this.props.employees.filter(emp=>emp.service_ids.includes(this.props.selections.service.id)).filter(emp=>emp.location_id===this.props.selections.location.id)
   }
 
   render() {

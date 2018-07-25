@@ -25,6 +25,7 @@ export const getLocations = () => (dispatch) =>
  {
   request 
   .get (`${baseUrl}/bookings/locations.json`)
+  // .get (`https://codaisseur-booking-widget.salonized.com/bookings/locations.json`)
   .then (response => {
     // console.log(response.body)
     dispatch ({

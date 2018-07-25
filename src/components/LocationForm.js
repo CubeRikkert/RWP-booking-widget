@@ -31,13 +31,16 @@ class LocationForm extends React.Component {
     this.props.selectLocation(this.props.locations.find(loc=>loc.name===event.value))
   };
 
-  filterLocations = () => {
-    if (this.props.selections.service && this.props.selections.employee) {
-      if (this.props.selections.service.id && this.props.selections.employee.id) return this.props.locations
-      if (!this.props.selections.service.id && !this.props.selections.employee.id) return this.props.locations
-      if (this.props.selections.service.id && !this.props.selections.employee.id) return this.props.locations
-      if (!this.props.selections.service.id && this.props.selections.employee.id) return this.props.locations
-    } else return this.props.locations
+  filterLocations = () => {      
+      if (!this.props.selections.service && !this.props.selections.employee) return this.props.locations
+      if (this.props.selections.service && !this.props.selections.employee) {
+        const employeesforService = this.props.employees.filter(emp=>emp.service_ids.includes(this.props.selections.service.id))
+        const locationsforService = employeesforService.map(emp=>emp.location_id)
+        return this.props.locations.filter(loc=>locationsforService.includes(loc.id))
+      }
+      if (!this.props.selections.service && this.props.selections.employee) return this.props.locations.filter(loc=>loc.id===this.props.selections.employee.location_id)
+      if (this.props.selections.service && this.props.selections.employee) return this.props.locations.filter(loc=>loc.id===this.props.selections.employee.location_id)
+      return this.props.locations
   }
 
   render() {
@@ -74,7 +77,8 @@ const mapStateToProps = function (state) {
   return {
     locations: state.allLocations,
     selections: state.selections,
-    location: state.selections.location
+    location: state.selections.location,
+    employees: state.allEmployees
   }
 }
 
