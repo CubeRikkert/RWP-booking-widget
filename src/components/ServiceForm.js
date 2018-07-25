@@ -35,11 +35,17 @@ class ServiceForm extends React.Component {
   };
 
   filterServices = () => {
-    if (this.props.selections.location && this.props.selections.employee) {
-      if (this.props.selections.location.id && this.props.selections.employee.id) return this.props.services
+    if (this.props.selections.location || this.props.selections.employee) {
+      if (this.props.selections.location.id && this.props.selections.employee.id) return this.props.services.filter(ser=>ser.resource_ids.includes(this.props.selections.employee.id))
       if (!this.props.selections.location.id && !this.props.selections.employee.id) return this.props.services
-      if (this.props.selections.location.id && !this.props.selections.employee.id) return this.props.services
-      if (!this.props.selections.location.id && this.props.selections.employee.id) return this.props.services
+      if (this.props.selections.location.id && !this.props.selections.employee.id) {
+        const employeesofLocation = this.props.employees.filter(emp=>emp.location_id===this.props.selections.location.id)
+        const servicesofLocation = employeesofLocation.map(emp=>emp.service_ids)
+        const combinedservicesofLocation = [].concat.apply([],servicesofLocation)
+        console.log(combinedservicesofLocation)
+        return this.props.services.filter(ser=>combinedservicesofLocation.includes(ser.id))
+      }
+      if (!this.props.selections.location.id && this.props.selections.employee.id) return this.props.services.filter(ser=>ser.resource_ids.includes(this.props.selections.employee.id))
     } else return this.props.services
   }
 
@@ -76,7 +82,8 @@ const mapStateToProps = function (state) {
   return {
     services: state.allServices,
     selections: state.selections,
-    service: state.selections.service
+    service: state.selections.service,
+    employees: state.allEmployees
   }
 }
 
