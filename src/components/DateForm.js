@@ -1,4 +1,4 @@
-
+import Calendar from 'react-calendar'
 import { connect } from 'react-redux'
 import compose from 'recompose/compose';
 import React from 'react';
@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import {selectDate} from '../actions/selections'
 import {getTimes} from '../actions/get'
 import {getDates} from '../actions/get'
+import './DateForm.css'
 
 
 const styles = theme => ({
@@ -24,44 +25,61 @@ const styles = theme => ({
 
 class DateForm extends React.Component {
 
+  state = {
+    date: new Date(),
+  }
+
+
+
   componentWillMount() {
     this.props.getTimes()
     this.props.getDates ()
   }
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-    this.props.selectDate(event.target.value)
+  onChange = date => {
+    this.setState({date});
+    console.log(this.state.date)
+    this.props.selectDate(this.state.date)
   };
 
   render() {
-
-    const { classes, selections } = this.props;
-    if (!selections.location || !selections.service || !selections.employee) return null //customer form appears only after location, service and employee is selected
+    const disabledDates = [
+      new Date(2018, 0, 1),
+      new Date(2018, 1, 2),
+    ];
+    const { classes, selections, date } = this.props;
+    // if (!selections.location || !selections.service || !selections.employee) return null 
     return (
-      <form className={classes.container} noValidate>
-      <TextField
-        id="datetime-local"
-        label="Pick an appointment date!"
-        type="datetime-local" 
-        className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        onChange={this.handleChange}
-        placeholder=''
-      />
-    </form>
+     
+
+       <div className = "calendarFrame">
+        
+           <Calendar
+             onChange={this.onChange}
+             value={this.state.date}
+             tileDisabled={({date, view}) =>
+                    (view === 'month') && // Block day tiles only
+                    disabledDates.some(disabledDate =>
+                      date.getFullYear() === disabledDate.getFullYear() &&
+                      date.getMonth() === disabledDate.getMonth() &&
+                      date.getDate() === disabledDate.getDate()
+                    )
+                  }
+           />
+
+       </div>
+
     );
   }
 }
 
 const mapStateToProps = function (state) {
   return {
-    // date: state.selections.selection.date,
+  
     getTimes : state.getTimes,
     getDates : state.getDates,
     selections: state.selections
+    
   }
 }
 
