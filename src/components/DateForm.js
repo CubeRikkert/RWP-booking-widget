@@ -30,10 +30,8 @@ class DateForm extends React.Component {
   }
 
 
-
   componentWillMount() {
-    this.props.getTimes()
-    this.props.getDates ()
+    this.props.getDates (518955, "2018-07-25")
   }
 
   onChange = date => {
@@ -41,6 +39,8 @@ class DateForm extends React.Component {
     console.log(this.state.date)
     this.props.selectDate(this.state.date)
   };
+
+
 
   render() {
     const disabledDates = [
