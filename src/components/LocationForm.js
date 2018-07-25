@@ -28,14 +28,21 @@ class LocationForm extends React.Component {
   }
 
   handleChange = event => {
-    this.props.selectLocation(event.value)
+    this.props.selectLocation(this.props.locations.find(loc=>loc.name===event.value))
   };
+
+  filterLocations = () => {
+    if (!this.props.selections.service.id && !this.props.selections.employee.id) return this.props.locations
+    if (this.props.selections.service.id && !this.props.selections.employee.id) return this.props.locations
+    if (!this.props.selections.service.id && this.props.selections.employee.id) return this.props.locations
+    return this.props.locations
+  }
 
   render() {
 
     const { classes, locations, location } = this.props;
     if (!locations) return null
-    const locationOptions = locations.map(loc=>({"value":loc.name,"label":loc.name}))
+    const locationOptions = this.filterLocations().map(loc=>({"value":loc.name,"label":loc.name}))
 
     return (
       <div className={classes.root}>
@@ -51,7 +58,7 @@ class LocationForm extends React.Component {
               options={locationOptions}
               onChange={this.handleChange}
               value={
-                location !== '' ? {value:location,label: location} : ''
+                location !== '' ? {value:location.name,label: location.name} : ''
               }
             />
           </Fragment>
@@ -64,6 +71,7 @@ class LocationForm extends React.Component {
 const mapStateToProps = function (state) {
   return {
     locations: state.allLocations,
+    selections: state.selections,
     location: state.selections.location
   }
 }

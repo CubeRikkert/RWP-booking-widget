@@ -31,14 +31,21 @@ class ServiceForm extends React.Component {
   }
 
   handleChange = event => {
-    this.props.selectServices(event.value)
+    this.props.selectServices(this.props.services.find(ser=>ser.name===event.value))
   };
+
+  filterServices = () => {
+    if (!this.props.selections.location.id && !this.props.selections.employee.id) return this.props.services
+    if (this.props.selections.location.id && !this.props.selections.employee.id) return this.props.services
+    if (!this.props.selections.location.id && this.props.selections.employee.id) return this.props.services
+    return this.props.services
+  }
 
   render() {
 
     const { classes, services, service } = this.props;
     if (!services) return null
-    const serviceOptions = services.map(ser=>({"value":ser.name,"label":ser.name}))
+    const serviceOptions = this.filterServices().map(ser=>({"value":ser.name,"label":ser.name}))
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
@@ -53,7 +60,7 @@ class ServiceForm extends React.Component {
               options={serviceOptions}
               onChange={this.handleChange}
               value={
-                service !== '' ? {value:service,label: service} : ''
+                service !== '' ? {value:service.name,label: service.name} : ''
               }
             />
           </Fragment>
@@ -66,6 +73,7 @@ class ServiceForm extends React.Component {
 const mapStateToProps = function (state) {
   return {
     services: state.allServices,
+    selections: state.selections,
     service: state.selections.service
   }
 }

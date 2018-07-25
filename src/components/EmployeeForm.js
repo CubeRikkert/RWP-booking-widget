@@ -28,14 +28,21 @@ class EmployeeForm extends React.Component {
   }
 
   handleChange = event => {
-    this.props.selectEmployees(event.value)
+    this.props.selectEmployees(this.props.employees.find(emp=>emp.name===event.value))
   };
+
+  filterEmployees = () => {
+    if (!this.props.selections.service.id && !this.props.selections.location.id) return this.props.employees
+    if (this.props.selections.service.id && !this.props.selections.location.id) return this.props.employees
+    if (!this.props.selections.service.id && this.props.selections.location.id) return this.props.employees
+    return this.props.employees
+  }
 
   render() {
 
     const { classes, employees, employee } = this.props;
     if (!employees) return null
-    const employeeOptions = employees.map(emp=>({"value":emp.name,"label":emp.name}))
+    const employeeOptions = this.filterEmployees().map(emp=>({"value":emp.name,"label":emp.name}))
     
     return (
       <div className={classes.root}>
@@ -51,7 +58,7 @@ class EmployeeForm extends React.Component {
               options={employeeOptions}
               onChange={this.handleChange}
               value={
-                employee !== '' ? {value:employee,label: employee} : ''
+                employee !== '' ? {value:employee.name,label: employee.name} : ''
               }
             />
           </Fragment>
@@ -64,6 +71,7 @@ class EmployeeForm extends React.Component {
 const mapStateToProps = function (state) {
   return {
     employees: state.allEmployees,
+    selections: state.selections,
     employee: state.selections.employee
   }
 }

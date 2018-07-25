@@ -56,8 +56,8 @@ class CustomerForm extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
-
+    const { classes, selections } = this.props;
+    if (!selections.location || !selections.service || !selections.employee) return null //customer form appears only after location, service and employee is selected
     return (
       <form className={classes.container} noValidate autoComplete="off">
         <TextField
@@ -155,7 +155,8 @@ class CustomerForm extends React.Component {
 
 const mapStateToProps = function (state) {
   return {
-    customer: state.customer
+    customer: state.customer,
+    selections: state.selections
   }
 }
 
