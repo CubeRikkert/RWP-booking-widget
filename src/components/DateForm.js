@@ -36,8 +36,8 @@ class DateForm extends React.Component {
 
   render() {
 
-    const { classes } = this.props;
-
+    const { classes, selections } = this.props;
+    if (!selections.location || !selections.service || !selections.employee) return null //customer form appears only after location, service and employee is selected
     return (
       <form className={classes.container} noValidate>
       <TextField
@@ -58,9 +58,10 @@ class DateForm extends React.Component {
 
 const mapStateToProps = function (state) {
   return {
-    date: state.selections.selection.date,
+    // date: state.selections.selection.date,
     getTimes : state.getTimes,
-    getDates : state.getDates
+    getDates : state.getDates,
+    selections: state.selections
   }
 }
 
