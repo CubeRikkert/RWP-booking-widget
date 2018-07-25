@@ -31,7 +31,7 @@ class DateForm extends React.Component {
 
 
   componentWillMount() {
-    this.props.getDates (518955, "2018-07-25")
+    this.props.getDates (518955, new Date().toJSON().slice(0,10).replace(/-/g,'-'))
   }
 
   onChange = date => {
