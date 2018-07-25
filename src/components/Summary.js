@@ -19,8 +19,13 @@ class Summary extends React.Component {
     checkServiceSelection = () => {
   
         if ( !this.props.selections.service || !this.props.selections.service.id ) return 'select a service'
-        return (`Service: ${this.props.selections.service.name}, \nPrice: €${(this.props.selections.service.price/100).toFixed(2)}, Duration ${this.props.selections.service.duration} minutes`)
-    }
+        const str = `Service: ${this.props.selections.service.name}, 
+                     \nPrice: €${(this.props.selections.service.price/100).toFixed(2)}, 
+                     \nDuration ${this.props.selections.service.duration} minutes`
+        return str.split('\n').map(i => {
+          return <p>{i}</p>
+        })
+      }
 
     checkLocationSelection = () => {
 
