@@ -28,14 +28,17 @@ class EmployeeForm extends React.Component {
   }
 
   handleChange = event => {
-    this.props.selectEmployees(this.props.employees.find(emp=>emp.name===event.value))
+    if (event) this.props.selectEmployees(this.props.employees.find(emp=>emp.name===event.value))
+    
   };
 
   filterEmployees = () => {
-    if (!this.props.selections.service.id && !this.props.selections.location.id) return this.props.employees
-    if (this.props.selections.service.id && !this.props.selections.location.id) return this.props.employees
-    if (!this.props.selections.service.id && this.props.selections.location.id) return this.props.employees
-    return this.props.employees
+    if (this.props.selections.service & this.props.selections.location) {
+      if (this.props.selections.service.id && this.props.selections.location.id) return this.props.employees
+      if (!this.props.selections.service.id && !this.props.selections.location.id) return this.props.employees
+      if (this.props.selections.service.id && !this.props.selections.location.id) return this.props.employees
+      if (!this.props.selections.service.id && this.props.selections.location.id) return this.props.employees
+    } else return this.props.employees
   }
 
   render() {
@@ -52,13 +55,15 @@ class EmployeeForm extends React.Component {
               placeholder = "Pick an employee..."
               isDisabled={false}
               isLoading={false}
-              isClearable={true}
+              // backspaceRemoves={false}
+              // deleteRemoves={false}
+              // isClearable={true}
               isSearchable={true}
               name="employee"
               options={employeeOptions}
               onChange={this.handleChange}
               value={
-                employee !== '' ? {value:employee.name,label: employee.name} : ''
+                employee && employee !== '' ? {value:employee.name,label: employee.name} : ''
               }
             />
           </Fragment>

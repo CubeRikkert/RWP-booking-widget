@@ -32,10 +32,12 @@ class LocationForm extends React.Component {
   };
 
   filterLocations = () => {
-    if (!this.props.selections.service.id && !this.props.selections.employee.id) return this.props.locations
-    if (this.props.selections.service.id && !this.props.selections.employee.id) return this.props.locations
-    if (!this.props.selections.service.id && this.props.selections.employee.id) return this.props.locations
-    return this.props.locations
+    if (this.props.selections.service && this.props.selections.employee) {
+      if (this.props.selections.service.id && this.props.selections.employee.id) return this.props.locations
+      if (!this.props.selections.service.id && !this.props.selections.employee.id) return this.props.locations
+      if (this.props.selections.service.id && !this.props.selections.employee.id) return this.props.locations
+      if (!this.props.selections.service.id && this.props.selections.employee.id) return this.props.locations
+    } else return this.props.locations
   }
 
   render() {
@@ -52,13 +54,13 @@ class LocationForm extends React.Component {
               placeholder = "Pick a location..."
               isDisabled={false}
               isLoading={false}
-              isClearable={true}
+              // isClearable={true}
               isSearchable={true}
               name="employee"
               options={locationOptions}
               onChange={this.handleChange}
               value={
-                location !== '' ? {value:location.name,label: location.name} : ''
+                location && location !== '' ? {value:location.name,label: location.name} : ''
               }
             />
           </Fragment>

@@ -35,10 +35,12 @@ class ServiceForm extends React.Component {
   };
 
   filterServices = () => {
-    if (!this.props.selections.location.id && !this.props.selections.employee.id) return this.props.services
-    if (this.props.selections.location.id && !this.props.selections.employee.id) return this.props.services
-    if (!this.props.selections.location.id && this.props.selections.employee.id) return this.props.services
-    return this.props.services
+    if (this.props.selections.location && this.props.selections.employee) {
+      if (this.props.selections.location.id && this.props.selections.employee.id) return this.props.services
+      if (!this.props.selections.location.id && !this.props.selections.employee.id) return this.props.services
+      if (this.props.selections.location.id && !this.props.selections.employee.id) return this.props.services
+      if (!this.props.selections.location.id && this.props.selections.employee.id) return this.props.services
+    } else return this.props.services
   }
 
   render() {
@@ -54,13 +56,13 @@ class ServiceForm extends React.Component {
               placeholder = "Pick a service..."
               isDisabled={false}
               isLoading={false}
-              isClearable={true}
+              // isClearable={true}
               isSearchable={true}
               name="service"
               options={serviceOptions}
               onChange={this.handleChange}
               value={
-                service !== '' ? {value:service.name,label: service.name} : ''
+                service && service !== '' ? {value:service.name,label: service.name} : ''
               }
             />
           </Fragment>
