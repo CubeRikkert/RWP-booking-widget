@@ -6,6 +6,7 @@ import allServices from './services'
 import customer from './customer'
 import availableTimes from './availableTimes'
 import availableDates from './availableDates'
+import addBooking from './booking'
 
 export default combineReducers({
   allLocations,
@@ -14,5 +15,6 @@ export default combineReducers({
   customer,
   selections,
   availableTimes,
-  availableDates
+  availableDates,
+  addBooking
 })
