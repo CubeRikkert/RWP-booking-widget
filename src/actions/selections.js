@@ -4,6 +4,7 @@ export const SELECT_SERVICES = 'SELECT_SERVICES'
 export const SELECT_EMPLOYEES = 'SELECT_EMPLOYEES'
 export const SELECT_DATE = 'SELECT_DATE'
 export const SELECT_TIME = 'SELECT_TIME'
+export const RESET_TIME = 'RESET_TIME'
 export const RESET_FORM = 'RESET_FORM'
 
 
@@ -46,5 +47,11 @@ export function selectTime(time) {
 export function resetForm() {
   return {
     type: RESET_FORM
+  }
+}
+
+export function resetTime() {
+  return {
+    type: RESET_TIME
   }
 }

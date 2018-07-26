@@ -23,12 +23,7 @@ const styles = theme => ({
 
 class TimeForm extends React.Component {
 
-  state = {
-    date : ""
-  }
-
   handleChange = event => {
-    this.setState({event})
     this.props.selectTime(event.value)
   };
 
@@ -37,9 +32,8 @@ class TimeForm extends React.Component {
   }
 
   render() {
-    
+   
     const { classes, selections, availableTimes, time } = this.props;
-    if (selections.date===null) return null
     if (!selections.location || !selections.service || !selections.employee || !selections.date) return null //customer form appears only after location, service and employee is selected
     if (availableTimes===null ) {this.props.getTimes(selections.service.id,selections.date)}
     else if (availableTimes[0].date!==selections.date) {
@@ -47,6 +41,7 @@ class TimeForm extends React.Component {
       } 
     if (!availableTimes) return null
     const timeOptions = this.filterTimes().map(time=>({"value":time.time,"label":time.time}))
+    // console.log(this.filterTimes().map(time=>time.resource_id).includes(this.props.selections.employee.id))
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
@@ -63,7 +58,7 @@ class TimeForm extends React.Component {
               options={timeOptions}
               onChange={this.handleChange}
               value={
-                time && time !== '' ? {value:time,label: time} : ''
+                time && time !== ''  ? {value:time,label: time} : ''
               }
             />
           </Fragment>

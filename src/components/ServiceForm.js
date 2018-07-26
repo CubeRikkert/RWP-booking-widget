@@ -40,7 +40,6 @@ class ServiceForm extends React.Component {
         const employeesofLocation = this.props.employees.filter(emp=>emp.location_id===this.props.selections.location.id)
         const servicesofLocation = employeesofLocation.map(emp=>emp.service_ids)
         const combinedservicesofLocation = [].concat.apply([],servicesofLocation)
-        console.log(combinedservicesofLocation)
         return this.props.services.filter(ser=>combinedservicesofLocation.includes(ser.id))
       }
       if (!this.props.selections.location && this.props.selections.employee) return this.props.services.filter(ser=>ser.resource_ids.includes(this.props.selections.employee.id))
@@ -61,7 +60,7 @@ class ServiceForm extends React.Component {
     const { classes, services, service } = this.props;
     if (!services) return null
     const serviceOptions = this.filterServices().map(ser=>({"value":ser.name,"label":ser.name}))
-    if (this.props.selections.service!==null) this.nowGetDates()
+    if (this.props.selections.service!==null ) this.nowGetDates()
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>

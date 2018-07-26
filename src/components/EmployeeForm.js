@@ -3,7 +3,7 @@ import compose from 'recompose/compose';
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {selectEmployees} from '../actions/selections'
+import {selectEmployees, resetTime} from '../actions/selections'
 import {getEmployees} from '../actions/get'
 import Select from 'react-select';
 
@@ -29,7 +29,7 @@ class EmployeeForm extends React.Component {
 
   handleChange = event => {
     if (event) this.props.selectEmployees(this.props.employees.find(emp=>emp.name===event.value))
-    
+    this.props.resetTime()
   };
 
   filterEmployees = () => {
@@ -83,4 +83,4 @@ EmployeeForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, {selectEmployees, getEmployees}))(EmployeeForm);
+export default compose(withStyles(styles), connect(mapStateToProps, {selectEmployees, getEmployees, resetTime}))(EmployeeForm);

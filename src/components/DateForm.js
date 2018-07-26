@@ -4,10 +4,8 @@ import compose from 'recompose/compose';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import {selectDate} from '../actions/selections'
 import {getTimes} from '../actions/get'
-import {getDates} from '../actions/get'
 import './DateForm.css'
 
 
@@ -44,15 +42,6 @@ class DateForm extends React.Component {
   onChange = date => {
     this.props.selectDate(this.formatDate(date))
   };
- 
-  nowGetDates = () => {
-    if (this.props.selections.service) {
-      const date = new Date().toJSON().slice(0,10).replace(/-/g,'-')
-      const serviceId = this.props.selections.service.id
-      this.props.getDates(serviceId, date)
-    }
-  }
-
 
   render() {
 
@@ -99,4 +88,4 @@ DateForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, {selectDate, getTimes, getDates}))(DateForm);
+export default compose(withStyles(styles), connect(mapStateToProps, {selectDate, getTimes}))(DateForm);
