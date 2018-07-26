@@ -6,7 +6,8 @@ const initialState = {
     location: '',
     service: '',
     employee: '',
-    date: ''
+    date: '',
+    time:''
   }
 
 
