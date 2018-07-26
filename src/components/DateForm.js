@@ -34,10 +34,26 @@ class DateForm extends React.Component {
   //   this.props.getDates (518955, new Date().toJSON().slice(0,10).replace(/-/g,'-'))
   // }
 
+  formatDate = (date) => {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
+
   onChange = date => {
-    this.setState({date});
-    console.log(this.state.date)
-    this.props.selectDate(date)
+    // this.setState({date});
+    // console.log(this.state.date)
+    // console.log(date,'date')
+    // const yyyymmdd = date.toJSON().slice(0,10).replace(/-/g,'-')
+    // console.log(yyyymmdd,'yyyymmdd')
+    //this.props.selectDate(date.toJSON().slice(0,10).replace(/-/g,'-'))
+    this.props.selectDate(this.formatDate(date))
   };
  
   nowGetDates = () => {
