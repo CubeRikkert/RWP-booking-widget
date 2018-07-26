@@ -69,6 +69,7 @@ class DateForm extends React.Component {
            <Calendar
              onChange={this.onChange}
              value={this.state.date}
+             
              tileDisabled={({date, view}) =>
                     (view === 'month') && // Block day tiles only
                     disabledDates.some(disabledDate =>

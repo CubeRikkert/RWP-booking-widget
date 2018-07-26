@@ -23,7 +23,12 @@ const styles = theme => ({
 
 class TimeForm extends React.Component {
 
+  state = {
+    date : ""
+  }
+
   handleChange = event => {
+    this.setState({event})
     this.props.selectTime(event.value)
   };
 
@@ -34,7 +39,7 @@ class TimeForm extends React.Component {
   render() {
     const { classes, selections, availableTimes, time } = this.props;
     if (!selections.location || !selections.service || !selections.employee || !selections.date) return null //customer form appears only after location, service and employee is selected
-    if (availableTimes===null) {this.props.getTimes(selections.service.id,selections.date)}
+    if (availableTimes===null  ) {this.props.getTimes(selections.service.id,selections.date)}
     else if (availableTimes[0].date!==selections.date) {
         this.props.getTimes(selections.service.id,selections.date)
       } 
