@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {getTimes} from '../actions/get'
+import {selectTime} from '../actions/selections';
 import { connect } from 'react-redux'
 import compose from 'recompose/compose';
 import Select from 'react-select';
@@ -22,8 +23,12 @@ const styles = theme => ({
 
 class TimeForm extends React.Component {
 
+  handleChange = event => {
+    this.props.selectTime(event.value)
+  };
+
   render() {
-    const { classes, selections, availableTimes } = this.props;
+    const { classes, selections, availableTimes, time } = this.props;
     if (!selections.location || !selections.service || !selections.employee || !selections.date) return null //customer form appears only after location, service and employee is selected
     if (availableTimes===null) {this.props.getTimes(selections.service.id,selections.date)}
     else if (availableTimes[0].date!==selections.date) {
@@ -43,12 +48,12 @@ class TimeForm extends React.Component {
               // deleteRemoves={false}
               // isClearable={true}
               isSearchable={true}
-              name="employee"
+              name="time"
               options={timeOptions}
               onChange={this.handleChange}
-              // value={
-              //   employee && employee !== '' ? {value:employee.name,label: employee.name} : ''
-              // }
+              value={
+                time && time !== '' ? {value:time,label: time} : ''
+              }
             />
           </Fragment>
         </div>
@@ -60,7 +65,8 @@ class TimeForm extends React.Component {
 const mapStateToProps = function (state) {
   return {
     selections: state.selections,
-    availableTimes: state.availableTimes
+    availableTimes: state.availableTimes,
+    time: state.selections.time
   }
 }
 
@@ -68,4 +74,4 @@ TimeForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps,{getTimes}))(TimeForm);
+export default compose(withStyles(styles), connect(mapStateToProps,{getTimes, selectTime}))(TimeForm);

@@ -1,5 +1,5 @@
 
-import {SELECT_LOCATION,SELECT_SERVICES,SELECT_EMPLOYEES,SELECT_DATE, RESET_FORM} from '../actions/selections'
+import {SELECT_LOCATION,SELECT_SERVICES,SELECT_EMPLOYEES,SELECT_DATE, SELECT_TIME,RESET_FORM} from '../actions/selections'
 
 
 const initialState = {
@@ -21,6 +21,8 @@ export default function(state = initialState, action) {
         return {...state, employee: action.payload}
       case SELECT_DATE:
         return {...state, date: action.payload}
+      case SELECT_TIME:
+        return {...state, time: action.payload}
       case RESET_FORM:
         return initialState
 
