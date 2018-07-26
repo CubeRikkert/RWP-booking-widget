@@ -32,19 +32,21 @@ class TimeForm extends React.Component {
     this.props.selectTime(event.value)
   };
 
-  // filterTimes = () => {
-    
-  // }
+  filterTimes = () => {
+    return this.props.availableTimes && this.props.availableTimes.filter(time=>time.resource_id===this.props.selections.employee.id)
+  }
 
   render() {
+    
     const { classes, selections, availableTimes, time } = this.props;
+    if (selections.date===null) return null
     if (!selections.location || !selections.service || !selections.employee || !selections.date) return null //customer form appears only after location, service and employee is selected
-    if (availableTimes===null  ) {this.props.getTimes(selections.service.id,selections.date)}
+    if (availableTimes===null ) {this.props.getTimes(selections.service.id,selections.date)}
     else if (availableTimes[0].date!==selections.date) {
         this.props.getTimes(selections.service.id,selections.date)
       } 
     if (!availableTimes) return null
-    const timeOptions = availableTimes.map(time=>({"value":time.time,"label":time.time}))
+    const timeOptions = this.filterTimes().map(time=>({"value":time.time,"label":time.time}))
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
@@ -75,6 +77,7 @@ const mapStateToProps = function (state) {
   return {
     selections: state.selections,
     availableTimes: state.availableTimes,
+    availableDates: state.availableDates,
     time: state.selections.time
   }
 }
