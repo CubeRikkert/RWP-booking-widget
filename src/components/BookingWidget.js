@@ -11,6 +11,7 @@ import CustomerForm from './CustomerForm'
 import ResetForm from './ResetForm';
 import Summary from './Summary'
 import TimeForm from './TimeForm';
+import BookingButton from './BookingButton'
 
 export default class BookingWidget extends PureComponent {
 
@@ -26,6 +27,7 @@ export default class BookingWidget extends PureComponent {
         <CustomerForm />
   
         <ResetForm />
+        <BookingButton />
         <Summary />
       </div>
     )
