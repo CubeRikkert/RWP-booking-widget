@@ -64,7 +64,7 @@ export const getTimes = (serviceId, date) => (dispatch) =>
 export const getDates = (serviceId, date) => (dispatch) =>
  {
   request 
-  .get (`${baseUrl}/bookings/available_days?service_ids=${serviceId}&date=${date}`)
+  .get (`${baseUrl}bookings/available_days?service_ids=${serviceId}&date=${date}`)
   .then (response => {
     // console.log(response.body)
     dispatch ({
@@ -74,16 +74,17 @@ export const getDates = (serviceId, date) => (dispatch) =>
 }
 
 
-export const addBooking = (serviceId, date, selection) => (dispatch, getState) => {
+export const addBooking = (booking) => (dispatch, getState) => {
   const state = getState()
 
   request
-    .post(`${baseUrl}/bookings/timeslots?service_ids=${serviceId}&date=${date}`)
-    .send(selection)
+    .post(`${baseUrl}/bookings`)
+    .send(booking)
     .then(response => {
       dispatch({
         type: ADD_BOOKING,
         payload: response.body
       })
     })
+    .catch(err => console.log(err))
 }
