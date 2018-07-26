@@ -4,8 +4,8 @@ import allLocations from './locations'
 import allEmployees from './employees'
 import allServices from './services'
 import customer from './customer'
-import getTimes from './getTimes'
-import getDates from './getDates'
+import availableTimes from './availableTimes'
+import availableDates from './availableDates'
 
 export default combineReducers({
   allLocations,
@@ -13,6 +13,6 @@ export default combineReducers({
   allServices,
   customer,
   selections,
-  getTimes,
-  getDates
+  availableTimes,
+  availableDates
 })

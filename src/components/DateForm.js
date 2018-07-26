@@ -30,30 +30,36 @@ class DateForm extends React.Component {
   }
 
 
-  componentWillMount() {
-    this.props.getDates (518955, new Date().toJSON().slice(0,10).replace(/-/g,'-'))
-  }
+  // componentWillMount() {
+  //   this.props.getDates (518955, new Date().toJSON().slice(0,10).replace(/-/g,'-'))
+  // }
 
   onChange = date => {
     this.setState({date});
     console.log(this.state.date)
-    this.props.selectDate(this.state.date)
+    this.props.selectDate(date)
   };
-
+ 
+  nowGetDates = () => {
+    const date = new Date().toJSON().slice(0,10).replace(/-/g,'-')
+    const serviceId = this.props.serviceSelection
+    this.props.getDates(serviceId, date)
+  }
 
 
   render() {
+
     const disabledDates = [
       new Date(2018, 0, 1),
       new Date(2018, 1, 2),
     ];
     const { classes, selections, date } = this.props;
-    // if (!selections.location || !selections.service || !selections.employee) return null 
-    return (
      
-
+    if (!selections.location || !selections.service || !selections.employee) return null 
+    // if (this.props.dates===null) this.nowGetDates()
+    return (
        <div className = "calendarFrame">
-        
+       
            <Calendar
              onChange={this.onChange}
              value={this.state.date}
@@ -76,8 +82,9 @@ class DateForm extends React.Component {
 const mapStateToProps = function (state) {
   return {
   
-    getTimes : state.getTimes,
-    getDates : state.getDates,
+    serviceSelection: state.selections.service.id,
+    times : state.availableTimes,
+    dates : state.availableDates,
     selections: state.selections
     
   }

@@ -15,8 +15,6 @@ export default function(state = initialState, action) {
       case SELECT_LOCATION:
         return {...state, location: action.payload}
       case SELECT_SERVICES:
-
-
         return {...state, service: action.payload}
       case SELECT_EMPLOYEES:
         return {...state, employee: action.payload}

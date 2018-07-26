@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {selectServices} from '../actions/selections';
-import { getServices} from '../actions/get';
+import { getServices, getDates} from '../actions/get';
 import Select from 'react-select';
 
 
@@ -48,11 +48,18 @@ class ServiceForm extends React.Component {
       return this.props.services
   }
 
+  nowGetDates = () => {
+    const date = new Date().toJSON().slice(0,10).replace(/-/g,'-')
+    const serviceId = this.props.serviceSelection
+    this.props.getDates(serviceId, date)
+  }
+
   render() {
 
     const { classes, services, service } = this.props;
     if (!services) return null
     const serviceOptions = this.filterServices().map(ser=>({"value":ser.name,"label":ser.name}))
+    if (this.props.selections.service!==null) this.nowGetDates()
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
@@ -82,7 +89,8 @@ const mapStateToProps = function (state) {
     services: state.allServices,
     selections: state.selections,
     service: state.selections.service,
-    employees: state.allEmployees
+    employees: state.allEmployees,
+    serviceSelection: state.selections.service.id,
   }
 }
 
@@ -90,4 +98,4 @@ ServiceForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, {selectServices, getServices}))(ServiceForm);
+export default compose(withStyles(styles), connect(mapStateToProps, {selectServices, getServices, getDates}))(ServiceForm);
