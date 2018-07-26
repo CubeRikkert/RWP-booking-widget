@@ -6,6 +6,7 @@ export const GET_LOCATIONS = 'GET_LOCATIONS'
 export const GET_EMPLOYEES = 'GET_EMPLOYEES'
 export const GET_TIMES = 'GET_TIMES'
 export const GET_DATES = 'GET_DATES'
+export const ADD_BOOKING = 'ADD_BOOKING'
 
 export const getServices = () => (dispatch) =>
  {
@@ -70,4 +71,19 @@ export const getDates = (serviceId, date) => (dispatch) =>
       type: GET_DATES,
       payload: response.body.days    })
   })
+}
+
+
+export const addBooking = (serviceId, date, selection) => (dispatch, getState) => {
+  const state = getState()
+
+  request
+    .post(`${baseUrl}/bookings/timeslots?service_ids=${serviceId}&date=${date}`)
+    .send(selection)
+    .then(response => {
+      dispatch({
+        type: ADD_BOOKING,
+        payload: response.body
+      })
+    })
 }
