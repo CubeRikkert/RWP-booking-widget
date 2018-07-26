@@ -49,9 +49,11 @@ class ServiceForm extends React.Component {
   }
 
   nowGetDates = () => {
-    const date = new Date().toJSON().slice(0,10).replace(/-/g,'-')
-    const serviceId = this.props.serviceSelection
-    this.props.getDates(serviceId, date)
+    if (this.props.selections.service) {
+      const date = new Date().toJSON().slice(0,10).replace(/-/g,'-')
+      const serviceId = this.props.selections.service.id
+      this.props.getDates(serviceId, date)
+    }
   }
 
   render() {
@@ -89,8 +91,7 @@ const mapStateToProps = function (state) {
     services: state.allServices,
     selections: state.selections,
     service: state.selections.service,
-    employees: state.allEmployees,
-    serviceSelection: state.selections.service.id,
+    employees: state.allEmployees
   }
 }
 

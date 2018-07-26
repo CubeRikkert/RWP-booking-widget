@@ -29,11 +29,6 @@ class DateForm extends React.Component {
     date: new Date(),
   }
 
-
-  // componentWillMount() {
-  //   this.props.getDates (518955, new Date().toJSON().slice(0,10).replace(/-/g,'-'))
-  // }
-
   formatDate = (date) => {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -47,19 +42,15 @@ class DateForm extends React.Component {
   }
 
   onChange = date => {
-    // this.setState({date});
-    // console.log(this.state.date)
-    // console.log(date,'date')
-    // const yyyymmdd = date.toJSON().slice(0,10).replace(/-/g,'-')
-    // console.log(yyyymmdd,'yyyymmdd')
-    //this.props.selectDate(date.toJSON().slice(0,10).replace(/-/g,'-'))
     this.props.selectDate(this.formatDate(date))
   };
  
   nowGetDates = () => {
-    const date = new Date().toJSON().slice(0,10).replace(/-/g,'-')
-    const serviceId = this.props.serviceSelection
-    this.props.getDates(serviceId, date)
+    if (this.props.selections.service) {
+      const date = new Date().toJSON().slice(0,10).replace(/-/g,'-')
+      const serviceId = this.props.selections.service.id
+      this.props.getDates(serviceId, date)
+    }
   }
 
 
@@ -72,7 +63,6 @@ class DateForm extends React.Component {
     const { classes, selections, date } = this.props;
      
     if (!selections.location || !selections.service || !selections.employee) return null 
-    // if (this.props.dates===null) this.nowGetDates()
     return (
        <div className = "calendarFrame">
        
@@ -97,8 +87,6 @@ class DateForm extends React.Component {
 
 const mapStateToProps = function (state) {
   return {
-  
-    serviceSelection: state.selections.service.id,
     times : state.availableTimes,
     dates : state.availableDates,
     selections: state.selections

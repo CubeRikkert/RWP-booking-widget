@@ -27,6 +27,10 @@ class TimeForm extends React.Component {
     this.props.selectTime(event.value)
   };
 
+  // filterTimes = () => {
+    
+  // }
+
   render() {
     const { classes, selections, availableTimes, time } = this.props;
     if (!selections.location || !selections.service || !selections.employee || !selections.date) return null //customer form appears only after location, service and employee is selected
