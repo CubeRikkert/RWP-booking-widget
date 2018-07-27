@@ -11,24 +11,27 @@ import './Summary.css'
 class Summary extends React.Component {
 
     checkServiceSelection = () => {
-  
-        if ( !this.props.selections.service || !this.props.selections.service.id ) return 'select a service'
-        const str = `Service: ${this.props.selections.service.name}, 
-                     \nPrice: €${(this.props.selections.service.price/100).toFixed(2)}, 
-                     \nDuration ${this.props.selections.service.duration} minutes`
-        return str.split('\n').map(i => {
-          return <p>{i}</p>
-        })
+      const { service } = this.props.selections;
+      // TODO: Explain the need to use .id
+      if (!service || !service.id) {
+        return 'select a service';
       }
+      const { name, price, duration } = service;
+      return (
+        <React.Fragment>
+          <p>Service: {name},</p>
+          <p>Price: €{(price/100).toFixed(2)}</p>
+          <p>Duration {duration} minutes</p>
+        </React.Fragment>
+      );
+    }
 
     checkLocationSelection = () => {
-
         if ( !this.props.selections.location || !this.props.selections.location.id) return 'select a location'
         else return this.props.selections.location.name
     }
 
     checkEmployeeSelection = () => {
-      
         if (!this.props.selections.employee || !this.props.selections.employee.id ) return 'select an employee'
         else return this.props.selections.employee.name 
     }
