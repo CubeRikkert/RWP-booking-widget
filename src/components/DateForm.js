@@ -4,7 +4,6 @@ import compose from 'recompose/compose';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import {selectDate} from '../actions/selections'
 import {getTimes} from '../actions/get'
 import {getDates} from '../actions/get'
@@ -68,7 +67,7 @@ class DateForm extends React.Component {
   DatePicker_IsValidDate = (input) => {
     var bits = input.split('-');
     var d = new Date(bits[0], bits[1] - 1, bits[2]);
-    return d.getFullYear() == bits[0] && (d.getMonth() + 1) == bits[1] && d.getDate() == Number(bits[2]);
+    return d.getFullYear() === bits[0] && (d.getMonth() + 1) === bits[1] && d.getDate() === Number(bits[2]);
   }
 
   // Get the disabled dates array based on the dates 
@@ -105,10 +104,11 @@ class DateForm extends React.Component {
 
   render() {
 
-    const { classes, selections, date,dates } = this.props;
+    const { selections, dates } = this.props;
 
     if (!selections.location || !selections.service || !selections.employee) return null 
     // if (this.props.dates===null) this.nowGetDates()
+    if (!dates) return null
     const disabledDates = this.getDisabledDates(dates)
     return (
        <div className = "calendarFrame">
@@ -147,7 +147,7 @@ class DateForm extends React.Component {
 const mapStateToProps = function (state) {
   return {
   
-    serviceSelection: state.selections.service.id,
+    serviceSelection: state.selections.service && state.selections.service.id,
     times : state.availableTimes,
     dates : state.availableDates,
     selections: state.selections
