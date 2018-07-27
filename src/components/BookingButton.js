@@ -18,36 +18,38 @@ const styles = theme => ({
 class BookingButton extends PureComponent {
   
   handleClick = () => {
-    // const serviceId = this.props.selections.service.id
-    // const date = this.props.selections.date
-    const dateTime = this.props.selections.date.concat(' ', this.props.selections.time)
-    const booking = {}
-    booking.location_id = this.props.selections.location.id
-    booking.resource_id = this.props.selections.employee.id
-    booking.service_ids = [this.props.selections.service.id]
-    booking.appointment_at = dateTime
-    booking.first_name = this.props.customer.firstName
-    booking.last_name = this.props.customer.lastName
-    booking.address = this.props.customer.address
-    booking.postalcode = this.props.customer.postalcode
-    booking.city = this.props.customer.city
-    booking.phone = this.props.customer.phone
-    booking.email = this.props.customer.email
-    booking.notes = this.props.customer.notes
-
+    const { date, time, location, employee, service } = this.props.selections;
+    const { firstName, lastName, address, postalcode, city, phone, email, notes } = this.props.customer;
+    const booking = {
+      location_id: location.id,
+      resource_id: employee.id,
+      service_ids: [
+        service.id
+      ],
+      appointment_at: `${date} ${time}`,
+      first_name: firstName,
+      last_name: lastName,
+      address,
+      postalcode,
+      city,
+      phone,
+      email,
+      notes,
+    }
     this.props.addBooking(booking)
-
-    console.log(booking)
-}
+  }
   render() {
     const { classes } = this.props;
+    const handle = () => this.handleClick();
     return (
-        <div>
-          <Button variant="contained" color="primary" className={classes.button} onClick={()=>this.handleClick()}>
-            BOOK APPOINTMENT
-          </Button>
-        </div>
-      );
+      <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={handle}>
+        BOOK APPOINTMENT
+      </Button>
+    );
   }
 
 }
@@ -57,10 +59,10 @@ BookingButton.propTypes = {
 };
 
 const mapStateToProps = function (state) {
-    return {
-        selections: state.selections,
-        customer: state.customer
-    }
+  return {
+    selections: state.selections,
+    customer: state.customer
+  }
 }
 
 export default compose(withStyles(styles), connect(mapStateToProps, {addBooking}))(BookingButton)
