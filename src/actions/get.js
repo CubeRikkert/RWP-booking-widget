@@ -61,10 +61,10 @@ export const getTimes = (serviceId, date) => (dispatch) =>
   })
 }
 
-export const getDates = (serviceId, date) => (dispatch) =>
+export const getDates = (serviceId, date,resourceId) => (dispatch) =>
  {
   request 
-  .get (`${baseUrl}/bookings/available_days?service_ids=${serviceId}&date=${date}`)
+  .get (`${baseUrl}/bookings/available_days?service_ids=${serviceId}&date=${date}&resource_id=${(resourceId)}`)
   .then (response => {
     // console.log(response.body)
     dispatch ({
@@ -74,16 +74,60 @@ export const getDates = (serviceId, date) => (dispatch) =>
 }
 
 
+// function post(path, params, method) {
+//   method = method || "post"; // Set method to post by default if not specified.
+
+//   // The rest of this code assumes you are not using a library.
+//   // It can be made less wordy if you use one.
+//   var form = document.createElement("form");
+//   form.setAttribute("method", method);
+//   form.setAttribute("action", path);
+
+//   for(var key in params) {
+//       if(params.hasOwnProperty(key)) {
+//           var hiddenField = document.createElement("input");
+//           hiddenField.setAttribute("type", "hidden");
+//           hiddenField.setAttribute("name", key);
+//           hiddenField.setAttribute("value", params[key]);
+
+//           form.appendChild(hiddenField);
+//       }
+//   }
+
+// form.submit();
+// }
+
+function post_to_url(url, params) {
+  var form = document.createElement('form');
+  form.action = url;
+  form.method = 'POST';
+  for (var i in params) {
+      if (params.hasOwnProperty(i)) {
+          var input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = i;
+          input.value = params[i];
+          form.appendChild(input);
+      }
+  }
+
+  document.body.appendChild(form);
+  form.submit();
+}
+
 export const addBooking = (booking) => (dispatch) => {
 
-  request
-    .post(`${baseUrl}/bookings`)
-    .send(booking)
-    .then(response => {
-      dispatch({
-        type: ADD_BOOKING,
-        payload: response.body
-      })
-    })
-    .catch(err => console.log(err))
+  console.log(booking,'booking')
+  post_to_url(`${baseUrl}/bookings`, booking);
+
+  // request
+  //   .post(`${baseUrl}/bookings`)
+  //   .send(booking)
+  //   .then(response => {
+  //     dispatch({
+  //       type: ADD_BOOKING,
+  //       payload: response.body
+  //     })
+  //   })
+  //   .catch(err => console.log(err))
 }

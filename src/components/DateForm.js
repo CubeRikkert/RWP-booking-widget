@@ -67,7 +67,7 @@ class DateForm extends React.Component {
   DatePicker_IsValidDate = (input) => {
     var bits = input.split('-');
     var d = new Date(bits[0], bits[1] - 1, bits[2]);
-    return d.getFullYear() === bits[0] && (d.getMonth() + 1) === bits[1] && d.getDate() === Number(bits[2]);
+    return d.getFullYear() === Number(bits[0]) && (d.getMonth() + 1) === Number(bits[1]) && d.getDate() === Number(bits[2]);
   }
 
   // Get the disabled dates array based on the dates 
@@ -90,11 +90,12 @@ class DateForm extends React.Component {
                                   strDate.substr(4,2)+'-'+
                                   strDate.substr(6,2)
           // ... check whether it is a valid date
-          if (this.DatePicker_IsValidDate(strDateYYYYMMDD))
+          if (this.DatePicker_IsValidDate(strDateYYYYMMDD)) {
             // ... and if so add it to the disabledDates array
             disabledDates.push(new Date(strDateYYYYMMDD.substr(0,4),
                                         strDateYYYYMMDD.substr(5,2)-1,
                                         strDateYYYYMMDD.substr(8,2)))
+          }
         }
       }
     }
