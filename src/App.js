@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import BookingWidget from './components/BookingWidget'
+import BookingWidget from './components/BookingWidget';
 
 class App extends Component {
   render() {
@@ -8,8 +8,7 @@ class App extends Component {
       <div className="flex-container">
         <BookingWidget />
       </div>
-      
-    )
+    );
   }
 }
 

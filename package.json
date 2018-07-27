@@ -5,6 +5,10 @@
   "dependencies": {
     "@material-ui/core": "^1.4.1",
     "@material-ui/icons": "^2.0.0",
+    "husky": "^0.14.3",
+    "leasot": "^6.3.0",
+    "lint-staged": "^7.2.0",
+    "prettier": "^1.13.7",
     "react": "^16.4.1",
     "react-calendar": "^2.16.1",
     "react-dom": "^16.4.1",
@@ -16,10 +20,24 @@
     "redux-thunk": "^2.3.0",
     "superagent": "^3.8.3"
   },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --write '{*.{js,jsx},!(node*|dist*)**/**/*.{js,jsx}}'",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "todo": "rm -f TODO.md; (./node_modules/leasot/bin/leasot.js '*.{js,jsx}' 'src/**/*.{js,jsx}' '__tests__/**/*.{js,jsx}' -r markdown > TODO.md || true);",
+    "precommit": "lint-staged && yarn todo && git add TODO.md",
+    "preinstall": "rm -f .git/hooks/pre-commit && rm -f .git/hooks/pre-push",
+    "postinstall": "node node_modules/husky/bin/install"
   }
 }
