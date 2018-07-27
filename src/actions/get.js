@@ -49,10 +49,10 @@ export const getEmployees = () => (dispatch) =>
 }
 
 
-export const getTimes = (serviceId, date) => (dispatch) =>
+export const getTimes = (serviceId, date, resourceId) => (dispatch) =>
  {
   request 
-  .get (`${baseUrl}/bookings/timeslots?service_ids=${serviceId}&date=${date}`)
+  .get (`${baseUrl}/bookings/timeslots?service_ids=${serviceId}&date=${date}&resource_id=${resourceId}`)
   .then (response => {
     // console.log(response.body)
     dispatch ({
