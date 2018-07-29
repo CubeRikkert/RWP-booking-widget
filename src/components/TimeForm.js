@@ -57,6 +57,15 @@ class TimeForm extends React.Component {
         selections.employee.id,
       );
     }
+    //next line of code is necessary for not showing the time in cases when the user selects an employee who has available time,
+    //but then changes the selection to an employee who has no available time.
+    if (
+      availableTimes &&
+      availableTimes.filter(
+        time => time.resource_id === selections.employee.id,
+      ) < 1
+    )
+      return null;
     if (!availableTimes) return null;
     const timeOptions = this.filterTimes().map(time => ({
       value: time.time,
