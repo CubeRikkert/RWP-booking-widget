@@ -1,10 +1,10 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {selectLocation} from '../actions/selections'
-import { getLocations} from '../actions/get';
+import { selectLocation } from '../actions/selections';
+import { getLocations } from '../actions/get';
 import Select from 'react-select';
 
 const styles = theme => ({
@@ -22,39 +22,55 @@ const styles = theme => ({
 });
 
 class LocationForm extends React.Component {
-
   componentWillMount() {
-    this.props.getLocations()
+    this.props.getLocations();
   }
 
   handleChange = event => {
-    this.props.selectLocation(this.props.locations.find(loc=>loc.name===event.value))
+    this.props.selectLocation(
+      this.props.locations.find(loc => loc.name === event.value),
+    );
   };
 
-  filterLocations = () => {      
-      if (!this.props.selections.service && !this.props.selections.employee) return this.props.locations
-      if (this.props.selections.service && !this.props.selections.employee) {
-        const employeesforService = this.props.employees.filter(emp=>emp.service_ids.includes(this.props.selections.service.id))
-        const locationsforService = employeesforService.map(emp=>emp.location_id)
-        return this.props.locations.filter(loc=>locationsforService.includes(loc.id))
-      }
-      if (!this.props.selections.service && this.props.selections.employee) return this.props.locations.filter(loc=>loc.id===this.props.selections.employee.location_id)
-      if (this.props.selections.service && this.props.selections.employee) return this.props.locations.filter(loc=>loc.id===this.props.selections.employee.location_id)
-      return this.props.locations
-  }
+  filterLocations = () => {
+    if (!this.props.selections.service && !this.props.selections.employee)
+      return this.props.locations;
+    if (this.props.selections.service && !this.props.selections.employee) {
+      const employeesforService = this.props.employees.filter(emp =>
+        emp.service_ids.includes(this.props.selections.service.id),
+      );
+      const locationsforService = employeesforService.map(
+        emp => emp.location_id,
+      );
+      return this.props.locations.filter(loc =>
+        locationsforService.includes(loc.id),
+      );
+    }
+    if (!this.props.selections.service && this.props.selections.employee)
+      return this.props.locations.filter(
+        loc => loc.id === this.props.selections.employee.location_id,
+      );
+    if (this.props.selections.service && this.props.selections.employee)
+      return this.props.locations.filter(
+        loc => loc.id === this.props.selections.employee.location_id,
+      );
+    return this.props.locations;
+  };
 
   render() {
-
     const { classes, locations, location } = this.props;
-    if (!locations) return null
-    const locationOptions = this.filterLocations().map(loc=>({"value":loc.name,"label":loc.name}))
+    if (!locations) return null;
+    const locationOptions = this.filterLocations().map(loc => ({
+      value: loc.name,
+      label: loc.name,
+    }));
 
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
           <Fragment>
             <Select
-              placeholder = "Pick a location..."
+              placeholder="Pick a location..."
               isDisabled={false}
               isLoading={false}
               // isClearable={true}
@@ -63,7 +79,9 @@ class LocationForm extends React.Component {
               options={locationOptions}
               onChange={this.handleChange}
               value={
-                location && location !== '' ? {value:location.name,label: location.name} : ''
+                location && location !== ''
+                  ? { value: location.name, label: location.name }
+                  : ''
               }
             />
           </Fragment>
@@ -73,17 +91,23 @@ class LocationForm extends React.Component {
   }
 }
 
-const mapStateToProps = function (state) {
+const mapStateToProps = function(state) {
   return {
     locations: state.allLocations,
     selections: state.selections,
     location: state.selections.location,
-    employees: state.allEmployees
-  }
-}
+    employees: state.allEmployees,
+  };
+};
 
 LocationForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, {selectLocation, getLocations}))(LocationForm);
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    { selectLocation, getLocations },
+  ),
+)(LocationForm);
