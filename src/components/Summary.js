@@ -1,10 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import compose from 'recompose/compose';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Typography from '@material-ui/core/Typography';
-import './Summary.css';
+// import './Summary.css';
+
+const styles = {
+  card: {
+    minWidth: 345,
+  },
+};
 
 class Summary extends React.Component {
   checkServiceSelection = () => {
@@ -36,8 +45,12 @@ class Summary extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <Card className="outer-paper">
+      <Card
+        className={classes.card}
+        style={{ marginLeft: 10, marginRight: 120 }}
+      >
         <CardHeader title="Summary:" subheader="based on your selection" />
         <CardContent>
           <Typography component="h2">{this.checkServiceSelection()}</Typography>
@@ -50,10 +63,17 @@ class Summary extends React.Component {
   }
 }
 
+Summary.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
 const mapStateToProps = function(state) {
   return {
     selections: state.selections,
   };
 };
 
-export default connect(mapStateToProps)(Summary);
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps),
+)(Summary);

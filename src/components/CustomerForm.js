@@ -19,12 +19,14 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
     minWidth: 350,
+    maxWidth: 350,
   },
+  // textField: {
+  //   marginLeft: theme.spacing.unit,
+  //   marginRight: theme.spacing.unit,
+  //   // minWidth: 350,
+  // },
   menu: {
     minWidth: 350,
   },
@@ -87,6 +89,7 @@ class CustomerForm extends React.Component {
               ? this.props.customer.firstName
               : ''
           }
+          style={{ width: 165, marginLeft: 10 }}
         />
         <TextField
           id="lastName"
@@ -100,6 +103,31 @@ class CustomerForm extends React.Component {
               ? this.props.customer.lastName
               : ''
           }
+          style={{ width: 165, marginLeft: 10 }}
+        />
+        <TextField
+          id="email"
+          label="E-mail"
+          placeholder="E-mail"
+          className={classes.textField}
+          margin="normal"
+          onChange={this.email}
+          value={
+            this.props.customer.email !== '' ? this.props.customer.email : ''
+          }
+          style={{ minWidth: 340, marginLeft: 10 }}
+        />
+        <TextField
+          id="phone"
+          label="Phone"
+          placeholder="Mobile"
+          className={classes.textField}
+          margin="normal"
+          onChange={this.phone}
+          value={
+            this.props.customer.phone !== '' ? this.props.customer.phone : ''
+          }
+          style={{ minWidth: 340, marginLeft: 10 }}
         />
         <TextField
           id="address"
@@ -113,6 +141,19 @@ class CustomerForm extends React.Component {
               ? this.props.customer.address
               : ''
           }
+          style={{ minWidth: 340, marginLeft: 10 }}
+        />
+        <TextField
+          id="city"
+          label="City"
+          placeholder="City"
+          className={classes.textField}
+          margin="normal"
+          onChange={this.city}
+          value={
+            this.props.customer.city !== '' ? this.props.customer.city : ''
+          }
+          style={{ width: 165, marginLeft: 10 }}
         />
         <TextField
           id="postalcode"
@@ -126,39 +167,7 @@ class CustomerForm extends React.Component {
               ? this.props.customer.postalcode
               : ''
           }
-        />
-        <TextField
-          id="city"
-          label="City"
-          placeholder="City"
-          className={classes.textField}
-          margin="normal"
-          onChange={this.city}
-          value={
-            this.props.customer.city !== '' ? this.props.customer.city : ''
-          }
-        />
-        <TextField
-          id="phone"
-          label="Phone"
-          placeholder="Phone"
-          className={classes.textField}
-          margin="normal"
-          onChange={this.phone}
-          value={
-            this.props.customer.phone !== '' ? this.props.customer.phone : ''
-          }
-        />
-        <TextField
-          id="email"
-          label="E-mail"
-          placeholder="E-mail"
-          className={classes.textField}
-          margin="normal"
-          onChange={this.email}
-          value={
-            this.props.customer.email !== '' ? this.props.customer.email : ''
-          }
+          style={{ width: 165, marginLeft: 10 }}
         />
         <TextField
           id="notes"
@@ -170,6 +179,7 @@ class CustomerForm extends React.Component {
           value={
             this.props.customer.notes !== '' ? this.props.customer.notes : ''
           }
+          style={{ minWidth: 340, marginLeft: 10 }}
         />
       </form>
     );

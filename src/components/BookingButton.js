@@ -45,7 +45,22 @@ class BookingButton extends PureComponent {
     this.props.addBooking(booking);
   };
   render() {
-    const { classes } = this.props;
+    const { classes, selections, customer } = this.props;
+    if (
+      !selections.location ||
+      !selections.service ||
+      !selections.employee ||
+      !selections.date ||
+      !selections.time ||
+      !customer.firstName ||
+      !customer.lastName ||
+      !customer.address ||
+      !customer.city ||
+      !customer.phone ||
+      !customer.postalcode ||
+      !customer.email
+    )
+      return null;
     const handle = () => this.handleClick();
     return (
       <Button
@@ -53,8 +68,9 @@ class BookingButton extends PureComponent {
         color="primary"
         className={classes.button}
         onClick={handle}
+        style={{ marginLeft: 8 }}
       >
-        BOOK APPOINTMENT
+        BOOK NOW
       </Button>
     );
   }
