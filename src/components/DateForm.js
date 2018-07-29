@@ -126,7 +126,7 @@ class DateForm extends React.Component {
     if (!selections.location || !selections.service || !selections.employee)
       return null;
     // if (this.props.dates===null) this.nowGetDates()
-    if (!dates) return null;
+    if (!dates || dates.length === 0) return null;
     const disabledDates = this.getDisabledDates(dates);
     return (
       <div className="calendarFrame">
