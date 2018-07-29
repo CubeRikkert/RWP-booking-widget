@@ -57,13 +57,15 @@ export const getTimes = (serviceId, date, resourceId) => dispatch => {
 
 export const getDates = (serviceId, date, resourceId) => dispatch => {
   request
-
     .get(
       `${baseUrl}/bookings/available_days?service_ids=${serviceId}&date=${date}&resource_id=${resourceId}`,
     )
     .then(response => {
       // console.log(response.body)
-      dispatch({ type: GET_DATES, payload: response.body.days });
+      dispatch({
+        type: GET_DATES,
+        payload: response.body.days,
+      });
     });
 };
 
