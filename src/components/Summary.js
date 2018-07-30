@@ -57,6 +57,28 @@ class Summary extends React.Component {
     else return <p>Time: {this.props.selections.time}</p>;
   };
 
+  totalPrice = () => {
+    if (this.props.selections.service.length < 1) return '';
+    else
+      return (
+        <h2>
+          Total Price:
+          {' ' +
+            (
+              this.props.selections.service
+                .map(sel => sel.price)
+                .reduce(
+                  (accumulator, currentValue) => accumulator + currentValue,
+                ) / 100
+            )
+              .toFixed(2)
+              .replace('.', ',')
+              .replace(/(\\d)(?=(\\d{3})+(?!\\d))/g, '$1.')}{' '}
+          Euro
+        </h2>
+      );
+  };
+
   render() {
     const { classes, selections } = this.props;
     // if (
@@ -71,6 +93,8 @@ class Summary extends React.Component {
         <CardHeader title="Summary:" subheader="based on your selection" />
         <CardContent>
           <Typography component="p">{this.checkServiceSelection()}</Typography>
+          <Typography component="p">{this.totalPrice()} </Typography>
+
           <Typography component="p">{this.checkLocationSelection()}</Typography>
           <Typography component="p">{this.checkEmployeeSelection()}</Typography>
           <Typography component="p">{this.checkDateSelection()}</Typography>
