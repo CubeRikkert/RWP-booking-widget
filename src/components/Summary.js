@@ -16,6 +16,15 @@ const styles = {
 };
 
 class Summary extends React.Component {
+  checkNumberOfServices = () => {
+    if (this.props.selections.service.length > 0)
+      return (
+        <p>
+          You are booking {this.props.selections.service.length} service(s){' '}
+        </p>
+      );
+  };
+
   checkServiceSelection = () => {
     const { service } = this.props.selections;
     // TODO: Explain the need to use .id
@@ -25,10 +34,7 @@ class Summary extends React.Component {
     // const { name, price, duration } = service;
     return this.props.selections.service.map(serv => (
       <React.Fragment>
-        <p>
-          You are booking {this.props.selections.service.length} service(s){' '}
-        </p>
-        <p>Service: {serv.name},</p>
+        <p>Service: {serv.name}</p>
         <p>Price: €{(serv.price / 100).toFixed(2)}</p>
         <p>Duration {serv.duration} minutes</p>
       </React.Fragment>
@@ -92,9 +98,9 @@ class Summary extends React.Component {
       <Card className={classes.card} style={{ marginLeft: 10 }}>
         <CardHeader title="Summary:" subheader="based on your selection" />
         <CardContent>
+          <Typography component="p">{this.checkNumberOfServices()}</Typography>
           <Typography component="p">{this.checkServiceSelection()}</Typography>
           <Typography component="p">{this.totalPrice()} </Typography>
-
           <Typography component="p">{this.checkLocationSelection()}</Typography>
           <Typography component="p">{this.checkEmployeeSelection()}</Typography>
           <Typography component="p">{this.checkDateSelection()}</Typography>
