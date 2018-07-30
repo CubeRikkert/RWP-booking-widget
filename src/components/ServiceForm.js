@@ -45,18 +45,22 @@ class ServiceForm extends React.Component {
       !this.props.selections.employee &&
       this.props.selections.service.length > 0
     ) {
-      let combinedServices = [];
-      for (let i = 0; i < this.props.selections.service.length; i++) {
-        let employeesofService = this.props.employees.filter(emp =>
-          emp.service_ids.includes(this.props.selections.service[i].id),
-        );
-        const services = employeesofService.map(emp => emp.service_ids);
-        const combinedserviceIds = [].concat.apply([], services);
-        combinedServices = this.props.services.filter(serv =>
-          combinedserviceIds.includes(serv.id),
-        );
-        console.log(combinedServices);
-      }
+      let employeesofService = this.props.employees.filter(emp => {
+        let employeeHasAllServices = true;
+        for (let i = 0; i < this.props.selections.service.length; i++) {
+          if (!emp.service_ids.includes(this.props.selections.service[i].id))
+            employeeHasAllServices = false;
+        }
+        if (employeeHasAllServices === true) return emp;
+      });
+      //console.log(employeesofService,'employeesofService')
+      const services = employeesofService.map(emp => emp.service_ids);
+      const combinedserviceIds = [].concat.apply([], services);
+      // console.log(combinedserviceIds,'combineserviceIds')
+      let combinedServices = this.props.services.filter(serv =>
+        combinedserviceIds.includes(serv.id),
+      );
+      // console.log(combinedServices,'combinedServices');
       return combinedServices;
     }
     if (this.props.selections.location && !this.props.selections.employee) {
