@@ -19,48 +19,62 @@ class Summary extends React.Component {
   checkServiceSelection = () => {
     const { service } = this.props.selections;
     // TODO: Explain the need to use .id
-    if (!service || !service.id) {
+    if (this.props.selections.service.length < 1) {
       return 'select a service';
     }
-    const { name, price, duration } = service;
-    return (
+    // const { name, price, duration } = service;
+    return this.props.selections.service.map(serv => (
       <React.Fragment>
-        <p>Service: {name},</p>
-        <p>Price: €{(price / 100).toFixed(2)}</p>
-        <p>Duration {duration} minutes</p>
+        <p>
+          You are booking {this.props.selections.service.length} service(s){' '}
+        </p>
+        <p>Service: {serv.name},</p>
+        <p>Price: €{(serv.price / 100).toFixed(2)}</p>
+        <p>Duration {serv.duration} minutes</p>
       </React.Fragment>
-    );
+    ));
   };
 
   checkLocationSelection = () => {
     if (!this.props.selections.location || !this.props.selections.location.id)
       return 'select a location';
-    else return this.props.selections.location.name;
+    else return <p>Location: {this.props.selections.location.name}</p>;
   };
 
   checkEmployeeSelection = () => {
     if (!this.props.selections.employee || !this.props.selections.employee.id)
       return 'select an employee';
-    else return this.props.selections.employee.name;
+    else return <p>Employee: {this.props.selections.employee.name}</p>;
+  };
+
+  checkDateSelection = () => {
+    if (!this.props.selections.date) return 'select a day';
+    else return <p>Day: {this.props.selections.date}</p>;
+  };
+
+  checkTimeSelection = () => {
+    if (!this.props.selections.time) return 'select an available time';
+    else return <p>Time: {this.props.selections.time}</p>;
   };
 
   render() {
     const { classes, selections } = this.props;
-    if (
-      !selections ||
-      !selections.location ||
-      !selections.service ||
-      !selections.employee
-    )
-      return null;
+    // if (
+    //   !selections ||
+    //   !selections.location ||
+    //   !selections.service ||
+    //   !selections.employee
+    // )
+    //   return null;
     return (
       <Card className={classes.card} style={{ marginLeft: 10 }}>
         <CardHeader title="Summary:" subheader="based on your selection" />
         <CardContent>
-          <Typography component="h2">{this.checkServiceSelection()}</Typography>
+          <Typography component="p">{this.checkServiceSelection()}</Typography>
           <Typography component="p">{this.checkLocationSelection()}</Typography>
           <Typography component="p">{this.checkEmployeeSelection()}</Typography>
-          <Typography component="p">{/* {date} */}</Typography>
+          <Typography component="p">{this.checkDateSelection()}</Typography>
+          <Typography component="p">{this.checkTimeSelection()} </Typography>
         </CardContent>
       </Card>
     );

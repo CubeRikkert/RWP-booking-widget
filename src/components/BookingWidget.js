@@ -65,6 +65,11 @@ class BookingWidget extends PureComponent {
               <div>
                 <Grid container wrap="nowrap" spacing={16}>
                   <Grid item>
+                    <Summary />
+                  </Grid>
+                </Grid>
+                <Grid container wrap="nowrap" spacing={16}>
+                  <Grid item>
                     <ServiceForm />
                   </Grid>
                 </Grid>
@@ -76,11 +81,6 @@ class BookingWidget extends PureComponent {
                 <Grid container wrap="nowrap" spacing={16}>
                   <Grid item>
                     <EmployeeForm />
-                  </Grid>
-                </Grid>
-                <Grid container wrap="nowrap" spacing={16}>
-                  <Grid item>
-                    <Summary />
                   </Grid>
                 </Grid>
                 <Grid container wrap="nowrap" spacing={16}>
