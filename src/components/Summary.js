@@ -37,6 +37,7 @@ class Summary extends React.Component {
         <p>Service: {serv.name}</p>
         <p>Price: €{(serv.price / 100).toFixed(2)}</p>
         <p>Duration {serv.duration} minutes</p>
+        <hr />
       </React.Fragment>
     ));
   };
