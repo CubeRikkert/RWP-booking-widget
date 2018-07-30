@@ -91,7 +91,14 @@ class ServiceForm extends React.Component {
     if (!services || !employees) return null;
     const serviceOptions = this.filterServices().map(ser => ({
       value: ser.name,
-      label: ser.name,
+      label:
+        ser.name +
+        ' |  Duration ' +
+        ser.duration +
+        ' min' +
+        ' | Price ' +
+        Number(ser.price) / 100 +
+        ' €',
     }));
     if (this.props.selections.service.length > 0 && !availableDates)
       this.nowGetDates();
