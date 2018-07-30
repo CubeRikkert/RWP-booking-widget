@@ -57,7 +57,10 @@ class DateForm extends React.Component {
       .toJSON()
       .slice(0, 10)
       .replace(/-/g, '-');
-    const serviceId = this.props.serviceSelection;
+    let serviceId;
+    if (this.props.selections.service.length > 0) {
+      serviceId = this.props.selections.service[0].id;
+    }
     this.props.getDates(serviceId, date);
   };
 
@@ -177,7 +180,6 @@ class DateForm extends React.Component {
 
 const mapStateToProps = function(state) {
   return {
-    serviceSelection: state.selections.service && state.selections.service.id,
     times: state.availableTimes,
     dates: state.availableDates,
     selections: state.selections,

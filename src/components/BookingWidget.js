@@ -41,7 +41,7 @@ class BookingWidget extends PureComponent {
   };
 
   render() {
-    const { fullScreen } = this.props;
+    const { fullScreen, selections } = this.props;
     return (
       <div>
         <Button
@@ -80,6 +80,11 @@ class BookingWidget extends PureComponent {
                 </Grid>
                 <Grid container wrap="nowrap" spacing={16}>
                   <Grid item>
+                    <Summary />
+                  </Grid>
+                </Grid>
+                <Grid container wrap="nowrap" spacing={16}>
+                  <Grid item>
                     <DateForm />
                   </Grid>
                 </Grid>
@@ -103,7 +108,6 @@ class BookingWidget extends PureComponent {
                     <ResetForm />
                     </Grid>
                   </Grid> */}
-                {/* <Summary /> */}
               </div>
             </Grid>
           </DialogContent>
@@ -121,6 +125,12 @@ class BookingWidget extends PureComponent {
     );
   }
 }
+
+const mapStateToProps = function(state) {
+  return {
+    selections: state.selections,
+  };
+};
 
 BookingWidget.propTypes = {
   fullScreen: PropTypes.bool.isRequired,

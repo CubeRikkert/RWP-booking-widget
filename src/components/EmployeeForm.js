@@ -35,32 +35,51 @@ class EmployeeForm extends React.Component {
   };
 
   filterEmployees = () => {
-    if (!this.props.selections.service && !this.props.selections.location)
-      return this.props.employees;
-    if (this.props.selections.service && !this.props.selections.location)
-      return this.props.employees.filter(emp =>
-        emp.service_ids.includes(this.props.selections.service.id),
-      );
-    if (!this.props.selections.service && this.props.selections.location)
-      return this.props.employees.filter(
+    let employees;
+    if (!this.props.selections.location) {
+      employees = this.props.employees;
+    } else {
+      employees = this.props.employees.filter(
         emp => emp.location_id === this.props.selections.location.id,
       );
-    if (this.props.selections.service && this.props.selections.location)
-      return this.props.employees
-        .filter(emp =>
-          emp.service_ids.includes(this.props.selections.service.id),
-        )
-        .filter(emp => emp.location_id === this.props.selections.location.id);
+    }
+    if (this.props.selections.service.length !== 0) {
+      employees = this.props.employees.filter(emp => {
+        let employeeHasAllServices = true;
+        for (let i = 0; i < this.props.selections.service.length; i++) {
+          if (!emp.service_ids.includes(this.props.selections.service[i].id))
+            employeeHasAllServices = false;
+        }
+        if (employeeHasAllServices === true) return emp;
+      });
+    }
+    return employees;
+    // if (this.props.selections.service.length<1 && !this.props.selections.location)
+    //   return this.props.employees;
+    // if (this.props.selections.service.length>0 && !this.props.selections.location)
+    //   return this.props.employees.filter(emp =>
+    //     emp.service_ids.includes(this.props.selections.service.id),
+    //   );
+    // if (this.props.selections.service.length<1 && this.props.selections.location)
+    //   return this.props.employees.filter(
+    //     emp => emp.location_id === this.props.selections.location.id,
+    //   );
+    // if (this.props.selections.service.length>0 && this.props.selections.location)
+    //   return this.props.employees
+    //     .filter(emp =>
+    //       emp.service_ids.includes(this.props.selections.service.id),
+    //     )
+    //     .filter(emp => emp.location_id === this.props.selections.location.id);
   };
 
   render() {
-    const { classes, employees, employee } = this.props;
+    const { classes, employees, employee, availableDates } = this.props;
     if (!employees) return null;
     const employeeOptions = this.filterEmployees().map(emp => ({
       value: emp.name,
       label: emp.name,
     }));
-
+    if (availableDates) return null;
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
@@ -94,6 +113,7 @@ const mapStateToProps = function(state) {
     employees: state.allEmployees,
     selections: state.selections,
     employee: state.selections.employee,
+    availableDates: state.availableDates,
   };
 };
 

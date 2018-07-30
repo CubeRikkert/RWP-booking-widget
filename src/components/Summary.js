@@ -45,12 +45,16 @@ class Summary extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, selections } = this.props;
+    if (
+      !selections ||
+      !selections.location ||
+      !selections.service ||
+      !selections.employee
+    )
+      return null;
     return (
-      <Card
-        className={classes.card}
-        style={{ marginLeft: 10, marginRight: 120 }}
-      >
+      <Card className={classes.card} style={{ marginLeft: 10 }}>
         <CardHeader title="Summary:" subheader="based on your selection" />
         <CardContent>
           <Typography component="h2">{this.checkServiceSelection()}</Typography>

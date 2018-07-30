@@ -61,13 +61,13 @@ class LocationForm extends React.Component {
   };
 
   render() {
-    const { classes, locations, location } = this.props;
+    const { classes, locations, location, availableDates } = this.props;
     if (!locations) return null;
     const locationOptions = this.filterLocations().map(loc => ({
       value: loc.name,
       label: loc.name,
     }));
-
+    if (availableDates) return null;
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
@@ -100,6 +100,7 @@ const mapStateToProps = function(state) {
     selections: state.selections,
     location: state.selections.location,
     employees: state.allEmployees,
+    availableDates: state.availableDates,
   };
 };
 
