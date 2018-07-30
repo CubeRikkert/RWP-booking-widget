@@ -35,9 +35,12 @@ class LocationForm extends React.Component {
   filterLocations = () => {
     if (!this.props.selections.service && !this.props.selections.employee)
       return this.props.locations;
-    if (this.props.selections.service && !this.props.selections.employee) {
+    if (
+      this.props.selections.service.length > 0 &&
+      !this.props.selections.employee
+    ) {
       const employeesforService = this.props.employees.filter(emp =>
-        emp.service_ids.includes(this.props.selections.service.id),
+        emp.service_ids.includes(this.props.selections.service[0].id),
       );
       const locationsforService = employeesforService.map(
         emp => emp.location_id,

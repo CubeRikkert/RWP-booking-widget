@@ -27,14 +27,38 @@ class ServiceForm extends React.Component {
   }
 
   handleChange = event => {
+    const serviceNames = event.map(ev => ev.value);
     this.props.selectServices(
-      this.props.services.find(ser => ser.name === event.value),
+      this.props.services.filter(ser => serviceNames.includes(ser.name)),
     );
   };
 
   filterServices = () => {
-    if (!this.props.selections.location && !this.props.selections.employee)
+    if (
+      !this.props.selections.location &&
+      !this.props.selections.employee &&
+      this.props.selections.service.length < 1
+    )
       return this.props.services;
+    if (
+      !this.props.selections.location &&
+      !this.props.selections.employee &&
+      this.props.selections.service.length > 0
+    ) {
+      let combinedServices = [];
+      for (let i = 0; i < this.props.selections.service.length; i++) {
+        let employeesofService = this.props.employees.filter(emp =>
+          emp.service_ids.includes(this.props.selections.service[i].id),
+        );
+        const services = employeesofService.map(emp => emp.service_ids);
+        const combinedserviceIds = [].concat.apply([], services);
+        combinedServices = this.props.services.filter(serv =>
+          combinedserviceIds.includes(serv.id),
+        );
+        console.log(combinedServices);
+      }
+      return combinedServices;
+    }
     if (this.props.selections.location && !this.props.selections.employee) {
       const employeesofLocation = this.props.employees.filter(
         emp => emp.location_id === this.props.selections.location.id,
