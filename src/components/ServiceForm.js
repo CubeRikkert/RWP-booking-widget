@@ -89,16 +89,18 @@ class ServiceForm extends React.Component {
               placeholder="Pick a service..."
               isDisabled={false}
               isLoading={false}
+              isMulti={true}
               // isClearable={true}
               isSearchable={true}
               name="service"
+              className="basic-multi-select"
               options={serviceOptions}
               onChange={this.handleChange}
-              value={
-                service && service !== ''
-                  ? { value: service.name, label: service.name }
-                  : ''
-              }
+              // value={
+              //   service && service !== ''
+              //     ? { value: service.name, label: service.name }
+              //     : ''
+              // }
             />
           </Fragment>
         </div>
