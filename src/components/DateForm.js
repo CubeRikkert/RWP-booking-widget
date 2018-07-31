@@ -177,6 +177,7 @@ class DateForm extends React.Component {
 
     return (
       <div className="calendarFrame">
+        <p style={{ marginTop: 2, marginBottom: 2, fontSize: 14 }}>Date</p>
         <Calendar
           onChange={this.onChange}
           value={this.state.date}

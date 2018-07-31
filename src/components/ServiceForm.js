@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { selectServices } from '../actions/selections';
 import { getServices, getDates } from '../actions/get';
 import Select from 'react-select';
+import './ServiceForm.css';
 
 const styles = theme => ({
   root: {
@@ -117,7 +118,8 @@ class ServiceForm extends React.Component {
     }));
     if (this.props.selections.service.length > 0 && !availableDates)
       this.nowGetDates();
-    if (availableDates) return null;
+    if (availableDates && selections.location) return null;
+
     if (this.props.config.allow_multiple_services === false)
       return (
         <div className={classes.root}>
@@ -147,13 +149,17 @@ class ServiceForm extends React.Component {
           </div>
         </div>
       );
+
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
+          <p style={{ marginTop: 2, marginBottom: 2, fontSize: 14 }}>
+            Service(s)
+          </p>
           <Fragment>
             <Select
-              className={classes.css - 10}
-              placeholder="Pick a service..."
+              // className={classes.css - 10}
+              placeholder="Which service(s) are you looking for?"
               isDisabled={false}
               isLoading={false}
               isMulti={true}
@@ -163,12 +169,21 @@ class ServiceForm extends React.Component {
               className="basic-multi-select"
               options={serviceOptions}
               onChange={this.handleChange}
-              // value={
-              //   service && service !== ''
-              //     ? { value: service.name, label: service.name }
-              //     : ''
-              // }
-
+              value={
+                service && service !== ''
+                  ? service.map(ser => ({
+                      value: ser.name,
+                      label:
+                        ser.name +
+                        ' |  Duration ' +
+                        ser.duration +
+                        ' min' +
+                        ' | Price ' +
+                        Number(ser.price) / 100 +
+                        ' €',
+                    }))
+                  : ''
+              }
               style={{ width: 30 }}
             />
           </Fragment>
