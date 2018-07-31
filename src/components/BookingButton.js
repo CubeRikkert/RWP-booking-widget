@@ -50,7 +50,8 @@ class BookingButton extends PureComponent {
       !selections.location ||
       !selections.service ||
       !selections.employee ||
-      !selections.date
+      !selections.date ||
+      !selections.time
     )
       return null;
     const handle = () => this.handleClick();
@@ -60,7 +61,6 @@ class BookingButton extends PureComponent {
         color="primary"
         className={classes.button}
         onClick={handle}
-        style={{ marginLeft: 8 }}
       >
         BOOK NOW
       </Button>

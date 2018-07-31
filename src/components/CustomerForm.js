@@ -77,20 +77,22 @@ class CustomerForm extends React.Component {
       return null; //customer form appears only after location, service and employee is selected
     return (
       <form className={classes.container} noValidate autoComplete="off">
-        <TextField
-          id="firstName"
-          label="First name"
-          placeholder="First name"
-          className={classes.textField}
-          margin="normal"
-          onChange={this.firstName}
-          value={
-            this.props.customer.firstName !== ''
-              ? this.props.customer.firstName
-              : ''
-          }
-          style={{ width: 165, marginLeft: 10, marginTop: 0 }}
-        />
+        <div>
+          <TextField
+            id="firstName"
+            label="First name"
+            placeholder="First name"
+            className={classes.textField}
+            margin="normal"
+            onChange={this.firstName}
+            value={
+              this.props.customer.firstName !== ''
+                ? this.props.customer.firstName
+                : ''
+            }
+            style={{ width: 165, marginLeft: 10, marginTop: 0 }}
+          />
+        </div>
         <TextField
           id="lastName"
           label="Last name"

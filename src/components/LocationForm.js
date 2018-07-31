@@ -61,19 +61,29 @@ class LocationForm extends React.Component {
   };
 
   render() {
-    const { classes, locations, location, availableDates } = this.props;
+    const {
+      classes,
+      locations,
+      location,
+      availableDates,
+      selections,
+    } = this.props;
     if (!locations) return null;
     const locationOptions = this.filterLocations().map(loc => ({
       value: loc.name,
       label: loc.name,
     }));
-    if (availableDates) return null;
+    if (availableDates && selections.employee && selections.location)
+      return null;
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
+          <p style={{ marginTop: 2, marginBottom: 2, fontSize: 14 }}>
+            Location
+          </p>
           <Fragment>
             <Select
-              placeholder="Pick a location..."
+              placeholder="Select a location / branch"
               isDisabled={false}
               isLoading={false}
               // isClearable={true}

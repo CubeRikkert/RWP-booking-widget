@@ -41,7 +41,7 @@ class BookingWidget extends PureComponent {
   };
 
   render() {
-    const { fullScreen, selections } = this.props;
+    const { fullScreen } = this.props;
     return (
       <div>
         <Button
@@ -63,17 +63,17 @@ class BookingWidget extends PureComponent {
           <DialogContent>
             <Grid container justify="center" style={{ minHeight: 700 }}>
               <div>
-                <Grid container wrap="nowrap" spacing={16}>
+                <Grid container wrap="nowrap">
                   <Grid item>
                     <ServiceForm />
                   </Grid>
                 </Grid>
-                <Grid container wrap="nowrap" spacing={16}>
+                <Grid container wrap="nowrap">
                   <Grid item>
                     <LocationForm />
                   </Grid>
                 </Grid>
-                <Grid container wrap="nowrap" spacing={16}>
+                <Grid container wrap="nowrap">
                   <Grid item>
                     <EmployeeForm />
                   </Grid>
@@ -98,11 +98,11 @@ class BookingWidget extends PureComponent {
                     <CustomerForm />
                   </Grid>
                 </Grid>
-                <Grid container spacing={16}>
+                {/* <Grid container spacing={16}>
                   <Grid item>
-                    <BookingButton />
+                    
                   </Grid>
-                </Grid>
+                </Grid> */}
                 {/* <Grid container spacing={16}>
                   <Grid item>
                     <ResetForm />
@@ -112,10 +112,14 @@ class BookingWidget extends PureComponent {
             </Grid>
           </DialogContent>
           <DialogActions>
+            <BookingButton
+              className={fullScreen.button}
+              // style={{marginRight:190}}
+            />
             <IconButton
               className={fullScreen.button}
               aria-label="Delete"
-              style={{ marginTop: -70, marginLeft: 320 }}
+              // style={{ marginTop: -70, marginLeft: 320 }}
             >
               <DeleteIcon onClick={this.handleClose} color="primary" />
             </IconButton>
@@ -125,12 +129,6 @@ class BookingWidget extends PureComponent {
     );
   }
 }
-
-const mapStateToProps = function(state) {
-  return {
-    selections: state.selections,
-  };
-};
 
 BookingWidget.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
