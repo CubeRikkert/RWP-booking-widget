@@ -78,7 +78,15 @@ class LocationForm extends React.Component {
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
-          <p style={{ marginTop: 2, marginBottom: 2, fontSize: 14 }}>
+          <p
+            style={{
+              marginTop: 2,
+              marginBottom: 2,
+              fontSize: 14,
+              textAlign: 'center',
+              padding: 5,
+            }}
+          >
             Location
           </p>
           <Fragment>

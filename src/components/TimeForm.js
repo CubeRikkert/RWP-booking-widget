@@ -76,7 +76,17 @@ class TimeForm extends React.Component {
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
-          <p style={{ marginTop: 2, marginBottom: 2, fontSize: 14 }}>Time</p>
+          <p
+            style={{
+              marginTop: 2,
+              marginBottom: 2,
+              fontSize: 14,
+              textAlign: 'center',
+              padding: 5,
+            }}
+          >
+            Time
+          </p>
           <Fragment>
             <Select
               placeholder="Select a time from available time slots"
