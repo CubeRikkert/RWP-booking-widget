@@ -1,38 +1,39 @@
-import {SELECT_LOCATION,SELECT_SERVICES,SELECT_EMPLOYEES,SELECT_DATE} from '../actions/selections'
+import {
+  SELECT_LOCATION,
+  SELECT_SERVICES,
+  SELECT_EMPLOYEES,
+  SELECT_DATE,
+  SELECT_TIME,
+  RESET_FORM,
+  RESET_TIME,
+} from '../actions/selections';
 
 const initialState = {
-  locations: ['cool hairdresser','very cool waxing','nice salon'],
-  services: ['waxing','cutting hair','change hair color'],
-  employees: ['jack','john'],
-  selection: {
-    location: '',
-    service: '',
-    employee: '',
-    date: ''
-  },
-  customer: {
-    firstName:'',
-    lastName:'',
-    address:'',
-    postalcode:'',
-    city:'',
-    phone:'',
-    email:'',
-    notes:''
-  }
-}
+  location: '',
+  service: '',
+  employee: '',
+  date: '',
+  time: '',
+};
 
 export default function(state = initialState, action) {
   switch (action.type) {
-      case SELECT_LOCATION:
-        return {...state, selection: {...state.selection, location: action.payload}}
-      case SELECT_SERVICES:
-        return {...state, selection: {...state.selection, service: action.payload}}
-      case SELECT_EMPLOYEES:
-        return {...state, selection: {...state.selection, employee: action.payload}}
-      case SELECT_DATE:
-        return {...state, selection: {...state.selection, date: action.payload}}
-      default:
-        return state
+    case SELECT_LOCATION:
+      return { ...state, location: action.payload };
+    case SELECT_SERVICES:
+      return { ...state, service: action.payload };
+    case SELECT_EMPLOYEES:
+      return { ...state, employee: action.payload };
+    case SELECT_DATE:
+      return { ...state, date: action.payload };
+    case SELECT_TIME:
+      return { ...state, time: action.payload };
+    case RESET_TIME:
+      return { ...state, time: '' };
+    case RESET_FORM:
+      return initialState;
+
+    default:
+      return state;
   }
 }

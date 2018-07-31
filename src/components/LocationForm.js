@@ -1,14 +1,11 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import {selectLocation} from '../actions/selections'
+import { selectLocation } from '../actions/selections';
+import { getLocations } from '../actions/get';
+import Select from 'react-select';
 
 const styles = theme => ({
   root: {
@@ -25,44 +22,92 @@ const styles = theme => ({
 });
 
 class LocationForm extends React.Component {
+  componentWillMount() {
+    this.props.getLocations();
+  }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-    this.props.selectLocation(event.target.value)
+    this.props.selectLocation(
+      this.props.locations.find(loc => loc.name === event.value),
+    );
+  };
+
+  filterLocations = () => {
+    if (!this.props.selections.service && !this.props.selections.employee)
+      return this.props.locations;
+    if (this.props.selections.service && !this.props.selections.employee) {
+      const employeesforService = this.props.employees.filter(emp =>
+        emp.service_ids.includes(this.props.selections.service.id),
+      );
+      const locationsforService = employeesforService.map(
+        emp => emp.location_id,
+      );
+      return this.props.locations.filter(loc =>
+        locationsforService.includes(loc.id),
+      );
+    }
+    if (!this.props.selections.service && this.props.selections.employee)
+      return this.props.locations.filter(
+        loc => loc.id === this.props.selections.employee.location_id,
+      );
+    if (this.props.selections.service && this.props.selections.employee)
+      return this.props.locations.filter(
+        loc => loc.id === this.props.selections.employee.location_id,
+      );
+    return this.props.locations;
   };
 
   render() {
-
     const { classes, locations, location } = this.props;
+    if (!locations) return null;
+    const locationOptions = this.filterLocations().map(loc => ({
+      value: loc.name,
+      label: loc.name,
+    }));
 
     return (
-      <form className={classes.root} autoComplete="off">
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="location-form">Pick a location!</InputLabel>
-          <Select
-            value={location}
-            onChange={this.handleChange}
-            input={<Input name="location" id="location" />}
-          >
-            {locations.map(loc=>
-              (<MenuItem key={loc} value={loc}>{loc}</MenuItem>)
-            )}
-          </Select>
-        </FormControl>
-      </form>
+      <div className={classes.root}>
+        <div className={classes.formControl}>
+          <Fragment>
+            <Select
+              placeholder="Pick a location..."
+              isDisabled={false}
+              isLoading={false}
+              // isClearable={true}
+              isSearchable={true}
+              name="employee"
+              options={locationOptions}
+              onChange={this.handleChange}
+              value={
+                location && location !== ''
+                  ? { value: location.name, label: location.name }
+                  : ''
+              }
+            />
+          </Fragment>
+        </div>
+      </div>
     );
   }
 }
 
-const mapStateToProps = function (state) {
+const mapStateToProps = function(state) {
   return {
-    locations: state.selections.locations,
-    location: state.selections.selection.location
-  }
-}
+    locations: state.allLocations,
+    selections: state.selections,
+    location: state.selections.location,
+    employees: state.allEmployees,
+  };
+};
 
 LocationForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, {selectLocation}))(LocationForm);
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    { selectLocation, getLocations },
+  ),
+)(LocationForm);
