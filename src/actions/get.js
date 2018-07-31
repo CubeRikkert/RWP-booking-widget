@@ -7,6 +7,7 @@ export const GET_EMPLOYEES = 'GET_EMPLOYEES';
 export const GET_TIMES = 'GET_TIMES';
 export const GET_DATES = 'GET_DATES';
 export const ADD_BOOKING = 'ADD_BOOKING';
+export const GET_CONF = 'GET_CONF';
 
 export const getServices = () => dispatch => {
   request.get(`${baseUrl}/services.json`).then(response => {

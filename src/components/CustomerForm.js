@@ -66,7 +66,7 @@ class CustomerForm extends React.Component {
   };
 
   render() {
-    const { classes, selections } = this.props;
+    const { classes, selections, getConfig } = this.props;
     if (
       !selections.location ||
       !selections.service ||
@@ -129,20 +129,22 @@ class CustomerForm extends React.Component {
           }
           style={{ minWidth: 340, marginLeft: 10, marginTop: 0 }}
         />
-        <TextField
-          id="address"
-          label="Address"
-          placeholder="Address"
-          className={classes.textField}
-          margin="normal"
-          onChange={this.address}
-          value={
-            this.props.customer.address !== ''
-              ? this.props.customer.address
-              : ''
-          }
-          style={{ minWidth: 340, marginLeft: 10, marginTop: 0 }}
-        />
+        {this.props.config.address_fields !== 'hidden' && (
+          <TextField
+            id="address"
+            label="Address"
+            placeholder="Address"
+            className={classes.textField}
+            margin="normal"
+            onChange={this.address}
+            value={
+              this.props.customer.address !== ''
+                ? this.props.customer.address
+                : ''
+            }
+            style={{ minWidth: 340, marginLeft: 10, marginTop: 0 }}
+          />
+        )}
         <TextField
           id="city"
           label="City"
@@ -190,6 +192,7 @@ const mapStateToProps = function(state) {
   return {
     customer: state.customer,
     selections: state.selections,
+    config: state.getConfig,
   };
 };
 
