@@ -33,6 +33,7 @@ class BookingWidget extends PureComponent {
   };
 
   componentWillMount() {
+    console.log(this.conf);
     this.props.getConfig();
   }
 
@@ -46,7 +47,8 @@ class BookingWidget extends PureComponent {
   };
 
   render() {
-    const { fullScreen } = this.props;
+    const { fullScreen, selections } = this.props;
+
     return (
       <div>
         <Button
@@ -58,6 +60,7 @@ class BookingWidget extends PureComponent {
         >
           Make a booking!
         </Button>
+
         <Dialog
           fullScreen={fullScreen}
           open={this.state.open}
@@ -134,6 +137,13 @@ class BookingWidget extends PureComponent {
     );
   }
 }
+
+const mapStateToProps = function(state) {
+  return {
+    selections: state.selections,
+    config: state.getConfig,
+  };
+};
 
 BookingWidget.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
