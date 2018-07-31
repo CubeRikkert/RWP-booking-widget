@@ -126,7 +126,12 @@ class DateForm extends React.Component {
   render() {
     const { selections, dates } = this.props;
 
-    if (!selections.location || !selections.service || !selections.employee)
+    if (
+      !selections.location ||
+      !selections.service ||
+      !selections.employee ||
+      selections.time
+    )
       return null;
     // if (this.props.dates===null) this.nowGetDates()
     if (!dates) return null;

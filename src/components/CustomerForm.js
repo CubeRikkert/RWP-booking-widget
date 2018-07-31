@@ -89,7 +89,7 @@ class CustomerForm extends React.Component {
               ? this.props.customer.firstName
               : ''
           }
-          style={{ width: 165, marginLeft: 10 }}
+          style={{ width: 165, marginLeft: 10, marginTop: 0 }}
         />
         <TextField
           id="lastName"
@@ -103,7 +103,7 @@ class CustomerForm extends React.Component {
               ? this.props.customer.lastName
               : ''
           }
-          style={{ width: 165, marginLeft: 10 }}
+          style={{ width: 165, marginLeft: 10, marginTop: 0 }}
         />
         <TextField
           id="email"
@@ -115,7 +115,7 @@ class CustomerForm extends React.Component {
           value={
             this.props.customer.email !== '' ? this.props.customer.email : ''
           }
-          style={{ minWidth: 340, marginLeft: 10 }}
+          style={{ minWidth: 340, marginLeft: 10, marginTop: 0 }}
         />
         <TextField
           id="phone"
@@ -127,7 +127,7 @@ class CustomerForm extends React.Component {
           value={
             this.props.customer.phone !== '' ? this.props.customer.phone : ''
           }
-          style={{ minWidth: 340, marginLeft: 10 }}
+          style={{ minWidth: 340, marginLeft: 10, marginTop: 0 }}
         />
         <TextField
           id="address"
@@ -141,7 +141,7 @@ class CustomerForm extends React.Component {
               ? this.props.customer.address
               : ''
           }
-          style={{ minWidth: 340, marginLeft: 10 }}
+          style={{ minWidth: 340, marginLeft: 10, marginTop: 0 }}
         />
         <TextField
           id="city"
@@ -153,7 +153,7 @@ class CustomerForm extends React.Component {
           value={
             this.props.customer.city !== '' ? this.props.customer.city : ''
           }
-          style={{ width: 165, marginLeft: 10 }}
+          style={{ width: 165, marginLeft: 10, marginTop: 0 }}
         />
         <TextField
           id="postalcode"
@@ -167,7 +167,7 @@ class CustomerForm extends React.Component {
               ? this.props.customer.postalcode
               : ''
           }
-          style={{ width: 165, marginLeft: 10 }}
+          style={{ width: 165, marginLeft: 10, marginTop: 0 }}
         />
         <TextField
           id="notes"
@@ -179,7 +179,7 @@ class CustomerForm extends React.Component {
           value={
             this.props.customer.notes !== '' ? this.props.customer.notes : ''
           }
-          style={{ minWidth: 340, marginLeft: 10 }}
+          style={{ minWidth: 340, marginLeft: 10, marginTop: 0 }}
         />
       </form>
     );
