@@ -60,10 +60,11 @@ class TimeForm extends React.Component {
     //next line of code is necessary for not showing the time in cases when the user selects an employee who has available time,
     //but then changes the selection to an employee who has no available time.
     if (
-      availableTimes &&
-      availableTimes.filter(
-        time => time.resource_id === selections.employee.id,
-      ) < 1
+      (availableTimes &&
+        availableTimes.filter(
+          time => time.resource_id === selections.employee.id,
+        ) < 1) ||
+      selections.time
     )
       return null;
     if (!availableTimes) return null;
@@ -75,9 +76,10 @@ class TimeForm extends React.Component {
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
+          <p style={{ marginTop: 2, marginBottom: 2, fontSize: 14 }}>Time</p>
           <Fragment>
             <Select
-              placeholder="Pick a time..."
+              placeholder="Select a time from available time slots"
               isDisabled={false}
               isLoading={false}
               // backspaceRemoves={false}

@@ -25,11 +25,17 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { getConfig } from '../actions/conf';
 
 class BookingWidget extends PureComponent {
   state = {
     open: false,
   };
+
+  componentWillMount() {
+    console.log(this.conf);
+    this.props.getConfig();
+  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -42,6 +48,7 @@ class BookingWidget extends PureComponent {
 
   render() {
     const { fullScreen, selections } = this.props;
+
     return (
       <div>
         <Button
@@ -53,6 +60,7 @@ class BookingWidget extends PureComponent {
         >
           Make a booking!
         </Button>
+
         <Dialog
           fullScreen={fullScreen}
           open={this.state.open}
@@ -63,22 +71,17 @@ class BookingWidget extends PureComponent {
           <DialogContent>
             <Grid container justify="center" style={{ minHeight: 700 }}>
               <div>
-                <Grid container wrap="nowrap" spacing={16}>
-                  <Grid item>
-                    <Summary />
-                  </Grid>
-                </Grid>
-                <Grid container wrap="nowrap" spacing={16}>
+                <Grid container wrap="nowrap">
                   <Grid item>
                     <ServiceForm />
                   </Grid>
                 </Grid>
-                <Grid container wrap="nowrap" spacing={16}>
+                <Grid container wrap="nowrap">
                   <Grid item>
                     <LocationForm />
                   </Grid>
                 </Grid>
-                <Grid container wrap="nowrap" spacing={16}>
+                <Grid container wrap="nowrap">
                   <Grid item>
                     <EmployeeForm />
                   </Grid>
@@ -95,14 +98,19 @@ class BookingWidget extends PureComponent {
                 </Grid>
                 <Grid container wrap="nowrap" spacing={16}>
                   <Grid item>
+                    <Summary />
+                  </Grid>
+                </Grid>
+                <Grid container wrap="nowrap" spacing={16}>
+                  <Grid item>
                     <CustomerForm />
                   </Grid>
                 </Grid>
-                <Grid container spacing={16}>
+                {/* <Grid container spacing={16}>
                   <Grid item>
-                    <BookingButton />
+                    
                   </Grid>
-                </Grid>
+                </Grid> */}
                 {/* <Grid container spacing={16}>
                   <Grid item>
                     <ResetForm />
@@ -112,10 +120,14 @@ class BookingWidget extends PureComponent {
             </Grid>
           </DialogContent>
           <DialogActions>
+            <BookingButton
+              className={fullScreen.button}
+              // style={{marginRight:190}}
+            />
             <IconButton
               className={fullScreen.button}
               aria-label="Delete"
-              style={{ marginTop: -70, marginLeft: 320 }}
+              // style={{ marginTop: -70, marginLeft: 320 }}
             >
               <DeleteIcon onClick={this.handleClose} color="primary" />
             </IconButton>
@@ -129,6 +141,7 @@ class BookingWidget extends PureComponent {
 const mapStateToProps = function(state) {
   return {
     selections: state.selections,
+    config: state.getConfig,
   };
 };
 
@@ -140,6 +153,6 @@ export default compose(
   withMobileDialog(),
   connect(
     null,
-    { resetForm },
+    { resetForm, getConfig },
   ),
 )(BookingWidget);

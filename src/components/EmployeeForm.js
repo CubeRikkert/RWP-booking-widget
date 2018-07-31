@@ -54,35 +54,28 @@ class EmployeeForm extends React.Component {
       });
     }
     return employees;
-    // if (this.props.selections.service.length<1 && !this.props.selections.location)
-    //   return this.props.employees;
-    // if (this.props.selections.service.length>0 && !this.props.selections.location)
-    //   return this.props.employees.filter(emp =>
-    //     emp.service_ids.includes(this.props.selections.service.id),
-    //   );
-    // if (this.props.selections.service.length<1 && this.props.selections.location)
-    //   return this.props.employees.filter(
-    //     emp => emp.location_id === this.props.selections.location.id,
-    //   );
-    // if (this.props.selections.service.length>0 && this.props.selections.location)
-    //   return this.props.employees
-    //     .filter(emp =>
-    //       emp.service_ids.includes(this.props.selections.service.id),
-    //     )
-    //     .filter(emp => emp.location_id === this.props.selections.location.id);
   };
 
   render() {
-    const { classes, employees, employee, availableDates } = this.props;
+    const {
+      classes,
+      employees,
+      employee,
+      availableDates,
+      selections,
+    } = this.props;
     if (!employees) return null;
     const employeeOptions = this.filterEmployees().map(emp => ({
       value: emp.name,
       label: emp.name,
     }));
-    if (availableDates) return null;
+    if (availableDates && selections.location) return null;
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
+          <p style={{ marginTop: 2, marginBottom: 2, fontSize: 14 }}>
+            Employee
+          </p>
           <Fragment>
             <Select
               placeholder="Pick an employee..."

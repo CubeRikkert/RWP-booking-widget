@@ -66,7 +66,7 @@ class CustomerForm extends React.Component {
   };
 
   render() {
-    const { classes, selections } = this.props;
+    const { classes, selections, getConfig } = this.props;
     if (
       !selections.location ||
       !selections.service ||
@@ -77,20 +77,22 @@ class CustomerForm extends React.Component {
       return null; //customer form appears only after location, service and employee is selected
     return (
       <form className={classes.container} noValidate autoComplete="off">
-        <TextField
-          id="firstName"
-          label="First name"
-          placeholder="First name"
-          className={classes.textField}
-          margin="normal"
-          onChange={this.firstName}
-          value={
-            this.props.customer.firstName !== ''
-              ? this.props.customer.firstName
-              : ''
-          }
-          style={{ width: 165, marginLeft: 10 }}
-        />
+        <div>
+          <TextField
+            id="firstName"
+            label="First name"
+            placeholder="First name"
+            className={classes.textField}
+            margin="normal"
+            onChange={this.firstName}
+            value={
+              this.props.customer.firstName !== ''
+                ? this.props.customer.firstName
+                : ''
+            }
+            style={{ width: 165, marginLeft: 10, marginTop: 0 }}
+          />
+        </div>
         <TextField
           id="lastName"
           label="Last name"
@@ -103,7 +105,7 @@ class CustomerForm extends React.Component {
               ? this.props.customer.lastName
               : ''
           }
-          style={{ width: 165, marginLeft: 10 }}
+          style={{ width: 165, marginLeft: 10, marginTop: 0 }}
         />
         <TextField
           id="email"
@@ -115,7 +117,7 @@ class CustomerForm extends React.Component {
           value={
             this.props.customer.email !== '' ? this.props.customer.email : ''
           }
-          style={{ minWidth: 340, marginLeft: 10 }}
+          style={{ minWidth: 340, marginLeft: 10, marginTop: 0 }}
         />
         <TextField
           id="phone"
@@ -127,22 +129,24 @@ class CustomerForm extends React.Component {
           value={
             this.props.customer.phone !== '' ? this.props.customer.phone : ''
           }
-          style={{ minWidth: 340, marginLeft: 10 }}
+          style={{ minWidth: 340, marginLeft: 10, marginTop: 0 }}
         />
-        <TextField
-          id="address"
-          label="Address"
-          placeholder="Address"
-          className={classes.textField}
-          margin="normal"
-          onChange={this.address}
-          value={
-            this.props.customer.address !== ''
-              ? this.props.customer.address
-              : ''
-          }
-          style={{ minWidth: 340, marginLeft: 10 }}
-        />
+        {this.props.config.address_fields !== 'hidden' && (
+          <TextField
+            id="address"
+            label="Address"
+            placeholder="Address"
+            className={classes.textField}
+            margin="normal"
+            onChange={this.address}
+            value={
+              this.props.customer.address !== ''
+                ? this.props.customer.address
+                : ''
+            }
+            style={{ minWidth: 340, marginLeft: 10, marginTop: 0 }}
+          />
+        )}
         <TextField
           id="city"
           label="City"
@@ -153,7 +157,7 @@ class CustomerForm extends React.Component {
           value={
             this.props.customer.city !== '' ? this.props.customer.city : ''
           }
-          style={{ width: 165, marginLeft: 10 }}
+          style={{ width: 165, marginLeft: 10, marginTop: 0 }}
         />
         <TextField
           id="postalcode"
@@ -167,7 +171,7 @@ class CustomerForm extends React.Component {
               ? this.props.customer.postalcode
               : ''
           }
-          style={{ width: 165, marginLeft: 10 }}
+          style={{ width: 165, marginLeft: 10, marginTop: 0 }}
         />
         <TextField
           id="notes"
@@ -179,7 +183,7 @@ class CustomerForm extends React.Component {
           value={
             this.props.customer.notes !== '' ? this.props.customer.notes : ''
           }
-          style={{ minWidth: 340, marginLeft: 10 }}
+          style={{ minWidth: 340, marginLeft: 10, marginTop: 0 }}
         />
       </form>
     );
@@ -190,6 +194,7 @@ const mapStateToProps = function(state) {
   return {
     customer: state.customer,
     selections: state.selections,
+    config: state.getConfig,
   };
 };
 
