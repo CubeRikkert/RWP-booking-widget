@@ -78,13 +78,17 @@ function postForm(path, params, method) {
 
   for (var i in params) {
     if (params.hasOwnProperty(i)) {
-      var input = document.createElement('input');
       if (i === 'service_ids') {
-        input.type = 'hidden';
-        input.name = 'booking[' + i + '][]';
-        input.value = params[i];
-        form.appendChild(input);
+        for (let p = 0; p < params[i].length; p++) {
+          var input = document.createElement('input');
+          // console.log(params[i][p],'params[i][p]')
+          input.type = 'hidden';
+          input.name = 'booking[' + i + '][]';
+          input.value = params[i][p];
+          form.appendChild(input);
+        }
       } else {
+        var input = document.createElement('input');
         input.type = 'hidden';
         input.name = 'booking[' + i + ']';
         input.value = params[i];

@@ -53,17 +53,17 @@ class DateForm extends React.Component {
     this.props.selectDate(this.formatDate(date));
   };
 
-  nowGetDates = () => {
-    const date = new Date()
-      .toJSON()
-      .slice(0, 10)
-      .replace(/-/g, '-');
-    let serviceId;
-    if (this.props.selections.service.length > 0) {
-      serviceId = this.props.selections.service[0].id;
-    }
-    this.props.getDates(serviceId, date);
-  };
+  // nowGetDates = () => {
+  //   const date = new Date()
+  //     .toJSON()
+  //     .slice(0, 10)
+  //     .replace(/-/g, '-');
+  //   let serviceId;
+  //   if (this.props.selections.service.length > 0) {
+  //     serviceId = this.props.selections.service[0].id;
+  //   }
+  //   this.props.getDates(serviceId, date);
+  // };
 
   // Check whether a given date is a valid date
   // input in ISO format: yyyy-MM-dd

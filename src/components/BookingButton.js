@@ -28,10 +28,13 @@ class BookingButton extends PureComponent {
       email,
       notes,
     } = this.props.customer;
+    const serviceIds = service.map(service => {
+      return service.id;
+    });
     const booking = {
       location_id: location.id,
       resource_id: employee.id,
-      service_ids: [service.id],
+      service_ids: serviceIds,
       appointment_at: `${date} ${time}`,
       first_name: firstName,
       last_name: lastName,
@@ -42,6 +45,7 @@ class BookingButton extends PureComponent {
       email,
       notes,
     };
+    //console.log(booking.service_ids,'booking.service_ids')
     this.props.addBooking(booking);
   };
   render() {

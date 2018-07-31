@@ -69,12 +69,15 @@ class ServiceForm extends React.Component {
         .toJSON()
         .slice(0, 10)
         .replace(/-/g, '-');
-      let serviceId;
+      let serviceIds;
       if (this.props.selections.service.length > 0) {
-        serviceId = this.props.selections.service[0].id;
+        this.props.selections.service.forEach((service, ix) => {
+          if (ix === 0) serviceIds = service.id;
+          else serviceIds = serviceIds + ',' + service.id;
+        });
       }
       const employeeId = this.props.selections.employee.id;
-      this.props.getDates(serviceId, date, employeeId);
+      this.props.getDates(serviceIds, date, employeeId);
     }
   };
 
