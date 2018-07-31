@@ -1,4 +1,5 @@
 import Calendar from 'react-calendar';
+// import Calendar from 'react-calendar/dist/entry.nostyle';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import React from 'react';
@@ -123,6 +124,27 @@ class DateForm extends React.Component {
     return disabledDates;
   };
 
+  checkDisabledDates = (date, firstValidDate, lastValidDate, disabledDates) => {
+    // Check the calendar dates against the valid/disabled dates
+    // Return true when the calendar date is a disabled date
+
+    // Turn the calendar date into a numeric value so it can be compared
+    const numberDate =
+      date.getFullYear() * 10000 + (date.getMonth() + 1) * 100 + date.getDate();
+    // Case where calendar date is before the first valid date
+    if (numberDate < firstValidDate) return true;
+    // Case where calendar date is later than last valid date
+    if (numberDate > lastValidDate) return true;
+    // Cases checking the calendar dates against the disabled dates
+    return disabledDates.some(disabledDate => {
+      return (
+        date.getFullYear() === disabledDate.getFullYear() &&
+        date.getMonth() + 1 === disabledDate.getMonth() + 1 &&
+        date.getDate() === disabledDate.getDate()
+      );
+    });
+  };
+
   render() {
     const { selections, dates } = this.props;
 
@@ -137,7 +159,17 @@ class DateForm extends React.Component {
           <p>Please try another employee.</p>
         </div>
       );
+
     const disabledDates = this.getDisabledDates(dates);
+    const firstValidDate = Number(
+      dates[0].substr(0, 4) + dates[0].substr(5, 2) + dates[0].substr(8, 2),
+    );
+    const lastValidDate = Number(
+      dates[dates.length - 1].substr(0, 4) +
+        dates[dates.length - 1].substr(5, 2) +
+        dates[dates.length - 1].substr(8, 2),
+    );
+
     return (
       <div className="calendarFrame">
         <Calendar
@@ -153,6 +185,18 @@ class DateForm extends React.Component {
                 date.getMonth() === disabledDate.getMonth() &&
                 date.getDate() === disabledDate.getDate(),
             )
+          }
+          // Set the class name for the disable/valid dates
+          tileClassName={({ date, view }) =>
+            view === 'month' &&
+            this.checkDisabledDates(
+              date,
+              firstValidDate,
+              lastValidDate,
+              disabledDates,
+            ) === true
+              ? 'disabledDates'
+              : 'validDates'
           }
           // Set the minimum calendar date that is clickable
           // based on the first day of the available days request result
