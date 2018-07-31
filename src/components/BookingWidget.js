@@ -25,11 +25,16 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { getConfig } from '../actions/conf';
 
 class BookingWidget extends PureComponent {
   state = {
     open: false,
   };
+
+  componentWillMount() {
+    this.props.getConfig();
+  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -138,6 +143,6 @@ export default compose(
   withMobileDialog(),
   connect(
     null,
-    { resetForm },
+    { resetForm, getConfig },
   ),
 )(BookingWidget);
