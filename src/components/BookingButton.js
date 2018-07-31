@@ -57,6 +57,14 @@ class BookingButton extends PureComponent {
     const handle = () => this.handleClick();
     return (
       <Button
+        disabled={
+          !customer.firstName ||
+          !customer.lastName ||
+          !customer.email ||
+          !customer.phone
+            ? true
+            : false
+        }
         variant="contained"
         color="primary"
         className={classes.button}

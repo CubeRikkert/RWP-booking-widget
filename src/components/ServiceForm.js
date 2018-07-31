@@ -120,36 +120,6 @@ class ServiceForm extends React.Component {
       this.nowGetDates();
     if (availableDates && selections.location) return null;
 
-    if (this.props.config.allow_multiple_services === false)
-      return (
-        <div className={classes.root}>
-          <div className={classes.formControl}>
-            <Fragment>
-              <Select
-                className={classes.css - 10}
-                placeholder="Pick a service..."
-                isDisabled={false}
-                isLoading={false}
-                isMulti={false}
-                // isClearable={true}
-                isSearchable={true}
-                name="service"
-                className="basic-multi-select"
-                options={serviceOptions}
-                onChange={this.handleChange}
-                // value={
-                //   service && service !== ''
-                //     ? { value: service.name, label: service.name }
-                //     : ''
-                // }
-
-                style={{ width: 30 }}
-              />
-            </Fragment>
-          </div>
-        </div>
-      );
-
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
@@ -162,7 +132,11 @@ class ServiceForm extends React.Component {
               placeholder="Which service(s) are you looking for?"
               isDisabled={false}
               isLoading={false}
-              isMulti={true}
+              isMulti={
+                this.props.config.allow_multiple_services === false
+                  ? false
+                  : true
+              }
               // isClearable={true}
               isSearchable={true}
               name="service"
