@@ -124,12 +124,16 @@ class ServiceForm extends React.Component {
       <div className={classes.root}>
         <div className={classes.formControl}>
           <p style={{ marginTop: 2, marginBottom: 2, fontSize: 14 }}>
-            Service(s)
+            Service{this.props.config.allow_multiple_services === false
+              ? ''
+              : 's'}
           </p>
           <Fragment>
             <Select
               // className={classes.css - 10}
-              placeholder="Which service(s) are you looking for?"
+              placeholder={`Which service${
+                this.props.config.allow_multiple_services === false ? '' : 's'
+              } are you looking for?`}
               isDisabled={false}
               isLoading={false}
               isMulti={
