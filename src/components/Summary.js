@@ -35,8 +35,6 @@ class Summary extends React.Component {
     return this.props.selections.service.map(serv => (
       <React.Fragment>
         <p>Service: {serv.name}</p>
-        <p>Price: €{(serv.price / 100).toFixed(2)}</p>
-        <p>Duration {serv.duration} minutes</p>
         <hr />
       </React.Fragment>
     ));
@@ -88,19 +86,24 @@ class Summary extends React.Component {
 
   render() {
     const { classes, selections } = this.props;
-    // if (
-    //   !selections ||
-    //   !selections.location ||
-    //   !selections.service ||
-    //   !selections.employee
-    // )
-    //   return null;
+    // if (!this.props.selections.service.time)
+    if (
+      !selections.location ||
+      !selections.service ||
+      !selections.employee ||
+      !selections.date ||
+      !selections.time
+    )
+      return null; //customer form appears only after location, service and employee is selected
+
     return (
-      <Card className={classes.card} style={{ marginLeft: 10 }}>
-        <CardHeader title="Summary:" subheader="based on your selection" />
-        <CardContent>
+      <Card
+        className={classes.card}
+        style={{ marginLeft: 10, padding: '0px 0px 0px 0px' }}
+      >
+        <CardContent style={{ padding: '0px 0px 0px 10px' }}>
           <Typography component="p">{this.checkNumberOfServices()}</Typography>
-          <Typography component="p">{this.checkServiceSelection()}</Typography>
+          {/* <Typography component="p">{this.checkServiceSelection()}</Typography> */}
           <Typography component="p">{this.totalPrice()} </Typography>
           <Typography component="p">{this.checkLocationSelection()}</Typography>
           <Typography component="p">{this.checkEmployeeSelection()}</Typography>

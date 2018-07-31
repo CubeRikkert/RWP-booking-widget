@@ -15,6 +15,7 @@ const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
     minWidth: 350,
+    maxWidth: 350,
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2,
@@ -108,6 +109,7 @@ class ServiceForm extends React.Component {
         <div className={classes.formControl}>
           <Fragment>
             <Select
+              className={classes.css - 10}
               placeholder="Pick a service..."
               isDisabled={false}
               isLoading={false}
@@ -123,6 +125,8 @@ class ServiceForm extends React.Component {
               //     ? { value: service.name, label: service.name }
               //     : ''
               // }
+
+              style={{ width: 30 }}
             />
           </Fragment>
         </div>

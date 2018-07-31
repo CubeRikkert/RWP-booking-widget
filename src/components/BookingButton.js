@@ -50,15 +50,7 @@ class BookingButton extends PureComponent {
       !selections.location ||
       !selections.service ||
       !selections.employee ||
-      !selections.date ||
-      !selections.time ||
-      !customer.firstName ||
-      !customer.lastName ||
-      !customer.address ||
-      !customer.city ||
-      !customer.phone ||
-      !customer.postalcode ||
-      !customer.email
+      !selections.date
     )
       return null;
     const handle = () => this.handleClick();
