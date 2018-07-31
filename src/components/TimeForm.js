@@ -46,13 +46,13 @@ class TimeForm extends React.Component {
       return null; //customer form appears only after location, service and employee is selected
     if (availableTimes === null) {
       this.props.getTimes(
-        selections.service.id,
+        selections.service[0].id,
         selections.date,
         selections.employee.id,
       );
     } else if (availableTimes[0].date !== selections.date) {
       this.props.getTimes(
-        selections.service.id,
+        selections.service[0].id,
         selections.date,
         selections.employee.id,
       );

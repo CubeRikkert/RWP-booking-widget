@@ -35,9 +35,12 @@ class LocationForm extends React.Component {
   filterLocations = () => {
     if (!this.props.selections.service && !this.props.selections.employee)
       return this.props.locations;
-    if (this.props.selections.service && !this.props.selections.employee) {
+    if (
+      this.props.selections.service.length > 0 &&
+      !this.props.selections.employee
+    ) {
       const employeesforService = this.props.employees.filter(emp =>
-        emp.service_ids.includes(this.props.selections.service.id),
+        emp.service_ids.includes(this.props.selections.service[0].id),
       );
       const locationsforService = employeesforService.map(
         emp => emp.location_id,
@@ -58,13 +61,13 @@ class LocationForm extends React.Component {
   };
 
   render() {
-    const { classes, locations, location } = this.props;
+    const { classes, locations, location, availableDates } = this.props;
     if (!locations) return null;
     const locationOptions = this.filterLocations().map(loc => ({
       value: loc.name,
       label: loc.name,
     }));
-
+    if (availableDates) return null;
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
@@ -97,6 +100,7 @@ const mapStateToProps = function(state) {
     selections: state.selections,
     location: state.selections.location,
     employees: state.allEmployees,
+    availableDates: state.availableDates,
   };
 };
 

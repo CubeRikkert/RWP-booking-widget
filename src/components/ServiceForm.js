@@ -27,38 +27,40 @@ class ServiceForm extends React.Component {
   }
 
   handleChange = event => {
+    const serviceNames = event.map(ev => ev.value);
     this.props.selectServices(
-      this.props.services.find(ser => ser.name === event.value),
+      this.props.services.filter(ser => serviceNames.includes(ser.name)),
     );
   };
 
   filterServices = () => {
-    if (!this.props.selections.location && !this.props.selections.employee)
-      return this.props.services;
-    if (this.props.selections.location && !this.props.selections.employee) {
-      const employeesofLocation = this.props.employees.filter(
+    let employees;
+    if (!this.props.selections.location) {
+      employees = this.props.employees;
+    } else {
+      employees = this.props.employees.filter(
         emp => emp.location_id === this.props.selections.location.id,
       );
-      const servicesofLocation = employeesofLocation.map(
-        emp => emp.service_ids,
-      );
-      const combinedservicesofLocation = [].concat.apply(
-        [],
-        servicesofLocation,
-      );
+    }
+    if (this.props.selections.employee) {
       return this.props.services.filter(ser =>
-        combinedservicesofLocation.includes(ser.id),
+        ser.resource_ids.includes(this.props.selections.employee.id),
       );
     }
-    if (!this.props.selections.location && this.props.selections.employee)
-      return this.props.services.filter(ser =>
-        ser.resource_ids.includes(this.props.selections.employee.id),
-      );
-    if (this.props.selections.location && this.props.selections.employee)
-      return this.props.services.filter(ser =>
-        ser.resource_ids.includes(this.props.selections.employee.id),
-      );
-    return this.props.services;
+    let employeesofService = employees.filter(emp => {
+      let employeeHasAllServices = true;
+      for (let i = 0; i < this.props.selections.service.length; i++) {
+        if (!emp.service_ids.includes(this.props.selections.service[i].id))
+          employeeHasAllServices = false;
+      }
+      if (employeeHasAllServices === true) return emp;
+    });
+    const services = employeesofService.map(emp => emp.service_ids);
+    const combinedserviceIds = [].concat.apply([], services);
+    let combinedServices = this.props.services.filter(serv =>
+      combinedserviceIds.includes(serv.id),
+    );
+    return combinedServices;
   };
 
   nowGetDates = () => {
@@ -67,20 +69,40 @@ class ServiceForm extends React.Component {
         .toJSON()
         .slice(0, 10)
         .replace(/-/g, '-');
-      const serviceId = this.props.selections.service.id;
+      let serviceId;
+      if (this.props.selections.service.length > 0) {
+        serviceId = this.props.selections.service[0].id;
+      }
       const employeeId = this.props.selections.employee.id;
       this.props.getDates(serviceId, date, employeeId);
     }
   };
 
   render() {
-    const { classes, services, service } = this.props;
-    if (!services) return null;
+    const {
+      classes,
+      services,
+      service,
+      employees,
+      availableTimes,
+      availableDates,
+      selections,
+    } = this.props;
+    if (!services || !employees) return null;
     const serviceOptions = this.filterServices().map(ser => ({
       value: ser.name,
-      label: ser.name,
+      label:
+        ser.name +
+        ' |  Duration ' +
+        ser.duration +
+        ' min' +
+        ' | Price ' +
+        Number(ser.price) / 100 +
+        ' €',
     }));
-    if (this.props.selections.service !== null) this.nowGetDates();
+    if (this.props.selections.service.length > 0 && !availableDates)
+      this.nowGetDates();
+    if (availableDates) return null;
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
@@ -89,16 +111,18 @@ class ServiceForm extends React.Component {
               placeholder="Pick a service..."
               isDisabled={false}
               isLoading={false}
+              isMulti={true}
               // isClearable={true}
               isSearchable={true}
               name="service"
+              className="basic-multi-select"
               options={serviceOptions}
               onChange={this.handleChange}
-              value={
-                service && service !== ''
-                  ? { value: service.name, label: service.name }
-                  : ''
-              }
+              // value={
+              //   service && service !== ''
+              //     ? { value: service.name, label: service.name }
+              //     : ''
+              // }
             />
           </Fragment>
         </div>
@@ -114,6 +138,8 @@ const mapStateToProps = function(state) {
     service: state.selections.service,
     resource: state.selections.employee,
     employees: state.allEmployees,
+    availableDates: state.availableDates,
+    availableTimes: state.availableTimes,
   };
 };
 
