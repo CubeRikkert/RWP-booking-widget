@@ -65,19 +65,14 @@ class EmployeeForm extends React.Component {
   };
 
   render() {
-    const {
-      classes,
-      employees,
-      employee,
-      availableDates,
-      selections,
-    } = this.props;
+    const { classes, employees, employee, navigation, selections } = this.props;
     if (!employees) return null;
     const employeeOptions = this.filterEmployees().map(emp => ({
       value: emp.name,
       label: emp.name,
     }));
     // if (availableDates && selections.location) return null;
+    if (navigation !== 1) return null;
     if (
       (employeeOptions.length === 1 && selections.employee === '') ||
       (employeeOptions.length === 1 && !selections.employee)
@@ -133,6 +128,7 @@ const mapStateToProps = function(state) {
     selections: state.selections,
     employee: state.selections.employee,
     availableDates: state.availableDates,
+    navigation: state.navigation,
   };
 };
 

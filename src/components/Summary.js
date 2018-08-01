@@ -85,7 +85,7 @@ class Summary extends React.Component {
   };
 
   render() {
-    const { classes, selections } = this.props;
+    const { classes, selections, navigation } = this.props;
     // if (!this.props.selections.service.time)
     if (
       !selections.location ||
@@ -95,7 +95,7 @@ class Summary extends React.Component {
       !selections.time
     )
       return null; //customer form appears only after location, service and employee is selected
-
+    if (navigation !== 3) return null;
     return (
       <Card
         className={classes.card}
@@ -129,6 +129,7 @@ Summary.propTypes = {
 const mapStateToProps = function(state) {
   return {
     selections: state.selections,
+    navigation: state.navigation,
   };
 };
 
