@@ -25,17 +25,11 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { getConfig } from '../actions/conf';
 
 class BookingWidget extends PureComponent {
   state = {
     open: false,
   };
-
-  componentWillMount() {
-    console.log(this.conf);
-    this.props.getConfig();
-  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -46,8 +40,22 @@ class BookingWidget extends PureComponent {
     this.props.resetForm();
   };
 
+  showScreenGrid = field => {
+    const { field_order } = this.props.config;
+    console.log(field);
+    if (field === 'service') return;
+
+    // {/* <Grid container wrap="nowrap">
+    //                   <Grid item>
+    //                     <ServiceForm />
+    //                   </Grid>
+    //                 </Grid> */}
+  };
+
   render() {
     const { fullScreen, selections } = this.props;
+    if (!this.props.config) return null;
+    console.log(this.props.config.field_order[1]);
 
     return (
       <div>
@@ -74,7 +82,17 @@ class BookingWidget extends PureComponent {
           >
             <Grid container justify="center" style={{ minHeight: 700 }}>
               <div>
-                <Grid container wrap="nowrap">
+                {/* {this.props.config.field_order.map(field => {if (field === "service")
+                return  <Grid item>fdf</Grid>
+                })} */}
+                {this.props.config.field_order[1] === 'service' && (
+                  <Grid container wrap="nowrap">
+                    <Grid item>
+                      <p>sdfsdf</p>
+                    </Grid>
+                  </Grid>
+                )}
+                {/* <Grid container wrap="nowrap">
                   <Grid item>
                     <ServiceForm />
                   </Grid>
@@ -88,7 +106,9 @@ class BookingWidget extends PureComponent {
                   <Grid item>
                     <EmployeeForm />
                   </Grid>
-                </Grid>
+                </Grid> */}
+                {/* {this.props.config.field_order[0]=== "location" && 
+              <p>try</p>} */}
                 <Grid container wrap="nowrap" spacing={16}>
                   <Grid item>
                     <DateForm />
@@ -144,7 +164,7 @@ class BookingWidget extends PureComponent {
 const mapStateToProps = function(state) {
   return {
     selections: state.selections,
-    config: state.getConfig,
+    config: state.allConfig,
   };
 };
 
@@ -155,7 +175,7 @@ BookingWidget.propTypes = {
 export default compose(
   withMobileDialog(),
   connect(
-    null,
-    { resetForm, getConfig },
+    mapStateToProps,
+    { resetForm },
   ),
 )(BookingWidget);

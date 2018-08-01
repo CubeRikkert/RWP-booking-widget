@@ -1,10 +1,16 @@
 import React, { PureComponent } from 'react';
 import BookingWidget from './BookingWidget';
+import { getConfig } from '../actions/conf';
+import { connect } from 'react-redux';
 import '../App.css';
 
 import './Home.css';
 
 class Home extends PureComponent {
+  componentWillMount() {
+    this.props.getConfig();
+  }
+
   render() {
     return (
       <div className="allBody">
@@ -39,4 +45,7 @@ class Home extends PureComponent {
   }
 }
 
-export default Home;
+export default connect(
+  null,
+  { getConfig },
+)(Home);
