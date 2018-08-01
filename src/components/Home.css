@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+.body {
+    width: 70%;
+}
+.titleContainer {
+    width: 90%;
+    height: auto;
+    text-align: center;
+    position: relative;
+    font-family: Open Sans;
+    padding: 5%
+}
+.picContainer {
+    width: 1300px;
+    height: 700px;
+    border-radius: 20%
+}
+.allBody {
+    background-color: #DFB783;
+    width: 100%;
+}
+ .paragraph {
+    width: 40%;
+    height: auto;
+    text-align: left;
+    font-family: Open Sans;
+    padding: 5%;
+    padding-top: 0.5%;
+    font-size: 100%;
+    display: inline-block;
+    position: relative;
+ }
+
+ .picContainer2 {
+    height: 50%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 90%;
+    /* width: 1000px; */
+    display: inline-block;
+   position: relative;
+   padding-left: 5%
+
+  }
+
+  .picContainer3 {
+    height: 50%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 90%;
+    /* width: 1000px; */
+    display: inline-block;
+   position: relative;
+   padding-left: 5%
+
+  }
+  .widgetButton {
+    position: absolute;
+    top: 100px;
+    right: 1px;
+    width: 150px;
+    height: 200px;
+
+    -webkit-transition: all 2s ease-in-out;
+    transition: all 2s ease-in-out;
+    z-index: 1;
+    display:inline;
+  }
+
+  .containerMultiplePic {
+    width: 195%px;
+
+  }
+
+  .employee {
+    width: 90%;
+
+    text-align: center;
+  }
+
+  .footer {
+    width: 100%;
+    height: 200px;
+    background-color: rgb(83, 57, 22)
+  }
+
+  h2 {
+      text-align: center
+  }
+
+  c {
+      font-size: 30px;
+      color: azure
+  }

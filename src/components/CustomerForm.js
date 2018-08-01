@@ -66,7 +66,7 @@ class CustomerForm extends React.Component {
   };
 
   render() {
-    const { classes, selections, getConfig } = this.props;
+    const { classes, selections, navigation } = this.props;
     if (
       !selections.location ||
       !selections.service ||
@@ -75,6 +75,7 @@ class CustomerForm extends React.Component {
       !selections.time
     )
       return null; //customer form appears only after location, service and employee is selected
+    if (navigation !== 3) return null;
     return (
       <form className={classes.container} noValidate autoComplete="off">
         <div>
@@ -194,7 +195,8 @@ const mapStateToProps = function(state) {
   return {
     customer: state.customer,
     selections: state.selections,
-    config: state.getConfig,
+    config: state.allConfig,
+    navigation: state.navigation,
   };
 };
 

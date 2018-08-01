@@ -4,6 +4,7 @@ export const SELECT_EMPLOYEES = 'SELECT_EMPLOYEES';
 export const SELECT_DATE = 'SELECT_DATE';
 export const SELECT_TIME = 'SELECT_TIME';
 export const RESET_TIME = 'RESET_TIME';
+export const RESET_DATE = 'RESET_DATE';
 export const RESET_FORM = 'RESET_FORM';
 export const RESET_EMPLOYEE = 'RESET_EMPLOYEE';
 export const RESET_LOCATION = 'RESET_LOCATION';
@@ -54,6 +55,12 @@ export function resetForm() {
 export function resetTime() {
   return {
     type: RESET_TIME,
+  };
+}
+
+export function resetDate() {
+  return {
+    type: RESET_DATE,
   };
 }
 
