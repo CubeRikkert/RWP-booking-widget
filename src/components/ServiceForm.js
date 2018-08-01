@@ -208,7 +208,7 @@ const mapStateToProps = function(state) {
     employees: state.allEmployees,
     availableDates: state.availableDates,
     availableTimes: state.availableTimes,
-    config: state.getConfig,
+    config: state.allConfig,
     navigation: state.navigation,
   };
 };
