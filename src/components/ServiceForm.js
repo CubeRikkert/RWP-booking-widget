@@ -3,7 +3,13 @@ import compose from 'recompose/compose';
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { selectServices } from '../actions/selections';
+import {
+  selectServices,
+  resetEmployee,
+  resetLocation,
+  resetDates,
+  resetTimes,
+} from '../actions/selections';
 import { getServices, getDates } from '../actions/get';
 import Select from 'react-select';
 import './ServiceForm.css';
@@ -36,6 +42,21 @@ class ServiceForm extends React.Component {
   // };
 
   handleChange = event => {
+    if (event) {
+      this.props.resetDates();
+      this.props.resetTimes();
+      // console.log(this.props.selections.employee.autoSelect, 'autoselect employee')
+      if (
+        this.props.selections.employee &&
+        this.props.selections.employee.autoSelect
+      )
+        this.props.resetEmployee();
+      if (
+        this.props.selections.location &&
+        this.props.selections.location.autoSelect
+      )
+        this.props.resetLocation();
+    }
     if (this.props.config.allow_multiple_services === true) {
       const serviceNames = event.map(ev => ev.value);
       this.props.selectServices(
@@ -88,22 +109,24 @@ class ServiceForm extends React.Component {
       let serviceIds;
       if (this.props.selections.service.length > 0) {
         this.props.selections.service.forEach((service, ix) => {
-          if (ix === 0) serviceIds = service.id;
-          else serviceIds = serviceIds + ',' + service.id;
+          if (ix === 0) serviceIds = 'service_ids[]=' + service.id;
+          else serviceIds = serviceIds + '&' + 'service_ids[]=' + service.id;
         });
       }
+      // console.log(serviceIds,'serviceIds')
       const employeeId = this.props.selections.employee.id;
       this.props.getDates(serviceIds, date, employeeId);
     }
   };
 
   render() {
+    console.log(this.props.config.field_order);
     const {
       classes,
       services,
       service,
       employees,
-      availableTimes,
+      navigation,
       availableDates,
       selections,
     } = this.props;
@@ -121,8 +144,8 @@ class ServiceForm extends React.Component {
     }));
     if (this.props.selections.service.length > 0 && !availableDates)
       this.nowGetDates();
-    if (availableDates && selections.location) return null;
-
+    // if (availableDates && selections.location) return null;
+    if (navigation !== 1) return null;
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
@@ -163,13 +186,10 @@ class ServiceForm extends React.Component {
                   ? service.map(ser => ({
                       value: ser.name,
                       label:
-                        ser.name +
-                        ' |  Duration ' +
-                        ser.duration +
-                        ' min' +
-                        ' | Price ' +
-                        Number(ser.price) / 100 +
-                        ' €',
+                        ser.name
+                          .split(' ')
+                          .slice(0, 4)
+                          .join(' ') + '...',
                     }))
                   : ''
               }
@@ -191,7 +211,8 @@ const mapStateToProps = function(state) {
     employees: state.allEmployees,
     availableDates: state.availableDates,
     availableTimes: state.availableTimes,
-    config: state.getConfig,
+    config: state.allConfig,
+    navigation: state.navigation,
   };
 };
 
@@ -203,6 +224,14 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    { selectServices, getServices, getDates },
+    {
+      selectServices,
+      getServices,
+      getDates,
+      resetEmployee,
+      resetLocation,
+      resetDates,
+      resetTimes,
+    },
   ),
 )(ServiceForm);

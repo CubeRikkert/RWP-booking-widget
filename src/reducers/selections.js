@@ -6,6 +6,9 @@ import {
   SELECT_TIME,
   RESET_FORM,
   RESET_TIME,
+  RESET_EMPLOYEE,
+  RESET_LOCATION,
+  RESET_DATE,
 } from '../actions/selections';
 
 const initialState = {
@@ -30,8 +33,14 @@ export default function(state = initialState, action) {
       return { ...state, time: action.payload };
     case RESET_TIME:
       return { ...state, time: '' };
+    case RESET_DATE:
+      return { ...state, date: '' };
     case RESET_FORM:
       return initialState;
+    case RESET_EMPLOYEE:
+      return { ...state, employee: '' };
+    case RESET_LOCATION:
+      return { ...state, location: '' };
 
     default:
       return state;

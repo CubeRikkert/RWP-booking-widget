@@ -16,8 +16,7 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    margin: theme.spacing.unit,
     minWidth: 350,
   },
 });
@@ -146,14 +145,9 @@ class DateForm extends React.Component {
   };
 
   render() {
-    const { selections, dates } = this.props;
+    const { selections, dates, navigation } = this.props;
 
-    if (
-      !selections.location ||
-      !selections.service ||
-      !selections.employee ||
-      selections.time
-    )
+    if (!selections.location || !selections.service || !selections.employee)
       return null;
     // if (this.props.dates===null) this.nowGetDates()
     if (!dates) return null;
@@ -174,7 +168,7 @@ class DateForm extends React.Component {
         dates[dates.length - 1].substr(5, 2) +
         dates[dates.length - 1].substr(8, 2),
     );
-
+    if (navigation !== 2) return null;
     return (
       <div className="calendarFrame">
         <p
@@ -243,6 +237,7 @@ const mapStateToProps = function(state) {
     times: state.availableTimes,
     dates: state.availableDates,
     selections: state.selections,
+    navigation: state.navigation,
   };
 };
 

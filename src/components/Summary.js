@@ -43,7 +43,13 @@ class Summary extends React.Component {
   checkLocationSelection = () => {
     if (!this.props.selections.location || !this.props.selections.location.id)
       return 'select a location';
-    else return <p>Location: {this.props.selections.location.name}</p>;
+    else
+      return (
+        <p>
+          Location: {this.props.selections.location.name} <br /> Address:{' '}
+          {this.props.selections.location.address}
+        </p>
+      );
   };
 
   checkEmployeeSelection = () => {
@@ -85,7 +91,7 @@ class Summary extends React.Component {
   };
 
   render() {
-    const { classes, selections } = this.props;
+    const { classes, selections, navigation } = this.props;
     // if (!this.props.selections.service.time)
     if (
       !selections.location ||
@@ -95,14 +101,21 @@ class Summary extends React.Component {
       !selections.time
     )
       return null; //customer form appears only after location, service and employee is selected
-
+    if (navigation !== 3) return null;
     return (
       <Card
         className={classes.card}
-        style={{ marginLeft: 10, padding: '0px 0px 0px 0px' }}
+        style={{
+          marginTop: 10,
+          marginLeft: 3,
+          marginBottom: 10,
+          padding: '0px 0px 0px 0px',
+        }}
       >
-        <CardContent style={{ padding: '0px 0px 0px 10px' }}>
-          <Typography component="p">{this.checkNumberOfServices()}</Typography>
+        <CardContent
+          style={{ padding: '0px 0px 0px 10px', marginTop: 0, marginBottom: 0 }}
+        >
+          <Typography component="p">{this.checkNumberOfServices()} </Typography>
           {/* <Typography component="p">{this.checkServiceSelection()}</Typography> */}
           <Typography component="p">{this.totalPrice()} </Typography>
           <Typography component="p">{this.checkLocationSelection()}</Typography>
@@ -122,6 +135,7 @@ Summary.propTypes = {
 const mapStateToProps = function(state) {
   return {
     selections: state.selections,
+    navigation: state.navigation,
   };
 };
 
