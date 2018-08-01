@@ -110,8 +110,7 @@ class BookingWidget extends PureComponent {
                   </Grid>
                 </Grid>
 
-                <Grid container wrap="nowrap" spacing={16}>
-                  =======
+                <Grid container wrap="nowrap">
                   <Grid item>
                     <DateForm />
                   </Grid>
