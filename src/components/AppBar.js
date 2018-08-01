@@ -48,14 +48,14 @@ class SimpleAppBar extends PureComponent {
             >
               Book Appointment
             </Typography>
-            {(navigation == 2 &&
+            {(navigation === 2 &&
               selections.time && (
                 <button onClick={this.clickForward} style={{ border: 'none' }}>
                   <ForwardButton />
                 </button>
               )) ||
               (navigation === 1 &&
-                selections.service &&
+                selections.service.length > 0 &&
                 selections.location &&
                 selections.employee && (
                   <button

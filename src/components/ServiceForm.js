@@ -186,13 +186,10 @@ class ServiceForm extends React.Component {
                   ? service.map(ser => ({
                       value: ser.name,
                       label:
-                        ser.name +
-                        ' |  Duration ' +
-                        ser.duration +
-                        ' min' +
-                        ' | Price ' +
-                        Number(ser.price) / 100 +
-                        ' €',
+                        ser.name
+                          .split(' ')
+                          .slice(0, 4)
+                          .join(' ') + '...',
                     }))
                   : ''
               }
