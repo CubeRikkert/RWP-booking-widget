@@ -67,7 +67,10 @@ class BookingWidget extends PureComponent {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogContent style={{ padding: 0 }}>
+          <DialogContent
+            style={{ backgroundColor: '#F0D9D9' }}
+            overlayStyle={{ backgroundColor: '#F0D9D9' }}
+          >
             <SimpleAppBar />
             <Grid container justify="center" style={{ minHeight: 700 }}>
               <div>
