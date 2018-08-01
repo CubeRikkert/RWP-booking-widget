@@ -16,8 +16,7 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    margin: theme.spacing.unit,
     minWidth: 350,
   },
 });
@@ -177,7 +176,17 @@ class DateForm extends React.Component {
 
     return (
       <div className="calendarFrame">
-        <p style={{ marginTop: 2, marginBottom: 2, fontSize: 14 }}>Date</p>
+        <p
+          style={{
+            marginTop: 2,
+            marginBottom: 2,
+            fontSize: 14,
+            textAlign: 'center',
+            padding: 5,
+          }}
+        >
+          Date
+        </p>
         <Calendar
           onChange={this.onChange}
           value={this.state.date}

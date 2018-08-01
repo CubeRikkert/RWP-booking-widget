@@ -99,10 +99,17 @@ class Summary extends React.Component {
     return (
       <Card
         className={classes.card}
-        style={{ marginLeft: 10, padding: '0px 0px 0px 0px' }}
+        style={{
+          marginTop: 10,
+          marginLeft: 3,
+          marginBottom: 10,
+          padding: '0px 0px 0px 0px',
+        }}
       >
-        <CardContent style={{ padding: '0px 0px 0px 10px' }}>
-          <Typography component="p">{this.checkNumberOfServices()}</Typography>
+        <CardContent
+          style={{ padding: '0px 0px 0px 10px', marginTop: 0, marginBottom: 0 }}
+        >
+          <Typography component="p">{this.checkNumberOfServices()} </Typography>
           {/* <Typography component="p">{this.checkServiceSelection()}</Typography> */}
           <Typography component="p">{this.totalPrice()} </Typography>
           <Typography component="p">{this.checkLocationSelection()}</Typography>

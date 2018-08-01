@@ -27,7 +27,13 @@ class EmployeeForm extends React.Component {
   }
 
   handleChange = event => {
-    if (event)
+    if (event.value === 'No Preference') {
+      const empOptions = this.filterEmployees().slice(1);
+      const randomEmp =
+        empOptions[Math.floor(empOptions.length * Math.random())];
+      this.props.selectEmployees(randomEmp);
+    }
+    if (event.value !== 'No Preference')
       this.props.selectEmployees(
         this.props.employees.find(emp => emp.name === event.value),
       );
@@ -53,6 +59,8 @@ class EmployeeForm extends React.Component {
         if (employeeHasAllServices === true) return emp;
       });
     }
+    if (employees.length > 1)
+      return [{ name: 'No Preference' }].concat(employees);
     return employees;
   };
 
@@ -69,11 +77,29 @@ class EmployeeForm extends React.Component {
       value: emp.name,
       label: emp.name,
     }));
-    if (availableDates && selections.location) return null;
+    // if (availableDates && selections.location) return null;
+    if (
+      (employeeOptions.length === 1 && selections.employee === '') ||
+      (employeeOptions.length === 1 && !selections.employee)
+    ) {
+      const emp = this.props.employees.find(
+        emp => emp.name === employeeOptions[0].value,
+      );
+      emp.autoSelect = true;
+      this.props.selectEmployees(emp);
+    }
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
-          <p style={{ marginTop: 2, marginBottom: 2, fontSize: 14 }}>
+          <p
+            style={{
+              marginTop: 2,
+              marginBottom: 2,
+              fontSize: 14,
+              textAlign: 'center',
+              padding: 5,
+            }}
+          >
             Employee
           </p>
           <Fragment>
