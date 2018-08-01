@@ -210,6 +210,7 @@ const mapStateToProps = function(state) {
     availableDates: state.availableDates,
     availableTimes: state.availableTimes,
     config: state.allConfig,
+    navigation: state.navigation,
   };
 };
 
