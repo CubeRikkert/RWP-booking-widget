@@ -82,17 +82,17 @@ class BookingWidget extends PureComponent {
           >
             <Grid container justify="center" style={{ minHeight: 700 }}>
               <div>
-                {/* {this.props.config.field_order.map(field => {if (field === "service")
+                {/* {/* {this.props.config.field_order.map(field => {if (field === "service")
                 return  <Grid item>fdf</Grid>
                 })} */}
-                {this.props.config.field_order[1] === 'service' && (
+                {/* {this.props.config.field_order[1] === 'service' && (
                   <Grid container wrap="nowrap">
                     <Grid item>
                       <p>sdfsdf</p>
                     </Grid>
                   </Grid>
-                )}
-                {/* <Grid container wrap="nowrap">
+                )} */}
+                <Grid container wrap="nowrap">
                   <Grid item>
                     <ServiceForm />
                   </Grid>
@@ -106,7 +106,7 @@ class BookingWidget extends PureComponent {
                   <Grid item>
                     <EmployeeForm />
                   </Grid>
-                </Grid> */}
+                </Grid>
                 {/* {this.props.config.field_order[0]=== "location" && 
               <p>try</p>} */}
                 <Grid container wrap="nowrap" spacing={16}>
