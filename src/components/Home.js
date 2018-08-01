@@ -13,11 +13,13 @@ class Home extends PureComponent {
   render() {
     return (
       <div className="allBody">
+        <div />
         <div className="titleContainer">
-          <h1> Welcome to Codaissalon</h1>
+          <div>
+            <img className="logo" src={require('./logo.png')} alt="logo" />
+          </div>
 
           <img
-            className="picContainer"
             src="http://www.yourlittleblackbook.me/wp-content/uploads/2015/07/Skins-Institute-%E2%80%93-De-L%E2%80%99Europe-1.jpg"
             width="100%"
             height="80%"
@@ -36,11 +38,11 @@ class Home extends PureComponent {
               src="http://www.essentiallyyoursblog.com/wp-content/uploads/2015/04/Massage-Oils.jpg?w=1400"
               width="300px"
             />
-            <img
+            {/* <img
               className="picContainer2"
               src="http://www.eclecticbeautysalon.com/wp-content/uploads/2016/05/eclectic-beauty-salon-services-facials.png"
               width="300px"
-            />
+            /> */}
           </div>
           <hr />
         </div>
