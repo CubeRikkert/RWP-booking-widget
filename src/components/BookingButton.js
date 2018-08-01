@@ -49,15 +49,16 @@ class BookingButton extends PureComponent {
     this.props.addBooking(booking);
   };
   render() {
-    const { classes, selections, customer } = this.props;
-    if (
-      !selections.location ||
-      !selections.service ||
-      !selections.employee ||
-      !selections.date ||
-      !selections.time
-    )
-      return null;
+    const { classes, selections, customer, navigation } = this.props;
+    // if (
+    //   !selections.location ||
+    //   !selections.service ||
+    //   !selections.employee ||
+    //   !selections.date ||
+    //   !selections.time
+    // )
+    //   return null;
+    if (navigation !== 3) return null;
     const handle = () => this.handleClick();
     return (
       <Button
@@ -88,6 +89,7 @@ const mapStateToProps = function(state) {
   return {
     selections: state.selections,
     customer: state.customer,
+    navigation: state.navigation,
   };
 };
 
