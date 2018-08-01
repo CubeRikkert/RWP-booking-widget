@@ -55,7 +55,7 @@ class SimpleAppBar extends PureComponent {
                 </button>
               )) ||
               (navigation === 1 &&
-                selections.service &&
+                selections.service.length > 0 &&
                 selections.location &&
                 selections.employee && (
                   <button
