@@ -62,9 +62,21 @@
    padding-left: 5%
 
   }
+
+  .picContainer4 {
+    height: 50%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 90%;
+    /* width: 1000px; */
+    display: inline-block;
+   position: relative;
+   padding-left: 5%
+
+  }
   .widgetButton {
-    position: absolute;
-    top: 100px;
+    position: fixed;
+    top: 760px;
     right: 1px;
     width: 150px;
     height: 200px;

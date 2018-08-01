@@ -55,7 +55,7 @@ class BookingWidget extends PureComponent {
     return (
       <div>
         <Button
-          style={{ marginTop: 300 }}
+          // style={{ marginTop: 300 }}
           variant="contained"
           color="primary"
           className={fullScreen.button}
@@ -72,10 +72,7 @@ class BookingWidget extends PureComponent {
           aria-describedby="alert-dialog-description"
         >
           <SimpleAppBar />
-          <DialogContent
-            style={{ backgroundColor: '#F0D9D9', padding: 0 }}
-            overlayStyle={{ backgroundColor: '#F0D9D9' }}
-          >
+          <DialogContent style={{ padding: 0 }}>
             <Grid container justify="center" style={{ minHeight: 700 }}>
               <div>
                 {this.props.config.field_order.map(field => {
