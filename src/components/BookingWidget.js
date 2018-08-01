@@ -71,7 +71,6 @@ class BookingWidget extends PureComponent {
             style={{ backgroundColor: '#F0D9D9' }}
             overlayStyle={{ backgroundColor: '#F0D9D9' }}
           >
-            <SimpleAppBar />
             <Grid container justify="center" style={{ minHeight: 700 }}>
               <div>
                 <Grid container wrap="nowrap">
