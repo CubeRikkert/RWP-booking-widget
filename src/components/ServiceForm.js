@@ -153,7 +153,7 @@ class ServiceForm extends React.Component {
               marginTop: 2,
               marginBottom: 2,
               fontSize: 14,
-              textAlign: 'center',
+              // textAlign: 'center',
               padding: 5,
             }}
           >
