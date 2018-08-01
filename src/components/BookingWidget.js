@@ -7,7 +7,6 @@ import EmployeeForm from './EmployeeForm';
 import ServiceForm from './ServiceForm';
 import DateForm from './DateForm';
 import CustomerForm from './CustomerForm';
-import ResetForm from './ResetForm';
 import Summary from './Summary';
 import TimeForm from './TimeForm';
 import BookingButton from './BookingButton';
@@ -15,8 +14,6 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import PropTypes from 'prop-types';
 import { Grid } from '../../node_modules/@material-ui/core';
@@ -26,6 +23,8 @@ import compose from 'recompose/compose';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { getConfig } from '../actions/conf';
+import Logo from '../salonized_logo.js';
+import SimpleAppBar from './AppBar';
 
 class BookingWidget extends PureComponent {
   state = {
@@ -89,22 +88,22 @@ class BookingWidget extends PureComponent {
                     <EmployeeForm />
                   </Grid>
                 </Grid>
-                <Grid container wrap="nowrap" spacing={16}>
+                <Grid container wrap="nowrap">
                   <Grid item>
                     <DateForm />
                   </Grid>
                 </Grid>
-                <Grid container wrap="nowrap" spacing={16}>
+                <Grid container wrap="nowrap">
                   <Grid item>
                     <TimeForm />
                   </Grid>
                 </Grid>
-                <Grid container wrap="nowrap" spacing={16}>
+                <Grid container wrap="nowrap">
                   <Grid item>
                     <Summary />
                   </Grid>
                 </Grid>
-                <Grid container wrap="nowrap" spacing={16}>
+                <Grid container wrap="nowrap">
                   <Grid item>
                     <CustomerForm />
                   </Grid>
@@ -122,17 +121,35 @@ class BookingWidget extends PureComponent {
               </div>
             </Grid>
           </DialogContent>
+          <BookingButton
+            className={fullScreen.button}
+            style={{ position: 'absolute' }}
+          />
           <DialogActions>
-            <BookingButton
-              className={fullScreen.button}
-              // style={{marginRight:190}}
-            />
+            <p
+              style={{
+                position: 'sticky',
+                right: 220,
+                bottom: 10,
+                marginBottom: 1,
+                fontSize: 12,
+                height: 10,
+                opacity: 0.5,
+              }}
+            >
+              <span style={{ opacity: 0.5 }}>Powered by</span>
+              <Logo />
+            </p>
             <IconButton
               className={fullScreen.button}
               aria-label="Delete"
               // style={{ marginTop: -70, marginLeft: 320 }}
             >
-              <DeleteIcon onClick={this.handleClose} color="primary" />
+              <DeleteIcon
+                onClick={this.handleClose}
+                color="black"
+                style={{ position: 'absolute' }}
+              />
             </IconButton>
           </DialogActions>
         </Dialog>
