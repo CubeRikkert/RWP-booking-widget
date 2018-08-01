@@ -7,6 +7,8 @@ export const RESET_TIME = 'RESET_TIME';
 export const RESET_FORM = 'RESET_FORM';
 export const RESET_EMPLOYEE = 'RESET_EMPLOYEE';
 export const RESET_LOCATION = 'RESET_LOCATION';
+export const RESET_DATES = 'RESET_DATES';
+export const RESET_TIMES = 'RESET_TIMES';
 
 export function selectLocation(location) {
   return {
@@ -64,5 +66,17 @@ export function resetEmployee() {
 export function resetLocation() {
   return {
     type: RESET_LOCATION,
+  };
+}
+
+export function resetDates() {
+  return {
+    type: RESET_DATES,
+  };
+}
+
+export function resetTimes() {
+  return {
+    type: RESET_TIMES,
   };
 }
