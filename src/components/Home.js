@@ -101,6 +101,11 @@ class Home extends PureComponent {
             src=" https://static2.codaisseur.com/uploads/team_member/avatar/26/milan-van-de-bovenkamp-png-99cb4aff9b433aa2725b16c3a0067a2b.png"
             width="300px"
           />
+          <img
+            className="picContainer3"
+            src=" https://static4.codaisseur.com/uploads/team_member/avatar/31/lisa-coffee-png-d5680ffcac03c532a00ec6f22fba5450.png"
+            width="300px"
+          />
         </div>
         <hr />
 
