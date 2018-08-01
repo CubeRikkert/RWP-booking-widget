@@ -194,7 +194,7 @@ const mapStateToProps = function(state) {
   return {
     customer: state.customer,
     selections: state.selections,
-    config: state.getConfig,
+    config: state.allConfig,
   };
 };
 

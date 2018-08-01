@@ -7,7 +7,7 @@ import customer from './customer';
 import availableTimes from './availableTimes';
 import availableDates from './availableDates';
 import addBooking from './booking';
-import getConfig from './conf';
+import allConfig from './conf';
 
 export default combineReducers({
   allLocations,
@@ -18,5 +18,5 @@ export default combineReducers({
   availableTimes,
   availableDates,
   addBooking,
-  getConfig,
+  allConfig,
 });

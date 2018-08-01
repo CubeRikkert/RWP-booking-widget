@@ -115,6 +115,7 @@ class ServiceForm extends React.Component {
   };
 
   render() {
+    console.log(this.props.config.field_order);
     const {
       classes,
       services,
@@ -208,7 +209,7 @@ const mapStateToProps = function(state) {
     employees: state.allEmployees,
     availableDates: state.availableDates,
     availableTimes: state.availableTimes,
-    config: state.getConfig,
+    config: state.allConfig,
   };
 };
 

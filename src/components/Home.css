@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+.body {
+    width: 70%;
+}
+.titleContainer {
+    width: 90%;
+    height: auto;
+    text-align: center;
+    position: relative;
+    font-family: Open Sans;
+    padding: 5%
+}
+.picContainer {
+    width: 90%;
+}
+.allBody {
+    background-color: #DFB783;
+    width: 100%;
+}
+ .paragraph {
+    width: 90%;
+    height: auto;
+    text-align: center;
+    position: relative;
+    font-family: Open Sans;
+    padding: 5%;
+    font-size: 100%
+
+ }
