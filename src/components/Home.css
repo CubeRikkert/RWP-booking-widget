@@ -68,15 +68,15 @@
   }
   .widgetButton {
     position: fixed;
-    top: 760px;
+    top: 775px;
     right: 1px;
-    width: 150px;
-    height: 200px;
-
+    /* width: 150px;
+    height: 200px; */
+/* 
     -webkit-transition: all 2s ease-in-out;
     transition: all 2s ease-in-out;
     z-index: 1;
-    display:inline;
+    display:inline; */
   }
 
   .containerMultiplePic {
