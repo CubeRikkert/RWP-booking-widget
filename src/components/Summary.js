@@ -43,7 +43,13 @@ class Summary extends React.Component {
   checkLocationSelection = () => {
     if (!this.props.selections.location || !this.props.selections.location.id)
       return 'select a location';
-    else return <p>Location: {this.props.selections.location.name}</p>;
+    else
+      return (
+        <p>
+          Location: {this.props.selections.location.name} <br /> Address:{' '}
+          {this.props.selections.location.address}
+        </p>
+      );
   };
 
   checkEmployeeSelection = () => {
