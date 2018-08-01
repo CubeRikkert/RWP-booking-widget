@@ -1,6 +1,11 @@
-.outer-paper {
+.classes.card {
     margin-top: 20px;
-    margin: auto;
-    padding: 20px;
+    margin: 20px;
+    padding: 5px;
     width: 60%;
+    padding-top: 5px;
   }
+
+  p {
+    font-weight: bold;
+}

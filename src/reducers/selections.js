@@ -10,7 +10,7 @@ import {
 
 const initialState = {
   location: '',
-  service: '',
+  service: [],
   employee: '',
   date: '',
   time: '',

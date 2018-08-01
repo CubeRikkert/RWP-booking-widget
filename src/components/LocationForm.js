@@ -35,9 +35,12 @@ class LocationForm extends React.Component {
   filterLocations = () => {
     if (!this.props.selections.service && !this.props.selections.employee)
       return this.props.locations;
-    if (this.props.selections.service && !this.props.selections.employee) {
+    if (
+      this.props.selections.service.length > 0 &&
+      !this.props.selections.employee
+    ) {
       const employeesforService = this.props.employees.filter(emp =>
-        emp.service_ids.includes(this.props.selections.service.id),
+        emp.service_ids.includes(this.props.selections.service[0].id),
       );
       const locationsforService = employeesforService.map(
         emp => emp.location_id,
@@ -58,19 +61,37 @@ class LocationForm extends React.Component {
   };
 
   render() {
-    const { classes, locations, location } = this.props;
+    const {
+      classes,
+      locations,
+      location,
+      availableDates,
+      selections,
+    } = this.props;
     if (!locations) return null;
     const locationOptions = this.filterLocations().map(loc => ({
       value: loc.name,
       label: loc.name,
     }));
-
+    if (availableDates && selections.employee && selections.location)
+      return null;
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
+          <p
+            style={{
+              marginTop: 2,
+              marginBottom: 2,
+              fontSize: 14,
+              textAlign: 'center',
+              padding: 5,
+            }}
+          >
+            Location
+          </p>
           <Fragment>
             <Select
-              placeholder="Pick a location..."
+              placeholder="Select a location / branch"
               isDisabled={false}
               isLoading={false}
               // isClearable={true}
@@ -97,6 +118,7 @@ const mapStateToProps = function(state) {
     selections: state.selections,
     location: state.selections.location,
     employees: state.allEmployees,
+    availableDates: state.availableDates,
   };
 };
 

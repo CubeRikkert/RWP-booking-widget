@@ -21,7 +21,11 @@ class ResetForm extends PureComponent {
     const { classes } = this.props;
     return (
       <div>
-        <IconButton className={classes.button} aria-label="Delete">
+        <IconButton
+          className={classes.button}
+          aria-label="Delete"
+          style={{ marginTop: -70, marginLeft: 320 }}
+        >
           <DeleteIcon onClick={() => this.props.resetForm()} />
         </IconButton>
       </div>

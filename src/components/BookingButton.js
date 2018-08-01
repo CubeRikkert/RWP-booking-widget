@@ -28,10 +28,13 @@ class BookingButton extends PureComponent {
       email,
       notes,
     } = this.props.customer;
+    const serviceIds = service.map(service => {
+      return service.id;
+    });
     const booking = {
       location_id: location.id,
       resource_id: employee.id,
-      service_ids: [service.id],
+      service_ids: serviceIds,
       appointment_at: `${date} ${time}`,
       first_name: firstName,
       last_name: lastName,
@@ -42,19 +45,36 @@ class BookingButton extends PureComponent {
       email,
       notes,
     };
+    //console.log(booking.service_ids,'booking.service_ids')
     this.props.addBooking(booking);
   };
   render() {
-    const { classes } = this.props;
+    const { classes, selections, customer } = this.props;
+    if (
+      !selections.location ||
+      !selections.service ||
+      !selections.employee ||
+      !selections.date ||
+      !selections.time
+    )
+      return null;
     const handle = () => this.handleClick();
     return (
       <Button
+        disabled={
+          !customer.firstName ||
+          !customer.lastName ||
+          !customer.email ||
+          !customer.phone
+            ? true
+            : false
+        }
         variant="contained"
         color="primary"
         className={classes.button}
         onClick={handle}
       >
-        BOOK APPOINTMENT
+        BOOK NOW
       </Button>
     );
   }
