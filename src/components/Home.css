@@ -11,8 +11,8 @@
     padding: 5%
 }
 .picContainer {
-    width: 1300px;
-    height: 700px;
+    width: 90%;
+    height: 20%;
     border-radius: 20%
 }
 .allBody {
@@ -91,4 +91,5 @@
   c {
       font-size: 30px;
       color: azure
+      
   }
