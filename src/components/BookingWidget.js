@@ -45,12 +45,6 @@ class BookingWidget extends PureComponent {
     const { field_order } = this.props.config;
     console.log(field);
     if (field === 'service') return;
-
-    // {/* <Grid container wrap="nowrap">
-    //                   <Grid item>
-    //                     <ServiceForm />
-    //                   </Grid>
-    //                 </Grid> */}
   };
 
   render() {
@@ -84,31 +78,32 @@ class BookingWidget extends PureComponent {
           >
             <Grid container justify="center" style={{ minHeight: 700 }}>
               <div>
-                {/* {/* {this.props.config.field_order.map(field => {if (field === "service")
-                return  <Grid item>fdf</Grid>
-                })} */}
-                {/* {this.props.config.field_order[1] === 'service' && (
-                  <Grid container wrap="nowrap">
-                    <Grid item>
-                      <p>sdfsdf</p>
-                    </Grid>
-                  </Grid>
-                )} */}
-                <Grid container wrap="nowrap">
-                  <Grid item>
-                    <ServiceForm />
-                  </Grid>
-                </Grid>
-                <Grid container wrap="nowrap">
-                  <Grid item>
-                    <LocationForm />
-                  </Grid>
-                </Grid>
-                <Grid container wrap="nowrap">
-                  <Grid item>
-                    <EmployeeForm />
-                  </Grid>
-                </Grid>
+                {this.props.config.field_order.map(field => {
+                  if (field === 'service')
+                    return (
+                      <Grid container wrap="nowrap">
+                        <Grid item>
+                          <ServiceForm />
+                        </Grid>
+                      </Grid>
+                    );
+                  if (field === 'location')
+                    return (
+                      <Grid container wrap="nowrap">
+                        <Grid item>
+                          <LocationForm />
+                        </Grid>
+                      </Grid>
+                    );
+                  if (field === 'resource')
+                    return (
+                      <Grid container wrap="nowrap">
+                        <Grid item>
+                          <EmployeeForm />
+                        </Grid>
+                      </Grid>
+                    );
+                })}
 
                 <Grid container wrap="nowrap">
                   <Grid item>
