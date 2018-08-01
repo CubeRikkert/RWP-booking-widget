@@ -8,6 +8,7 @@ import availableTimes from './availableTimes';
 import availableDates from './availableDates';
 import addBooking from './booking';
 import getConfig from './conf';
+import navigation from './navigation';
 
 export default combineReducers({
   allLocations,
@@ -19,4 +20,5 @@ export default combineReducers({
   availableDates,
   addBooking,
   getConfig,
+  navigation,
 });

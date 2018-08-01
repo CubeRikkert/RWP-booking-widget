@@ -36,7 +36,13 @@ class TimeForm extends React.Component {
   };
 
   render() {
-    const { classes, selections, availableTimes, time } = this.props;
+    const {
+      classes,
+      selections,
+      availableTimes,
+      time,
+      navigation,
+    } = this.props;
     if (
       !selections.location ||
       !selections.service ||
@@ -60,11 +66,10 @@ class TimeForm extends React.Component {
     //next line of code is necessary for not showing the time in cases when the user selects an employee who has available time,
     //but then changes the selection to an employee who has no available time.
     if (
-      (availableTimes &&
-        availableTimes.filter(
-          time => time.resource_id === selections.employee.id,
-        ) < 1) ||
-      selections.time
+      availableTimes &&
+      availableTimes.filter(
+        time => time.resource_id === selections.employee.id,
+      ) < 1
     )
       return null;
     if (!availableTimes) return null;
@@ -73,6 +78,7 @@ class TimeForm extends React.Component {
       label: time.time,
     }));
     // console.log(this.filterTimes().map(time=>time.resource_id).includes(this.props.selections.employee.id))
+    if (navigation !== 2) return null;
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
@@ -114,6 +120,7 @@ const mapStateToProps = function(state) {
     availableTimes: state.availableTimes,
     availableDates: state.availableDates,
     time: state.selections.time,
+    navigation: state.navigation,
   };
 };
 
