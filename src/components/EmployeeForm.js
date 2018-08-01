@@ -31,7 +31,6 @@ class EmployeeForm extends React.Component {
       const empOptions = this.filterEmployees().slice(1);
       const randomEmp =
         empOptions[Math.floor(empOptions.length * Math.random())];
-      console.log(randomEmp);
       this.props.selectEmployees(randomEmp);
     }
     if (event.value !== 'No Preference')
@@ -79,7 +78,6 @@ class EmployeeForm extends React.Component {
       label: emp.name,
     }));
     // if (availableDates && selections.location) return null;
-    console.log(employeeOptions);
     if (
       (employeeOptions.length === 1 && selections.employee === '') ||
       (employeeOptions.length === 1 && !selections.employee)

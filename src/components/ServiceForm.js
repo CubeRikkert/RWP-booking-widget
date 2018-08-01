@@ -40,7 +40,6 @@ class ServiceForm extends React.Component {
   // };
 
   handleChange = event => {
-    console.log(event);
     if (event) {
       // console.log(this.props.selections.employee.autoSelect, 'autoselect employee')
       if (
