@@ -79,9 +79,11 @@ class LocationForm extends React.Component {
       (locationOptions.length === 1 && selections.location === '') ||
       (locationOptions.length === 1 && !selections.location)
     ) {
-      this.props.selectLocation(
-        this.props.locations.find(loc => loc.name === locationOptions[0].value),
+      const loc = this.props.locations.find(
+        loc => loc.name === locationOptions[0].value,
       );
+      loc.autoSelect = true;
+      this.props.selectLocation(loc);
       return null;
     }
     return (
