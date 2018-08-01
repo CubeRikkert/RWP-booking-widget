@@ -6,6 +6,8 @@ import {
   SELECT_TIME,
   RESET_FORM,
   RESET_TIME,
+  RESET_EMPLOYEE,
+  RESET_LOCATION,
 } from '../actions/selections';
 
 const initialState = {
@@ -32,6 +34,10 @@ export default function(state = initialState, action) {
       return { ...state, time: '' };
     case RESET_FORM:
       return initialState;
+    case RESET_EMPLOYEE:
+      return { ...state, employee: '' };
+    case RESET_LOCATION:
+      return { ...state, location: '' };
 
     default:
       return state;
