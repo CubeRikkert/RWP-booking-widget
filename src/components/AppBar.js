@@ -34,7 +34,7 @@ class SimpleAppBar extends PureComponent {
     const { classes, navigation, selections } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="white" elevation={1}>
+        <AppBar position="static" color="inherit" elevation={1}>
           <Toolbar style={{ minHeight: 50 }}>
             {navigation !== 1 && (
               <button onClick={this.clickBack} style={{ border: 'none' }}>

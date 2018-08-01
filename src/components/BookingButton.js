@@ -49,7 +49,7 @@ class BookingButton extends PureComponent {
     this.props.addBooking(booking);
   };
   render() {
-    const { classes, selections, customer, navigation } = this.props;
+    const { classes, customer, navigation } = this.props;
     // if (
     //   !selections.location ||
     //   !selections.service ||

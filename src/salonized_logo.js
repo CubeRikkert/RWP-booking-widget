@@ -15,13 +15,7 @@ export default () => (
     <title>salonized</title>
     <desc>Created with Sketch.</desc>
     <defs />
-    <g
-      id="Page-1"
-      stroke="none"
-      stroke-width="1"
-      fill="none"
-      fill-rule="evenodd"
-    >
+    <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g
         id="salonized_features"
         transform="translate(-154.000000, -42.000000)"

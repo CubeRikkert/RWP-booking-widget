@@ -120,7 +120,7 @@ class ServiceForm extends React.Component {
   };
 
   render() {
-    console.log(this.props.config.field_order);
+    // console.log(this.props.config.field_order);
     const {
       classes,
       services,
@@ -128,7 +128,6 @@ class ServiceForm extends React.Component {
       employees,
       navigation,
       availableDates,
-      selections,
     } = this.props;
     if (!services || !employees) return null;
     const serviceOptions = this.filterServices().map(ser => ({

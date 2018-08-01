@@ -29,11 +29,13 @@ class Home extends PureComponent {
           <hr />
           <div className="containerMultiplePic">
             <img
+              alt=""
               className="picContainer2"
               src="https://spa-blumoret.it/wp-content/uploads/2017/01/blu-moret-wellness-spa-centro-benessere-udine-trattamento-fango2.jpg"
               width="300px"
             />
             <img
+              alt=""
               className="picContainer2"
               src="http://www.essentiallyyoursblog.com/wp-content/uploads/2015/04/Massage-Oils.jpg?w=1400"
               width="300px"
@@ -84,31 +86,37 @@ class Home extends PureComponent {
         </div>
         <div>
           <img
+            alt=""
             className="picContainer3"
             src="https://static0.codaisseur.com/uploads/team_member/avatar/20/bram-koot-png-5566cc89b8b585591ead68a63abcae0a.png"
             width="300px"
           />
           <img
+            alt=""
             className="picContainer3"
             src=" https://static1.codaisseur.com/uploads/team_member/avatar/1/codaisseur-portraits-27-jpg-cb64901ab564a35a59906130ff5970bf.png"
             width="300px"
           />
           <img
+            alt=""
             className="picContainer3"
             src=" https://static0.codaisseur.com/uploads/team_member/avatar/27/slack-codaisseur-2018-03-27-rbmm2-png-5aadbccadc4e0eee976c0771be8dda0a.png"
             width="300px"
           />
           <img
+            alt=""
             className="picContainer3"
             src=" https://static2.codaisseur.com/uploads/team_member/avatar/26/milan-van-de-bovenkamp-png-99cb4aff9b433aa2725b16c3a0067a2b.png"
             width="300px"
           />
           <img
+            alt=""
             className="picContainer3"
             src=" https://static4.codaisseur.com/uploads/team_member/avatar/31/lisa-coffee-png-d5680ffcac03c532a00ec6f22fba5450.png"
             width="300px"
           />
           <img
+            alt=""
             className="picContainer4"
             src=" https://static4.codaisseur.com/uploads/team_member/avatar/28/rein-op-t-land-png-8f046bb3066a379ec018a732637a74e1.png"
             width="300px"

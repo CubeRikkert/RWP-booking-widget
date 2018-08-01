@@ -23,7 +23,7 @@ import compose from 'recompose/compose';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { getConfig } from '../actions/conf';
+// import { getConfig } from '../actions/conf';
 import Logo from '../salonized_logo.js';
 import SimpleAppBar from './AppBar';
 
@@ -42,15 +42,15 @@ class BookingWidget extends PureComponent {
   };
 
   showScreenGrid = field => {
-    const { field_order } = this.props.config;
-    console.log(field);
+    // const { field_order } = this.props.config;
+    // console.log(field);
     if (field === 'service') return;
   };
 
   render() {
-    const { fullScreen, selections } = this.props;
+    const { fullScreen } = this.props;
     if (!this.props.config) return null;
-    console.log(this.props.config.field_order[1]);
+    // console.log(this.props.config.field_order[1]);
 
     return (
       <div>
@@ -78,7 +78,7 @@ class BookingWidget extends PureComponent {
                 {this.props.config.field_order.map(field => {
                   if (field === 'service')
                     return (
-                      <Grid container wrap="nowrap">
+                      <Grid key={field} container wrap="nowrap">
                         <Grid item>
                           <ServiceForm />
                         </Grid>
@@ -86,7 +86,7 @@ class BookingWidget extends PureComponent {
                     );
                   if (field === 'location')
                     return (
-                      <Grid container wrap="nowrap">
+                      <Grid key={field} container wrap="nowrap">
                         <Grid item>
                           <LocationForm />
                         </Grid>
@@ -94,7 +94,7 @@ class BookingWidget extends PureComponent {
                     );
                   if (field === 'resource')
                     return (
-                      <Grid container wrap="nowrap">
+                      <Grid key={field} container wrap="nowrap">
                         <Grid item>
                           <EmployeeForm />
                         </Grid>
@@ -161,7 +161,7 @@ class BookingWidget extends PureComponent {
             >
               <DeleteIcon
                 onClick={this.handleClose}
-                color="black"
+                color="inherit"
                 style={{ position: 'absolute' }}
               />
             </IconButton>
