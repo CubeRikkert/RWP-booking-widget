@@ -3,7 +3,11 @@ import compose from 'recompose/compose';
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { selectServices } from '../actions/selections';
+import {
+  selectServices,
+  resetEmployee,
+  resetLocation,
+} from '../actions/selections';
 import { getServices, getDates } from '../actions/get';
 import Select from 'react-select';
 import './ServiceForm.css';
@@ -36,6 +40,20 @@ class ServiceForm extends React.Component {
   // };
 
   handleChange = event => {
+    console.log(event);
+    if (event) {
+      // console.log(this.props.selections.employee.autoSelect, 'autoselect employee')
+      if (
+        this.props.selections.employee &&
+        this.props.selections.employee.autoSelect
+      )
+        this.props.resetEmployee();
+      if (
+        this.props.selections.location &&
+        this.props.selections.location.autoSelect
+      )
+        this.props.resetLocation();
+    }
     if (this.props.config.allow_multiple_services === true) {
       const serviceNames = event.map(ev => ev.value);
       this.props.selectServices(
@@ -203,6 +221,6 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    { selectServices, getServices, getDates },
+    { selectServices, getServices, getDates, resetEmployee, resetLocation },
   ),
 )(ServiceForm);

@@ -84,9 +84,11 @@ class EmployeeForm extends React.Component {
       (employeeOptions.length === 1 && selections.employee === '') ||
       (employeeOptions.length === 1 && !selections.employee)
     ) {
-      this.props.selectEmployees(
-        this.props.employees.find(emp => emp.name === employeeOptions[0].value),
+      const emp = this.props.employees.find(
+        emp => emp.name === employeeOptions[0].value,
       );
+      emp.autoSelect = true;
+      this.props.selectEmployees(emp);
     }
     return (
       <div className={classes.root}>
