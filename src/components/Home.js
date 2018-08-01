@@ -14,7 +14,7 @@ class Home extends PureComponent {
     return (
       <div className="allBody">
         <div className="titleContainer">
-          <h1> Welcome to CodeSaloon</h1>
+          <h1> Welcome to Codaissalon</h1>
 
           <img
             className="picContainer"
@@ -104,6 +104,11 @@ class Home extends PureComponent {
           <img
             className="picContainer3"
             src=" https://static4.codaisseur.com/uploads/team_member/avatar/31/lisa-coffee-png-d5680ffcac03c532a00ec6f22fba5450.png"
+            width="300px"
+          />
+          <img
+            className="picContainer4"
+            src=" https://static4.codaisseur.com/uploads/team_member/avatar/28/rein-op-t-land-png-8f046bb3066a379ec018a732637a74e1.png"
             width="300px"
           />
         </div>

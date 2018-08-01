@@ -55,7 +55,7 @@ class BookingWidget extends PureComponent {
     return (
       <div>
         <Button
-          style={{ marginTop: 300 }}
+          // style={{ marginTop: 300 }}
           variant="contained"
           color="primary"
           className={fullScreen.button}
