@@ -7,6 +7,8 @@ import {
   selectServices,
   resetEmployee,
   resetLocation,
+  resetDates,
+  resetTimes,
 } from '../actions/selections';
 import { getServices, getDates } from '../actions/get';
 import Select from 'react-select';
@@ -41,6 +43,8 @@ class ServiceForm extends React.Component {
 
   handleChange = event => {
     if (event) {
+      this.props.resetDates();
+      this.props.resetTimes();
       // console.log(this.props.selections.employee.autoSelect, 'autoselect employee')
       if (
         this.props.selections.employee &&
@@ -105,10 +109,11 @@ class ServiceForm extends React.Component {
       let serviceIds;
       if (this.props.selections.service.length > 0) {
         this.props.selections.service.forEach((service, ix) => {
-          if (ix === 0) serviceIds = service.id;
-          else serviceIds = serviceIds + ',' + service.id;
+          if (ix === 0) serviceIds = 'service_ids[]=' + service.id;
+          else serviceIds = serviceIds + '&' + 'service_ids[]=' + service.id;
         });
       }
+      // console.log(serviceIds,'serviceIds')
       const employeeId = this.props.selections.employee.id;
       this.props.getDates(serviceIds, date, employeeId);
     }
@@ -222,6 +227,14 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    { selectServices, getServices, getDates, resetEmployee, resetLocation },
+    {
+      selectServices,
+      getServices,
+      getDates,
+      resetEmployee,
+      resetLocation,
+      resetDates,
+      resetTimes,
+    },
   ),
 )(ServiceForm);

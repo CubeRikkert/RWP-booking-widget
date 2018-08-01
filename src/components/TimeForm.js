@@ -53,11 +53,11 @@ class TimeForm extends React.Component {
     let serviceIds = null;
     if (selections.service.length > 0) {
       selections.service.forEach((service, ix) => {
-        if (ix === 0) serviceIds = service.id;
-        else serviceIds = serviceIds + ',' + service.id;
+        if (ix === 0) serviceIds = serviceIds = 'service_ids[]=' + service.id;
+        else serviceIds = serviceIds + '&' + 'service_ids[]=' + service.id;
       });
     }
-    //console.log(serviceIds,'serviceIds')
+    // console.log(serviceIds,'serviceIds TimeForm')
     if (availableTimes === null) {
       this.props.getTimes(serviceIds, selections.date, selections.employee.id);
     } else if (availableTimes[0].date !== selections.date) {
