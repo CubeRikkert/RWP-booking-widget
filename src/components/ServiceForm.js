@@ -121,7 +121,7 @@ class ServiceForm extends React.Component {
     }));
     if (this.props.selections.service.length > 0 && !availableDates)
       this.nowGetDates();
-    if (availableDates && selections.location) return null;
+    // if (availableDates && selections.location) return null;
 
     return (
       <div className={classes.root}>

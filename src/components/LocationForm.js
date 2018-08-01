@@ -73,8 +73,17 @@ class LocationForm extends React.Component {
       value: loc.name,
       label: loc.name,
     }));
-    if (availableDates && selections.employee && selections.location)
+    // if (availableDates && selections.employee && selections.location)
+    //   return null;
+    if (
+      (locationOptions.length === 1 && selections.location === '') ||
+      (locationOptions.length === 1 && !selections.location)
+    ) {
+      this.props.selectLocation(
+        this.props.locations.find(loc => loc.name === locationOptions[0].value),
+      );
       return null;
+    }
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>

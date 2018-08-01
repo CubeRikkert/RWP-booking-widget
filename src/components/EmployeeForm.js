@@ -69,7 +69,15 @@ class EmployeeForm extends React.Component {
       value: emp.name,
       label: emp.name,
     }));
-    if (availableDates && selections.location) return null;
+    // if (availableDates && selections.location) return null;
+    if (
+      (employeeOptions.length === 1 && selections.employee === '') ||
+      (employeeOptions.length === 1 && !selections.employee)
+    ) {
+      this.props.selectEmployees(
+        this.props.employees.find(emp => emp.name === employeeOptions[0].value),
+      );
+    }
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
