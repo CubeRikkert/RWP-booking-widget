@@ -11,7 +11,6 @@ export const GET_CONF = 'GET_CONF';
 
 export const getServices = () => dispatch => {
   request.get(`${baseUrl}/services.json`).then(response => {
-    // console.log(response.body.services)
     dispatch({
       type: GET_SERVICES,
       payload: response.body.services,
@@ -24,7 +23,6 @@ export const getLocations = () => dispatch => {
     .get(`${baseUrl}/bookings/locations.json`)
     // .get (`https://codaisseur-booking-widget.salonized.com/bookings/locations.json`)
     .then(response => {
-      // console.log(response.body)
       dispatch({
         type: GET_LOCATIONS,
         payload: response.body.locations,
@@ -34,7 +32,6 @@ export const getLocations = () => dispatch => {
 
 export const getEmployees = () => dispatch => {
   request.get(`${baseUrl}/bookings/resources.json`).then(response => {
-    // console.log(response.body)
     dispatch({
       type: GET_EMPLOYEES,
       payload: response.body['resources/employees'],
@@ -48,7 +45,6 @@ export const getTimes = (serviceIds, date, resourceId) => dispatch => {
       `${baseUrl}/bookings/timeslots?${serviceIds}&date=${date}&resource_id=${resourceId}`,
     )
     .then(response => {
-      // console.log(response.body)
       dispatch({
         type: GET_TIMES,
         payload: response.body,
@@ -62,7 +58,6 @@ export const getDates = (serviceIds, date, resourceId) => dispatch => {
       `${baseUrl}/bookings/available_days?${serviceIds}&date=${date}&resource_id=${resourceId}`,
     )
     .then(response => {
-      // console.log(response.body)
       dispatch({
         type: GET_DATES,
         payload: response.body.days,
@@ -82,7 +77,6 @@ function postForm(path, params, method) {
       if (i === 'service_ids') {
         for (let p = 0; p < params[i].length; p++) {
           var input = document.createElement('input');
-          // console.log(params[i][p],'params[i][p]')
           input.type = 'hidden';
           input.name = 'booking[' + i + '][]';
           input.value = params[i][p];

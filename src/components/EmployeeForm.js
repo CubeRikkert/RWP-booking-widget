@@ -72,7 +72,6 @@ class EmployeeForm extends React.Component {
       value: emp.name,
       label: emp.name,
     }));
-    // if (availableDates && selections.location) return null;
     if (navigation !== 1) return null;
     if (
       (employeeOptions.length === 1 && selections.employee === '') ||
@@ -92,7 +91,6 @@ class EmployeeForm extends React.Component {
               marginTop: 2,
               marginBottom: 2,
               fontSize: 14,
-              // textAlign: 'center',
               padding: 5,
             }}
           >
@@ -103,9 +101,6 @@ class EmployeeForm extends React.Component {
               placeholder="Pick an employee..."
               isDisabled={false}
               isLoading={false}
-              // backspaceRemoves={false}
-              // deleteRemoves={false}
-              // isClearable={true}
               isSearchable={true}
               name="employee"
               options={employeeOptions}
