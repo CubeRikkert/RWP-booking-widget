@@ -4,7 +4,7 @@ import compose from 'recompose/compose';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { selectDate } from '../actions/selections';
+import { selectDate, resetTime } from '../actions/selections';
 import { getTimes } from '../actions/get';
 import { getDates } from '../actions/get';
 import './DateForm.css';
@@ -44,6 +44,7 @@ class DateForm extends React.Component {
 
   onChange = date => {
     this.props.selectDate(this.formatDate(date));
+    this.props.resetTime();
   };
 
   // Check whether a given date is a valid date
@@ -134,9 +135,9 @@ class DateForm extends React.Component {
     if (!dates) return null;
     if (dates.length === 0)
       return (
-        <div>
-          <p>There's no available date for this employee.</p>
-          <p>Please try another employee.</p>
+        <div className="noAvailText" style={{ marginLeft: 10 }}>
+          <p>There's no available date for this employee</p>
+          <p>Please try another employee</p>
         </div>
       );
 
@@ -231,6 +232,6 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    { selectDate, getTimes, getDates },
+    { selectDate, getTimes, getDates, resetTime },
   ),
 )(DateForm);

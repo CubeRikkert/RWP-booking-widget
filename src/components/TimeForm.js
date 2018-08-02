@@ -48,7 +48,7 @@ class TimeForm extends React.Component {
         else serviceIds = serviceIds + '&' + 'service_ids[]=' + service.id;
       });
     }
-    if (availableTimes === null) {
+    if (availableTimes.length === 0) {
       this.props.getTimes(
         serviceIds,
         selections.date,
