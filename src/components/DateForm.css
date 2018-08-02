@@ -15,3 +15,9 @@
     background-color: white;
 }
 
+.noAvailText {
+    text-align: center;
+    color : blue;
+    margin-left: 30px !important;
+}
+

@@ -28,6 +28,7 @@ class EmployeeForm extends React.Component {
 
   handleChange = event => {
     if (event.value === 'No Preference') {
+      console.log(this.props.config.resource_selection);
       const empOptions = this.filterEmployees().slice(1);
       const randomEmp =
         empOptions[Math.floor(empOptions.length * Math.random())];
@@ -66,6 +67,8 @@ class EmployeeForm extends React.Component {
   };
 
   render() {
+    // if (this.props.config) {
+    // console.log(this.props.config.resource_selection)}
     const { classes, employees, employee, navigation, selections } = this.props;
     if (!employees) return null;
     const employeeOptions = this.filterEmployees().map(emp => ({
@@ -83,6 +86,7 @@ class EmployeeForm extends React.Component {
       emp.autoSelect = true;
       this.props.selectEmployees(emp);
     }
+
     return (
       <div className={classes.root}>
         <div className={classes.formControl}>
@@ -125,6 +129,7 @@ const mapStateToProps = function(state) {
     employee: state.selections.employee,
     availableDates: state.availableDates,
     navigation: state.navigation,
+    config: state.allConfig,
   };
 };
 
