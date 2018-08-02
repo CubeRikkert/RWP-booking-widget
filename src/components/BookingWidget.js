@@ -22,7 +22,6 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-
 // import { getConfig } from '../actions/conf';
 import Logo from '../salonized_logo.js';
 import SimpleAppBar from './AppBar';
@@ -55,7 +54,6 @@ class BookingWidget extends PureComponent {
     return (
       <div>
         <Button
-          // style={{ marginTop: 300 }}
           variant="contained"
           color="primary"
           className={fullScreen.button}
@@ -122,16 +120,6 @@ class BookingWidget extends PureComponent {
                     <CustomerForm />
                   </Grid>
                 </Grid>
-                {/* <Grid container spacing={16}>
-                  <Grid item>
-                    
-                  </Grid>
-                </Grid> */}
-                {/* <Grid container spacing={16}>
-                  <Grid item>
-                    <ResetForm />
-                    </Grid>
-                  </Grid> */}
               </div>
             </Grid>
           </DialogContent>
@@ -154,11 +142,7 @@ class BookingWidget extends PureComponent {
               <span style={{ opacity: 0.5 }}>Powered by</span>
               <Logo />
             </p>
-            <IconButton
-              className={fullScreen.button}
-              aria-label="Delete"
-              // style={{ marginTop: -70, marginLeft: 320 }}
-            >
+            <IconButton className={fullScreen.button} aria-label="Delete">
               <DeleteIcon
                 onClick={this.handleClose}
                 color="inherit"

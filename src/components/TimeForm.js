@@ -57,7 +57,6 @@ class TimeForm extends React.Component {
         else serviceIds = serviceIds + '&' + 'service_ids[]=' + service.id;
       });
     }
-    // console.log(serviceIds,'serviceIds TimeForm')
     if (availableTimes === null) {
       this.props.getTimes(serviceIds, selections.date, selections.employee.id);
     } else if (availableTimes[0].date !== selections.date) {
@@ -77,7 +76,6 @@ class TimeForm extends React.Component {
       value: time.time,
       label: time.time,
     }));
-    // console.log(this.filterTimes().map(time=>time.resource_id).includes(this.props.selections.employee.id))
     if (navigation !== 2) return null;
     return (
       <div className={classes.root}>
@@ -87,7 +85,6 @@ class TimeForm extends React.Component {
               marginTop: 2,
               marginBottom: 2,
               fontSize: 14,
-              textAlign: 'center',
               padding: 5,
             }}
           >
@@ -98,9 +95,6 @@ class TimeForm extends React.Component {
               placeholder="Select a time from available time slots"
               isDisabled={false}
               isLoading={false}
-              // backspaceRemoves={false}
-              // deleteRemoves={false}
-              // isClearable={true}
               isSearchable={true}
               name="time"
               options={timeOptions}

@@ -1,5 +1,4 @@
 import Calendar from 'react-calendar';
-// import Calendar from 'react-calendar/dist/entry.nostyle';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import React from 'react';
@@ -14,10 +13,15 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    margin: theme.spacing.unit,
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 350,
+    maxWidth: 350,
   },
   textField: {
     margin: theme.spacing.unit,
-    minWidth: 350,
   },
 });
 
@@ -25,10 +29,6 @@ class DateForm extends React.Component {
   state = {
     date: new Date(),
   };
-
-  // componentWillMount() {
-  //   this.props.getDates (518955, new Date().toJSON().slice(0,10).replace(/-/g,'-'))
-  // }
 
   formatDate = date => {
     var d = new Date(date),
@@ -43,26 +43,8 @@ class DateForm extends React.Component {
   };
 
   onChange = date => {
-    // this.setState({date});
-    // console.log(this.state.date)
-    // console.log(date,'date')
-    // const yyyymmdd = date.toJSON().slice(0,10).replace(/-/g,'-')
-    // console.log(yyyymmdd,'yyyymmdd')
-    //this.props.selectDate(date.toJSON().slice(0,10).replace(/-/g,'-'))
     this.props.selectDate(this.formatDate(date));
   };
-
-  // nowGetDates = () => {
-  //   const date = new Date()
-  //     .toJSON()
-  //     .slice(0, 10)
-  //     .replace(/-/g, '-');
-  //   let serviceId;
-  //   if (this.props.selections.service.length > 0) {
-  //     serviceId = this.props.selections.service[0].id;
-  //   }
-  //   this.props.getDates(serviceId, date);
-  // };
 
   // Check whether a given date is a valid date
   // input in ISO format: yyyy-MM-dd
@@ -145,11 +127,10 @@ class DateForm extends React.Component {
   };
 
   render() {
-    const { selections, dates, navigation } = this.props;
+    const { selections, dates, navigation, classes } = this.props;
 
     if (!selections.location || !selections.service || !selections.employee)
       return null;
-    // if (this.props.dates===null) this.nowGetDates()
     if (!dates) return null;
     if (dates.length === 0)
       return (
@@ -170,63 +151,64 @@ class DateForm extends React.Component {
     );
     if (navigation !== 2) return null;
     return (
-      <div className="calendarFrame">
-        <p
-          style={{
-            marginTop: 2,
-            marginBottom: 2,
-            fontSize: 14,
-            textAlign: 'center',
-            padding: 5,
-          }}
-        >
-          Date
-        </p>
-        <Calendar
-          onChange={this.onChange}
-          value={this.state.date}
-          // Set the calendar dates that are not clickable
-          // based on the available days request result
-          tileDisabled={({ date, view }) =>
-            view === 'month' && // Block day tiles only
-            disabledDates.some(
-              disabledDate =>
-                date.getFullYear() === disabledDate.getFullYear() &&
-                date.getMonth() === disabledDate.getMonth() &&
-                date.getDate() === disabledDate.getDate(),
-            )
-          }
-          // Set the class name for the disable/valid dates
-          tileClassName={({ date, view }) =>
-            view === 'month' &&
-            this.checkDisabledDates(
-              date,
-              firstValidDate,
-              lastValidDate,
-              disabledDates,
-            ) === true
-              ? 'disabledDates'
-              : 'validDates'
-          }
-          // Set the minimum calendar date that is clickable
-          // based on the first day of the available days request result
-          minDate={
-            new Date(
-              dates[0].substr(0, 4),
-              dates[0].substr(5, 2) - 1,
-              dates[0].substr(8, 2),
-            )
-          }
-          // Set the maximum calendar date that is clickable
-          // based on the last day of the available days request result
-          maxDate={
-            new Date(
-              dates[dates.length - 1].substr(0, 4),
-              dates[dates.length - 1].substr(5, 2) - 1,
-              dates[dates.length - 1].substr(8, 2),
-            )
-          }
-        />
+      <div className={classes.root}>
+        <div className={classes.formControl}>
+          <p
+            style={{
+              marginTop: 2,
+              marginBottom: 2,
+              fontSize: 14,
+              padding: 5,
+            }}
+          >
+            Date
+          </p>
+          <Calendar
+            onChange={this.onChange}
+            value={this.state.date}
+            // Set the calendar dates that are not clickable
+            // based on the available days request result
+            tileDisabled={({ date, view }) =>
+              view === 'month' && // Block day tiles only
+              disabledDates.some(
+                disabledDate =>
+                  date.getFullYear() === disabledDate.getFullYear() &&
+                  date.getMonth() === disabledDate.getMonth() &&
+                  date.getDate() === disabledDate.getDate(),
+              )
+            }
+            // Set the class name for the disable/valid dates
+            tileClassName={({ date, view }) =>
+              view === 'month' &&
+              this.checkDisabledDates(
+                date,
+                firstValidDate,
+                lastValidDate,
+                disabledDates,
+              ) === true
+                ? 'disabledDates'
+                : 'validDates'
+            }
+            // Set the minimum calendar date that is clickable
+            // based on the first day of the available days request result
+            minDate={
+              new Date(
+                dates[0].substr(0, 4),
+                dates[0].substr(5, 2) - 1,
+                dates[0].substr(8, 2),
+              )
+            }
+            // Set the maximum calendar date that is clickable
+            // based on the last day of the available days request result
+            maxDate={
+              new Date(
+                dates[dates.length - 1].substr(0, 4),
+                dates[dates.length - 1].substr(5, 2) - 1,
+                dates[dates.length - 1].substr(8, 2),
+              )
+            }
+          />
+        </div>
       </div>
     );
   }

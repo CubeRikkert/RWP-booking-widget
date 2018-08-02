@@ -3,7 +3,7 @@ import compose from 'recompose/compose';
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { selectEmployees, resetTime } from '../actions/selections';
+import { selectEmployees, resetTime, resetDates } from '../actions/selections';
 import { getEmployees } from '../actions/get';
 import Select from 'react-select';
 
@@ -38,6 +38,7 @@ class EmployeeForm extends React.Component {
         this.props.employees.find(emp => emp.name === event.value),
       );
     this.props.resetTime();
+    this.props.resetDates();
   };
 
   filterEmployees = () => {
@@ -50,7 +51,7 @@ class EmployeeForm extends React.Component {
       );
     }
     if (this.props.selections.service.length !== 0) {
-      employees = this.props.employees.filter(emp => {
+      employees = employees.filter(emp => {
         let employeeHasAllServices = true;
         for (let i = 0; i < this.props.selections.service.length; i++) {
           if (!emp.service_ids.includes(this.props.selections.service[i].id))
@@ -71,7 +72,6 @@ class EmployeeForm extends React.Component {
       value: emp.name,
       label: emp.name,
     }));
-    // if (availableDates && selections.location) return null;
     if (navigation !== 1) return null;
     if (
       (employeeOptions.length === 1 && selections.employee === '') ||
@@ -91,7 +91,6 @@ class EmployeeForm extends React.Component {
               marginTop: 2,
               marginBottom: 2,
               fontSize: 14,
-              textAlign: 'center',
               padding: 5,
             }}
           >
@@ -102,9 +101,6 @@ class EmployeeForm extends React.Component {
               placeholder="Pick an employee..."
               isDisabled={false}
               isLoading={false}
-              // backspaceRemoves={false}
-              // deleteRemoves={false}
-              // isClearable={true}
               isSearchable={true}
               name="employee"
               options={employeeOptions}
@@ -140,6 +136,6 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    { selectEmployees, getEmployees, resetTime },
+    { selectEmployees, getEmployees, resetTime, resetDates },
   ),
 )(EmployeeForm);

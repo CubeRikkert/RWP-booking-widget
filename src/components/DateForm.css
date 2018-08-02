@@ -1,7 +1,7 @@
 .calendarFrame {
-    margin-right: 0px;
+    /* margin-right: 0px;
     margin-left: 7px;
-    border-left-width: 1px;
+    border-left-width: 1px; */
 }
 
 .disabledDates {
@@ -14,3 +14,4 @@
     color:blue;
     background-color: white;
 }
+

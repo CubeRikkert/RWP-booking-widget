@@ -34,18 +34,10 @@ class ServiceForm extends React.Component {
     this.props.getServices();
   }
 
-  // handleChange = event => {
-  //   const serviceNames = event.map(ev => ev.value);
-  //   this.props.selectServices(
-  //     this.props.services.filter(ser => serviceNames.includes(ser.name)),
-  //   );
-  // };
-
   handleChange = event => {
     if (event) {
       this.props.resetDates();
       this.props.resetTimes();
-      // console.log(this.props.selections.employee.autoSelect, 'autoselect employee')
       if (
         this.props.selections.employee &&
         this.props.selections.employee.autoSelect
@@ -113,14 +105,12 @@ class ServiceForm extends React.Component {
           else serviceIds = serviceIds + '&' + 'service_ids[]=' + service.id;
         });
       }
-      // console.log(serviceIds,'serviceIds')
       const employeeId = this.props.selections.employee.id;
       this.props.getDates(serviceIds, date, employeeId);
     }
   };
 
   render() {
-    // console.log(this.props.config.field_order);
     const {
       classes,
       services,
@@ -143,7 +133,6 @@ class ServiceForm extends React.Component {
     }));
     if (this.props.selections.service.length > 0 && !availableDates)
       this.nowGetDates();
-    // if (availableDates && selections.location) return null;
     if (navigation !== 1) return null;
     return (
       <div className={classes.root}>
@@ -153,7 +142,6 @@ class ServiceForm extends React.Component {
               marginTop: 2,
               marginBottom: 2,
               fontSize: 14,
-              textAlign: 'center',
               padding: 5,
             }}
           >
@@ -163,7 +151,6 @@ class ServiceForm extends React.Component {
           </p>
           <Fragment>
             <Select
-              // className={classes.css - 10}
               placeholder={`Which service${
                 this.props.config.allow_multiple_services === false ? '' : 's'
               } are you looking for?`}
@@ -174,7 +161,6 @@ class ServiceForm extends React.Component {
                   ? false
                   : true
               }
-              // isClearable={true}
               isSearchable={true}
               name="service"
               className="basic-multi-select"
