@@ -31,7 +31,7 @@ class SimpleAppBar extends PureComponent {
   };
 
   render() {
-    const { classes, navigation, selections } = this.props;
+    const { classes, navigation, selections, availableDates } = this.props;
     return (
       <div className={classes.root}>
         <AppBar position="static" color="inherit" elevation={1}>
@@ -80,6 +80,7 @@ const mapStateToProps = function(state) {
   return {
     navigation: state.navigation,
     selections: state.selections,
+    availableDates: state.availableDates,
   };
 };
 
