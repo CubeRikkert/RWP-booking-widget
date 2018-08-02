@@ -33,7 +33,7 @@ class Summary extends React.Component {
         style={{
           marginTop: 10,
           marginLeft: 10,
-          marginBottom: 10,
+          // marginBottom: 10,
           padding: '0px 0px 0px 0px',
         }}
       >
