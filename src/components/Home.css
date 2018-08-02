@@ -75,9 +75,14 @@
 
   }
   .widgetButton {
+
     position: fixed;
-    top: 775px;
-    right: 1px;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    /* display: none; */
+    /* top: 775px; */
+    /* right: 1px; */
     /* width: 150px;
     height: 200px; */
 /* 
