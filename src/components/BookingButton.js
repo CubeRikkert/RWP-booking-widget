@@ -45,19 +45,10 @@ class BookingButton extends PureComponent {
       email,
       notes,
     };
-    //console.log(booking.service_ids,'booking.service_ids')
     this.props.addBooking(booking);
   };
   render() {
     const { classes, customer, navigation } = this.props;
-    // if (
-    //   !selections.location ||
-    //   !selections.service ||
-    //   !selections.employee ||
-    //   !selections.date ||
-    //   !selections.time
-    // )
-    //   return null;
     if (navigation !== 3) return null;
     const handle = () => this.handleClick();
     return (

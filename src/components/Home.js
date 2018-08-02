@@ -21,6 +21,7 @@ class Home extends PureComponent {
 
           <img
             src="http://www.yourlittleblackbook.me/wp-content/uploads/2015/07/Skins-Institute-%E2%80%93-De-L%E2%80%99Europe-1.jpg"
+            alt=""
             width="100%"
             height="80%"
           />
@@ -40,11 +41,6 @@ class Home extends PureComponent {
               src="http://www.essentiallyyoursblog.com/wp-content/uploads/2015/04/Massage-Oils.jpg?w=1400"
               width="300px"
             />
-            {/* <img
-              className="picContainer2"
-              src="http://www.eclecticbeautysalon.com/wp-content/uploads/2016/05/eclectic-beauty-salon-services-facials.png"
-              width="300px"
-            /> */}
           </div>
           <hr />
         </div>

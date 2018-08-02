@@ -1,5 +1,4 @@
 import Calendar from 'react-calendar';
-// import Calendar from 'react-calendar/dist/entry.nostyle';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import React from 'react';
@@ -31,10 +30,6 @@ class DateForm extends React.Component {
     date: new Date(),
   };
 
-  // componentWillMount() {
-  //   this.props.getDates (518955, new Date().toJSON().slice(0,10).replace(/-/g,'-'))
-  // }
-
   formatDate = date => {
     var d = new Date(date),
       month = '' + (d.getMonth() + 1),
@@ -48,26 +43,8 @@ class DateForm extends React.Component {
   };
 
   onChange = date => {
-    // this.setState({date});
-    // console.log(this.state.date)
-    // console.log(date,'date')
-    // const yyyymmdd = date.toJSON().slice(0,10).replace(/-/g,'-')
-    // console.log(yyyymmdd,'yyyymmdd')
-    //this.props.selectDate(date.toJSON().slice(0,10).replace(/-/g,'-'))
     this.props.selectDate(this.formatDate(date));
   };
-
-  // nowGetDates = () => {
-  //   const date = new Date()
-  //     .toJSON()
-  //     .slice(0, 10)
-  //     .replace(/-/g, '-');
-  //   let serviceId;
-  //   if (this.props.selections.service.length > 0) {
-  //     serviceId = this.props.selections.service[0].id;
-  //   }
-  //   this.props.getDates(serviceId, date);
-  // };
 
   // Check whether a given date is a valid date
   // input in ISO format: yyyy-MM-dd
@@ -154,7 +131,6 @@ class DateForm extends React.Component {
 
     if (!selections.location || !selections.service || !selections.employee)
       return null;
-    // if (this.props.dates===null) this.nowGetDates()
     if (!dates) return null;
     if (dates.length === 0)
       return (
@@ -182,7 +158,6 @@ class DateForm extends React.Component {
               marginTop: 2,
               marginBottom: 2,
               fontSize: 14,
-              // textAlign: 'center',
               padding: 5,
             }}
           >

@@ -67,8 +67,6 @@ class LocationForm extends React.Component {
       value: loc.name,
       label: loc.name,
     }));
-    // if (availableDates && selections.employee && selections.location)
-    //   return null;
     if (navigation !== 1) return null;
     if (
       (locationOptions.length === 1 && selections.location === '') ||
@@ -89,7 +87,6 @@ class LocationForm extends React.Component {
               marginTop: 2,
               marginBottom: 2,
               fontSize: 14,
-              // textAlign: 'center',
               padding: 5,
             }}
           >
@@ -100,7 +97,6 @@ class LocationForm extends React.Component {
               placeholder="Select a location / branch"
               isDisabled={false}
               isLoading={false}
-              // isClearable={true}
               isSearchable={true}
               name="employee"
               options={locationOptions}

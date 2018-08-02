@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-// import './Summary.css';
 
 const styles = {
   card: {
@@ -17,7 +16,6 @@ const styles = {
 class Summary extends React.Component {
   render() {
     const { classes, selections, navigation } = this.props;
-    // if (!this.props.selections.service.time)
     if (
       !selections.location ||
       !selections.service ||
@@ -33,7 +31,6 @@ class Summary extends React.Component {
         style={{
           marginTop: 10,
           marginLeft: 10,
-          // marginBottom: 10,
           padding: '0px 0px 0px 0px',
         }}
       >
