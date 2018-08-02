@@ -26,15 +26,6 @@ class TimeForm extends React.Component {
     this.props.selectTime(event.value);
   };
 
-  filterTimes = () => {
-    return (
-      this.props.availableTimes &&
-      this.props.availableTimes.filter(
-        time => time.resource_id === this.props.selections.employee.id,
-      )
-    );
-  };
-
   render() {
     const {
       classes,
@@ -45,7 +36,7 @@ class TimeForm extends React.Component {
     } = this.props;
     if (
       !selections.location ||
-      !selections.service ||
+      selections.service.length === 0 ||
       !selections.employee ||
       !selections.date
     )
@@ -58,21 +49,22 @@ class TimeForm extends React.Component {
       });
     }
     if (availableTimes === null) {
-      this.props.getTimes(serviceIds, selections.date, selections.employee.id);
+      this.props.getTimes(
+        serviceIds,
+        selections.date,
+        selections.employee.id,
+        selections.location.id,
+      );
     } else if (availableTimes[0].date !== selections.date) {
-      this.props.getTimes(serviceIds, selections.date, selections.employee.id);
+      this.props.getTimes(
+        serviceIds,
+        selections.date,
+        selections.employee.id,
+        selections.location.id,
+      );
     }
-    //next line of code is necessary for not showing the time in cases when the user selects an employee who has available time,
-    //but then changes the selection to an employee who has no available time.
-    if (
-      availableTimes &&
-      availableTimes.filter(
-        time => time.resource_id === selections.employee.id,
-      ) < 1
-    )
-      return null;
     if (!availableTimes) return null;
-    const timeOptions = this.filterTimes().map(time => ({
+    const timeOptions = availableTimes.map(time => ({
       value: time.time,
       label: time.time,
     }));

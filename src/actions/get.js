@@ -39,10 +39,17 @@ export const getEmployees = () => dispatch => {
   });
 };
 
-export const getTimes = (serviceIds, date, resourceId) => dispatch => {
+export const getTimes = (
+  serviceIds,
+  date,
+  resourceId,
+  locationId,
+) => dispatch => {
   request
     .get(
-      `${baseUrl}/bookings/timeslots?${serviceIds}&date=${date}&resource_id=${resourceId}`,
+      `${baseUrl}/bookings/timeslots?${serviceIds}&date=${date}&
+                                     resource_id=${resourceId}&
+                                     location_id=${locationId}`,
     )
     .then(response => {
       dispatch({
@@ -52,10 +59,17 @@ export const getTimes = (serviceIds, date, resourceId) => dispatch => {
     });
 };
 
-export const getDates = (serviceIds, date, resourceId) => dispatch => {
+export const getDates = (
+  serviceIds,
+  date,
+  resourceId,
+  locationId,
+) => dispatch => {
   request
     .get(
-      `${baseUrl}/bookings/available_days?${serviceIds}&date=${date}&resource_id=${resourceId}`,
+      `${baseUrl}/bookings/available_days?${serviceIds}&date=${date}&
+                                          resource_id=${resourceId}&
+                                          location_id=${locationId}`,
     )
     .then(response => {
       dispatch({
