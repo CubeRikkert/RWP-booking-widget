@@ -51,7 +51,7 @@ class EmployeeForm extends React.Component {
       );
     }
     if (this.props.selections.service.length !== 0) {
-      employees = this.props.employees.filter(emp => {
+      employees = employees.filter(emp => {
         let employeeHasAllServices = true;
         for (let i = 0; i < this.props.selections.service.length; i++) {
           if (!emp.service_ids.includes(this.props.selections.service[i].id))
