@@ -42,7 +42,7 @@ class Summary extends React.Component {
     if (navigation !== 3) return null;
     return (
       <div>
-        <ExpansionPanel style={{ marginTop: 10, minWidth: 350 }}>
+        <ExpansionPanel style={{ marginTop: 10, minWidth: 350, marginLeft: 3 }}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>
               <b>Booking Details:</b> (click here to see)
