@@ -2,15 +2,17 @@ import React from 'react';
 
 export default () => (
   <svg
-    width="13"
-    height="21"
-    viewBox="0 0 13 21"
+    width="11"
+    height="19"
+    viewBox="0 0 11 19"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M10.4996 0L0 10.5L10.4996 21L12.4996 19L3.9996 10.5L12.4996 2L10.4996 0Z"
-      fill="#828282"
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M0.53033 8.5L9.03033 0L10.091 1.06066L2.12132 9.03033L10.091 17L9.03033 18.0607L0.53033 9.56066L0 9.03033L0.53033 8.5Z"
+      fill="#007AFF"
     />
   </svg>
 );
