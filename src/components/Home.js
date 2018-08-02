@@ -16,7 +16,7 @@ class Home extends PureComponent {
         <div />
         <div className="titleContainer">
           <div>
-            <img className="logo" src={require('./logo.png')} alt="logo" />
+            <img className="logo" src={require('./logo2.png')} alt="logo" />
           </div>
 
           <img
