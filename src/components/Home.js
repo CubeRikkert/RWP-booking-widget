@@ -22,7 +22,7 @@ class Home extends PureComponent {
           <img
             src="http://www.yourlittleblackbook.me/wp-content/uploads/2015/07/Skins-Institute-%E2%80%93-De-L%E2%80%99Europe-1.jpg"
             alt=""
-            width="100%"
+            width="80%"
             height="80%"
           />
           <br />
@@ -40,6 +40,12 @@ class Home extends PureComponent {
               className="picContainer2"
               src="http://www.essentiallyyoursblog.com/wp-content/uploads/2015/04/Massage-Oils.jpg?w=1400"
               width="300px"
+            />
+            <img
+              alt=""
+              className="picContainer2"
+              src="https://static1.squarespace.com/static/56bd004537013b7f82762963/t/586ebd383e00be50807589a4/1483652416664/Fotolia_39256365_Subscription_XL.jpg?format=1500w"
+              width="350px"
             />
           </div>
           <hr />
@@ -61,7 +67,7 @@ class Home extends PureComponent {
           </p>
         </div>
         <div className="paragraph">
-          <h2>Our Services</h2>
+          <h2>Benefits</h2>
           <p>
             Massages in Amsterdam bij Het Massagehuys Het Massagehuys biedt
             Oosterse massages aan zoals dat hoort. Gewoon, in een leuke straat,
@@ -123,8 +129,12 @@ class Home extends PureComponent {
         <div className="widgetButton">
           <BookingWidget />
         </div>
+
         <div className="footer">
-          <c> Opening Time </c>
+          <br />
+          <c> Opening Time 9:00 - 18:00 </c>
+          <br />
+          <c> Monday to Saturday </c>
         </div>
       </div>
     );

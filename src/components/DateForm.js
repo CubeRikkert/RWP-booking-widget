@@ -135,9 +135,9 @@ class DateForm extends React.Component {
     if (!dates) return null;
     if (dates.length === 0)
       return (
-        <div style={{ marginLeft: 10 }}>
-          <p>There's no available date for this employee.</p>
-          <p>Please try another employee.</p>
+        <div className="noAvailText" style={{ marginLeft: 10 }}>
+          <p>There's no available date for this employee</p>
+          <p>Please try another employee</p>
         </div>
       );
 
