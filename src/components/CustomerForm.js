@@ -153,18 +153,6 @@ class CustomerForm extends React.Component {
               />
             )}
             <TextField
-              id="city"
-              label="City"
-              placeholder="City"
-              className={classes.textField}
-              margin="normal"
-              onChange={this.city}
-              value={
-                this.props.customer.city !== '' ? this.props.customer.city : ''
-              }
-              style={{ width: 165, marginLeft: 5, marginTop: 0 }}
-            />
-            <TextField
               id="postalcode"
               label="Postal code"
               placeholder="Postal code"
@@ -176,7 +164,19 @@ class CustomerForm extends React.Component {
                   ? this.props.customer.postalcode
                   : ''
               }
-              style={{ width: 165, marginLeft: 10, marginTop: 0 }}
+              style={{ width: 135, marginLeft: 5, marginTop: 0 }}
+            />
+            <TextField
+              id="city"
+              label="City"
+              placeholder="City"
+              className={classes.textField}
+              margin="normal"
+              onChange={this.city}
+              value={
+                this.props.customer.city !== '' ? this.props.customer.city : ''
+              }
+              style={{ width: 195, marginLeft: 10, marginTop: 0 }}
             />
             <TextField
               id="notes"
