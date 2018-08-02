@@ -57,7 +57,10 @@ class BookingButton extends PureComponent {
           !customer.firstName ||
           !customer.lastName ||
           !customer.email ||
-          !customer.phone
+          !customer.phone ||
+          !customer.address ||
+          !customer.postalcode ||
+          !customer.city
             ? true
             : false
         }
