@@ -93,7 +93,11 @@ class ServiceForm extends React.Component {
   };
 
   nowGetDates = () => {
-    if (this.props.selections.service && this.props.selections.employee) {
+    if (
+      this.props.selections.service &&
+      this.props.selections.employee &&
+      this.props.selections.location
+    ) {
       const date = new Date()
         .toJSON()
         .slice(0, 10)
@@ -106,7 +110,9 @@ class ServiceForm extends React.Component {
         });
       }
       const employeeId = this.props.selections.employee.id;
-      this.props.getDates(serviceIds, date, employeeId);
+      const locationId = this.props.selections.location.id;
+      this.props.getDates(serviceIds, date, employeeId, locationId);
+      // this.props.resetTimes();
     }
   };
 
