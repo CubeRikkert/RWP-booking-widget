@@ -8,7 +8,7 @@ export default function(state = null, action) {
     case RESET_FORM:
       return null;
     case RESET_TIMES:
-      return null;
+      return [];
     default:
       return state;
   }
